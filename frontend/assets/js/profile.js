@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const displayName = user.name || user.email.split('@')[0];
       const email = user.email || '';
-      const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=6366f1&color=fff&rounded=true&size=128`;
+      const customAvatar = localStorage.getItem('papermind_custom_avatar') || (user && user.avatar);
+      const avatarUrl = customAvatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=6366f1&color=fff&rounded=true&size=128`;
 
       // Update Hero Section
       const heroName = document.getElementById('heroUserName');
@@ -87,6 +88,24 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   await loadProfile();
+
+  // Avatar Upload Listener in Profile Page
+  const profileAvatarInput = document.getElementById('profilePageAvatarInput');
+  if (profileAvatarInput) {
+    profileAvatarInput.addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      if (window.handleProfileImageUpload) {
+        window.handleProfileImageUpload(file, (dataUrl) => {
+          const heroAvatar = document.getElementById('heroUserAvatar');
+          if (heroAvatar) heroAvatar.src = dataUrl;
+          showAlert(profileAlert, 'Profile picture updated successfully!', 'success');
+        }, (err) => {
+          showAlert(profileAlert, err, 'error');
+        });
+      }
+    });
+  }
 
   // Handle Edit Profile Form
   const editProfileForm = document.getElementById('editProfileForm');

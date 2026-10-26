@@ -406,13 +406,17 @@
       copilotGreeting.textContent = `Hello ${firstName}! How can I assist your research right now?`;
     }
 
+    // Check for custom uploaded avatar in localStorage or user profile
+    const customAvatar = localStorage.getItem('papermind_custom_avatar') || (user && user.avatar);
+    const avatarUrl = customAvatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=6366f1&color=fff&rounded=true`;
+
     // Update avatar and name across header/sidebar dropdowns
     document.querySelectorAll('.user-profile-menu').forEach((el) => {
       const h4 = el.querySelector('.user-info h4');
       if (h4) h4.textContent = displayName;
       const avatar = el.querySelector('img.avatar');
       if (avatar) {
-        avatar.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=6366f1&color=fff&rounded=true`;
+        avatar.src = avatarUrl;
       }
     });
 
@@ -423,8 +427,12 @@
       if (p) p.textContent = userEmail;
       const avatarLg = el.querySelector('img.avatar-lg');
       if (avatarLg) {
-        avatarLg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=6366f1&color=fff&rounded=true`;
+        avatarLg.src = avatarUrl;
       }
+    });
+
+    document.querySelectorAll('#heroUserAvatar, .user-avatar-target').forEach((img) => {
+      img.src = avatarUrl;
     });
 
     // Dynamically wire up all placeholder navigation links
@@ -482,6 +490,62 @@
     return true;
   }
 
+  /**
+   * Universal profile image upload handler: reads file, crops/resizes, saves to localStorage & user object
+   */
+  function handleProfileImageUpload(file, onSuccess, onError) {
+    if (!file) return;
+    if (!file.type || !file.type.startsWith('image/')) {
+      const err = 'Please select a valid image file (PNG, JPG, WebP, etc.).';
+      if (onError) onError(err);
+      else alert(err);
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      const err = 'Image size exceeds 5MB limit. Please choose a smaller image.';
+      if (onError) onError(err);
+      else alert(err);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = new Image();
+      img.onload = function() {
+        try {
+          const canvas = document.createElement('canvas');
+          const size = Math.min(img.width, img.height);
+          canvas.width = 256;
+          canvas.height = 256;
+          const ctx = canvas.getContext('2d');
+          
+          const sx = (img.width - size) / 2;
+          const sy = (img.height - size) / 2;
+          ctx.drawImage(img, sx, sy, size, size, 0, 0, 256, 256);
+          
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+          localStorage.setItem('papermind_custom_avatar', dataUrl);
+          
+          const u = getUser();
+          if (u) {
+            u.avatar = dataUrl;
+            setUser(u);
+          }
+          
+          updateHeaderUserInfo();
+          if (onSuccess) onSuccess(dataUrl);
+        } catch (err) {
+          if (onError) onError('Could not process image: ' + err.message);
+        }
+      };
+      img.onerror = function() {
+        if (onError) onError('Failed to load image file.');
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
   // Export to window
   window.API_BASE_URL = API_BASE_URL;
   window.authAPI = authAPI;
@@ -493,4 +557,5 @@
   window.isAuthenticated = isAuthenticated;
   window.getToken = getToken;
   window.requireAuth = requireAuth;
+  window.handleProfileImageUpload = handleProfileImageUpload;
 })();

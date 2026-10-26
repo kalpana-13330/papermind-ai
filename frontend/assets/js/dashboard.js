@@ -65,16 +65,20 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (savedTheme === 'light') {
         document.body.classList.add('light-theme');
+        document.documentElement.setAttribute('data-theme', 'light');
         if (themeBtn) {
             const icon = themeBtn.querySelector('i');
             icon.className = 'fa-solid fa-sun';
         }
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
     }
 
     if (themeBtn) {
         themeBtn.addEventListener('click', () => {
             document.body.classList.toggle('light-theme');
             const isLight = document.body.classList.contains('light-theme');
+            document.documentElement.setAttribute('data-theme', isLight ? 'light' : 'dark');
             localStorage.setItem('papermind_theme', isLight ? 'light' : 'dark');
 
             const icon = themeBtn.querySelector('i');
@@ -153,6 +157,26 @@ document.addEventListener('DOMContentLoaded', () => {
             profileDropdown.classList.remove('open');
         }
     });
+
+    // Profile Avatar Upload File Listener
+    const dashAvatarInput = document.getElementById('dashAvatarFileInput');
+    if (dashAvatarInput) {
+        dashAvatarInput.addEventListener('change', (e) => {
+            const file = e.target.files && e.target.files[0];
+            if (!file) return;
+            if (window.handleProfileImageUpload) {
+                window.handleProfileImageUpload(file, () => {
+                    const notify = document.createElement('div');
+                    notify.style.cssText = 'position:fixed;top:24px;right:24px;z-index:99999;background:linear-gradient(135deg,#10b981,#059669);color:#fff;padding:12px 20px;border-radius:12px;box-shadow:0 10px 25px rgba(16,185,129,0.4);font-weight:600;font-size:0.9rem;display:flex;align-items:center;gap:10px;animation:fadeIn 0.3s forwards;';
+                    notify.innerHTML = '<i class="fa-solid fa-circle-check"></i> Profile picture updated successfully!';
+                    document.body.appendChild(notify);
+                    setTimeout(() => notify.remove(), 3500);
+                }, (err) => {
+                    alert(err);
+                });
+            }
+        });
+    }
 
     // --- 8. GLOBAL SEARCH COMMAND PALETTE (Ctrl + K / Cmd + K) ---
     const searchModal = document.getElementById('searchModal');

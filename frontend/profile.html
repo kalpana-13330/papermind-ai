@@ -176,7 +176,11 @@
                 <div class="profile-hero-card glass-card">
                     <div class="profile-hero-left">
                         <div class="profile-hero-avatar-wrapper">
-                            <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true&size=128" alt="Profile Avatar" class="profile-hero-avatar" id="heroUserAvatar">
+                            <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true&size=128" alt="Profile Avatar" class="profile-hero-avatar user-avatar-target" id="heroUserAvatar">
+                            <label for="profilePageAvatarInput" class="avatar-camera-btn hero-camera-btn" title="Upload Profile Picture">
+                                <i class="fa-solid fa-camera"></i>
+                            </label>
+                            <input type="file" id="profilePageAvatarInput" accept="image/*" style="display: none;">
                         </div>
                         <div class="profile-hero-details">
                             <h2 id="heroUserName">Loading...</h2>
@@ -186,6 +190,9 @@
                                 <span class="profile-badge profile-badge-active"><i class="fa-solid fa-shield-check"></i> Verified Account</span>
                                 <span class="profile-badge" style="background: rgba(255,255,255,0.06); color: #94a3b8;"><i class="fa-regular fa-calendar"></i> Member since <span id="memberSinceDate">Recent</span></span>
                             </div>
+                            <button type="button" class="btn-change-photo-badge" style="margin-top: 12px; display: inline-flex;" onclick="document.getElementById('profilePageAvatarInput').click()">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> Upload Profile Picture
+                            </button>
                         </div>
                     </div>
 

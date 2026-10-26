@@ -148,7 +148,7 @@
                         <!-- User Profile Dropdown -->
                         <div class="nav-dropdown-wrapper">
                             <div class="user-profile-menu" id="userProfileBtn" tabindex="0" role="button" aria-haspopup="true" aria-expanded="false">
-                                <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar">
+                                <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar user-avatar-target">
                                 <div class="user-info">
                                     <h4>User</h4>
                                     <p>Pro Plan</p>
@@ -158,10 +158,19 @@
 
                             <div class="dropdown-panel profile-dropdown glass-card" id="profileDropdown">
                                 <div class="profile-dropdown-header">
-                                    <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar-lg">
-                                    <div>
+                                    <div class="dropdown-avatar-container">
+                                        <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar-lg user-avatar-target" id="dashDropdownAvatar">
+                                        <label for="dashAvatarFileInput" class="avatar-camera-btn" title="Upload Profile Picture">
+                                            <i class="fa-solid fa-camera"></i>
+                                        </label>
+                                        <input type="file" id="dashAvatarFileInput" accept="image/*" style="display: none;">
+                                    </div>
+                                    <div class="dropdown-user-meta">
                                         <h4>User</h4>
                                         <p>user@example.com</p>
+                                        <button type="button" class="btn-change-photo-badge" onclick="document.getElementById('dashAvatarFileInput').click()" title="Click to upload profile picture">
+                                            <i class="fa-solid fa-cloud-arrow-up"></i> Change Photo
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="dropdown-divider"></div>

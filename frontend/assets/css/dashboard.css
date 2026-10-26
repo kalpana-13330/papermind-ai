@@ -2,46 +2,48 @@
    DASHBOARD STYLES (PaperMind.AI Clean SaaS Production Design)
    ========================================================================= */
 
-/* --- BASE & LAYOUT --- */
+/* --- BASE & LAYOUT (Awwwards-Level Obsidian & Glass Canvas - Images 3 & 4) --- */
 body.dashboard-body {
-    background-color: #030712;
+    background-color: #08090f;
     color: #f8fafc;
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
     margin: 0;
+    transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* Background Ambient Glows */
+/* Background Ambient Glows (Warm Amber Lamp Reflection & Electric Violet Halo - Kezabank Style) */
 .dash-bg-glow {
     position: fixed;
     border-radius: 50%;
-    filter: blur(100px);
+    filter: blur(120px);
     z-index: 0;
     pointer-events: none;
+    transition: all 0.5s ease;
 }
 .dash-bg-glow.glow-1 {
-    top: -100px;
-    left: -100px;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+    top: -80px;
+    left: 28%;
+    width: 650px;
+    height: 480px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.16) 0%, rgba(217, 119, 6, 0.06) 45%, transparent 75%);
 }
 .dash-bg-glow.glow-2 {
-    bottom: -150px;
-    right: -150px;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
+    bottom: -120px;
+    right: -100px;
+    width: 650px;
+    height: 650px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(99, 102, 241, 0.05) 50%, transparent 75%);
 }
 
 .dash-bg-grid {
     position: fixed;
     inset: 0;
     background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
     background-size: 40px 40px;
     pointer-events: none;
     z-index: 0;
@@ -54,15 +56,18 @@ body.dashboard-body {
     z-index: 1;
 }
 
-/* --- GLASS CARD UTILITY --- */
+/* --- GLASS CARD UTILITY (Awwwards Multi-Layer Translucent Glass - Images 3 & 4) --- */
 .glass-card {
-    background: rgba(17, 24, 39, 0.65);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.075) 0%, rgba(255, 255, 255, 0.02) 100%);
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    box-shadow: 
+        0 24px 60px -15px rgba(0, 0, 0, 0.7),
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.32),
+        inset 0 -1px 1px 0 rgba(0, 0, 0, 0.45);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* --- PAGE LOADER OVERLAY --- */
@@ -607,11 +612,12 @@ body.dashboard-body {
     color: #64748b;
 }
 
-.profile-dropdown { width: 260px; }
-.profile-dropdown-header { display: flex; align-items: center; gap: 0.85rem; }
-.avatar-lg { width: 44px; height: 44px; border-radius: 50%; }
-.profile-dropdown-header h4 { font-size: 0.95rem; margin: 0; color: #fff; }
-.profile-dropdown-header p { font-size: 0.75rem; color: #94a3b8; margin: 0.15rem 0 0 0; }
+.profile-dropdown { width: 280px; }
+.profile-dropdown-header { display: flex; align-items: center; gap: 0.95rem; }
+.dropdown-user-meta { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.avatar-lg { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+.profile-dropdown-header h4 { font-size: 0.95rem; margin: 0; color: #fff; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.profile-dropdown-header p { font-size: 0.75rem; color: #94a3b8; margin: 0.15rem 0 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .dropdown-divider { height: 1px; background: rgba(255, 255, 255, 0.08); margin: 0.85rem 0; }
 .profile-menu-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.25rem; }
 .profile-menu-list a { display: flex; align-items: center; gap: 0.75rem; padding: 0.55rem 0.75rem; color: #cbd5e1; text-decoration: none; font-size: 0.85rem; border-radius: 10px; transition: all 0.2s ease; }
@@ -863,19 +869,852 @@ body.dashboard-body {
 .copilot-input-box input { background: transparent; border: none; outline: none; color: #fff; font-size: 0.82rem; flex: 1; }
 .send-btn { background: #6366f1; border: none; color: #fff; width: 28px; height: 28px; border-radius: 8px; cursor: pointer; font-size: 0.75rem; }
 
-/* --- LIGHT THEME OVERRIDES --- */
-body.light-theme { background-color: #f8fafc; color: #0f172a; }
-body.light-theme .dash-sidebar { background: rgba(255, 255, 255, 0.9); border-right-color: rgba(0, 0, 0, 0.08); }
+/* =========================================================================
+   CLAYMORPHISM LIGHT THEME SYSTEM (Images 1 & 2: Soft 3D Tactile Clay Design)
+   ========================================================================= */
+body.light-theme,
+[data-theme="light"] body.dashboard-body {
+    background-color: #f4efe9;
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(226, 219, 252, 0.55) 0px, transparent 55%),
+        radial-gradient(at 100% 0%, rgba(254, 226, 216, 0.45) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(212, 243, 231, 0.45) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(254, 243, 199, 0.45) 0px, transparent 50%);
+    color: #0f172a;
+}
+
+/* Light Theme Ambient Glows */
+body.light-theme .dash-bg-glow.glow-1,
+[data-theme="light"] .dash-bg-glow.glow-1 {
+    background: radial-gradient(circle, rgba(199, 210, 254, 0.4) 0%, transparent 70%);
+}
+body.light-theme .dash-bg-glow.glow-2,
+[data-theme="light"] .dash-bg-glow.glow-2 {
+    background: radial-gradient(circle, rgba(254, 215, 170, 0.35) 0%, transparent 70%);
+}
+body.light-theme .dash-bg-grid,
+[data-theme="light"] .dash-bg-grid {
+    opacity: 0.18;
+    background-image: 
+        linear-gradient(to right, rgba(180, 165, 150, 0.2) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(180, 165, 150, 0.2) 1px, transparent 1px);
+}
+
+/* 1. CLAYMORPHIC CARDS (Soft Moldable 3D Shapes & Double Shadows - Images 1 & 2) */
+body.light-theme .glass-card,
+[data-theme="light"] .glass-card {
+    background: #f7f3ee;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    border-radius: 26px;
+    box-shadow: 
+        12px 14px 28px rgba(192, 177, 160, 0.35),
+        -10px -10px 24px rgba(255, 255, 255, 0.95),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.9),
+        inset -2px -2px 5px rgba(180, 165, 148, 0.14);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 2. CLAYMORPHIC SIDEBAR */
+body.light-theme .dash-sidebar,
+[data-theme="light"] .dash-sidebar {
+    background: #f4efe9;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-right: 1px solid rgba(195, 180, 165, 0.3);
+    box-shadow: 10px 0 30px rgba(190, 175, 160, 0.2);
+}
+
 body.light-theme .logo-text,
+[data-theme="light"] .logo-text {
+    color: #0f172a;
+    font-weight: 800;
+}
+
+body.light-theme .logo-text span,
+[data-theme="light"] .logo-text span {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.light-theme .sidebar-live-status,
+[data-theme="light"] .sidebar-live-status {
+    background: #d4f3e7;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 4px 4px 10px rgba(160, 205, 185, 0.35), -3px -3px 8px #ffffff;
+}
+
+body.light-theme .live-status-text,
+[data-theme="light"] .live-status-text {
+    color: #065f46;
+    font-weight: 700;
+}
+
+body.light-theme .live-time,
+[data-theme="light"] .live-time {
+    color: #475569;
+    font-weight: 600;
+}
+
+body.light-theme .nav-section-title,
+[data-theme="light"] .nav-section-title {
+    color: #64748b;
+    font-weight: 800;
+}
+
+/* Claymorphic Navigation Items */
+body.light-theme .nav-item,
+[data-theme="light"] .nav-item {
+    color: #334155;
+    font-weight: 600;
+    border-radius: 18px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.light-theme .nav-item i,
+[data-theme="light"] .nav-item i {
+    color: #475569;
+}
+
+body.light-theme .nav-item:hover,
+[data-theme="light"] .nav-item:hover {
+    color: #0f172a;
+    background: #ede6dd;
+    box-shadow: 5px 5px 12px rgba(190, 175, 160, 0.25), -4px -4px 10px #ffffff;
+}
+
+/* Active Lavender Clay Nav Pill (Image 1 & 2 "Overview" Signature Style) */
+body.light-theme .nav-item.active,
+[data-theme="light"] .nav-item.active {
+    background: #e2dbfc;
+    color: #3730a3;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 
+        6px 6px 16px rgba(175, 165, 215, 0.45),
+        -4px -4px 12px rgba(255, 255, 255, 0.95),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.85),
+        inset -2px -2px 4px rgba(150, 138, 195, 0.2);
+}
+
+body.light-theme .nav-item.active i,
+[data-theme="light"] .nav-item.active i {
+    color: #4338ca;
+}
+
+body.light-theme .active-indicator,
+[data-theme="light"] .active-indicator {
+    background: #6366f1;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.6);
+}
+
+body.light-theme .sidebar-footer,
+[data-theme="light"] .sidebar-footer {
+    border-top: 1px solid rgba(195, 180, 165, 0.25);
+}
+
+/* 3. CLAYMORPHIC TOP HEADER & CONTROLS */
 body.light-theme .welcome-text h2,
+[data-theme="light"] .welcome-text h2 {
+    color: #0f172a;
+    font-weight: 800;
+}
+
+body.light-theme .welcome-text h2 span,
+[data-theme="light"] .welcome-text h2 span {
+    background: linear-gradient(135deg, #4338ca, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.light-theme .welcome-text p,
+[data-theme="light"] .welcome-text p {
+    color: #334155;
+    font-weight: 500;
+}
+
+body.light-theme .sync-tag,
+[data-theme="light"] .sync-tag {
+    color: #059669;
+    font-weight: 600;
+}
+
+/* Recessed Inset Clay Search Bar (Image 1 & 2) */
+body.light-theme .search-bar,
+[data-theme="light"] .search-bar {
+    background: #ebe4dc;
+    border: 1px solid rgba(195, 180, 165, 0.35);
+    border-radius: 100px;
+    box-shadow: 
+        inset 4px 4px 8px rgba(185, 170, 150, 0.35),
+        inset -3px -3px 6px rgba(255, 255, 255, 0.95);
+    transition: all 0.3s ease;
+}
+
+body.light-theme .search-bar:focus-within,
+[data-theme="light"] .search-bar:focus-within {
+    border-color: #6366f1;
+    background: #e7dfd5;
+    box-shadow: 
+        inset 5px 5px 10px rgba(185, 170, 150, 0.45),
+        inset -3px -3px 6px rgba(255, 255, 255, 0.95),
+        0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+body.light-theme .search-bar input,
+[data-theme="light"] .search-bar input {
+    color: #0f172a;
+    font-weight: 600;
+}
+
+body.light-theme .search-bar input::placeholder,
+[data-theme="light"] .search-bar input::placeholder {
+    color: #64748b;
+    font-weight: 500;
+}
+
+body.light-theme .search-bar i,
+[data-theme="light"] .search-bar i {
+    color: #475569;
+}
+
+body.light-theme .search-shortcut,
+[data-theme="light"] .search-shortcut {
+    background: #f7f3ee;
+    color: #475569;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 2px 2px 5px rgba(185, 170, 150, 0.25), -2px -2px 4px #ffffff;
+}
+
+/* Tactile 3D Clay Icon Buttons (Image 1 & 2 Squircle / Round Buttons) */
+body.light-theme .icon-btn,
+[data-theme="light"] .icon-btn,
+body.light-theme .mobile-menu-btn,
+[data-theme="light"] .mobile-menu-btn {
+    background: #f5efe8;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    color: #334155;
+    box-shadow: 
+        6px 6px 14px rgba(190, 175, 160, 0.35),
+        -5px -5px 12px rgba(255, 255, 255, 0.95),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.8),
+        inset -1px -1px 2px rgba(180, 165, 150, 0.12);
+}
+
+body.light-theme .icon-btn:hover,
+[data-theme="light"] .icon-btn:hover {
+    color: #4338ca;
+    transform: translateY(-2px);
+    box-shadow: 
+        8px 8px 18px rgba(190, 175, 160, 0.42),
+        -6px -6px 14px rgba(255, 255, 255, 1),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+body.light-theme .icon-btn:active,
+[data-theme="light"] .icon-btn:active {
+    transform: translateY(1px);
+    box-shadow: 
+        inset 3px 3px 6px rgba(180, 165, 150, 0.35),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.9);
+}
+
+/* User Profile Pill Menu */
+body.light-theme .user-profile-menu,
+[data-theme="light"] .user-profile-menu {
+    background: #f5efe8;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 
+        6px 6px 14px rgba(190, 175, 160, 0.35),
+        -5px -5px 12px rgba(255, 255, 255, 0.95),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+body.light-theme .user-info h4,
+[data-theme="light"] .user-info h4 {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+body.light-theme .user-info p,
+[data-theme="light"] .user-info p {
+    color: #4338ca;
+    font-weight: 600;
+}
+
+body.light-theme .user-profile-menu i,
+[data-theme="light"] .user-profile-menu i {
+    color: #475569;
+}
+
+/* 4. CLAYMORPHIC STATS CARDS & ICONS (Images 1 & 2) */
+body.light-theme .stat-card,
+[data-theme="light"] .stat-card {
+    background: #f7f3ee;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    border-radius: 26px;
+    box-shadow: 
+        12px 14px 28px rgba(192, 177, 160, 0.34),
+        -8px -8px 20px rgba(255, 255, 255, 0.95),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.9),
+        inset -2px -2px 4px rgba(180, 165, 150, 0.12);
+}
+
+body.light-theme .stat-card:hover,
+[data-theme="light"] .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+        16px 18px 32px rgba(192, 177, 160, 0.4),
+        -10px -10px 24px rgba(255, 255, 255, 1),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.9);
+}
+
 body.light-theme .stat-details h3,
+[data-theme="light"] .stat-details h3 {
+    color: #0f172a;
+    font-weight: 800;
+    font-size: 1.85rem;
+}
+
+body.light-theme .stat-details p,
+[data-theme="light"] .stat-details p {
+    color: #334155;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* 3D Pastel Clay Stat Icons (Image 2 Palette) */
+body.light-theme .stat-icon,
+[data-theme="light"] .stat-icon {
+    border-radius: 20px;
+    box-shadow: 
+        6px 6px 14px rgba(180, 165, 150, 0.35),
+        -4px -4px 10px rgba(255, 255, 255, 0.95),
+        inset 2px 2px 3px rgba(255, 255, 255, 0.8),
+        inset -2px -2px 3px rgba(0, 0, 0, 0.12);
+}
+
+body.light-theme .purple-gradient,
+[data-theme="light"] .purple-gradient {
+    background: linear-gradient(135deg, #a78bfa, #818cf8);
+    color: #ffffff;
+}
+
+body.light-theme .blue-gradient,
+[data-theme="light"] .blue-gradient {
+    background: linear-gradient(135deg, #60a5fa, #38bdf8);
+    color: #ffffff;
+}
+
+body.light-theme .green-gradient,
+[data-theme="light"] .green-gradient {
+    background: linear-gradient(135deg, #34d399, #10b981);
+    color: #ffffff;
+}
+
+body.light-theme .pink-gradient,
+[data-theme="light"] .pink-gradient {
+    background: linear-gradient(135deg, #f472b6, #fb7185);
+    color: #ffffff;
+}
+
+/* 5. CLAYMORPHIC QUICK ACTIONS */
+body.light-theme .section-header h3,
+[data-theme="light"] .section-header h3,
+body.light-theme .widget-header h3,
+[data-theme="light"] .widget-header h3 {
+    color: #0f172a;
+    font-weight: 800;
+}
+
+body.light-theme .action-card,
+[data-theme="light"] .action-card {
+    background: #f7f3ee;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    box-shadow: 
+        10px 12px 24px rgba(192, 177, 160, 0.32),
+        -8px -8px 20px rgba(255, 255, 255, 0.95),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.9),
+        inset -2px -2px 4px rgba(180, 165, 150, 0.12);
+}
+
+body.light-theme .action-card:hover,
+[data-theme="light"] .action-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        14px 16px 30px rgba(192, 177, 160, 0.4),
+        -10px -10px 24px rgba(255, 255, 255, 1);
+}
+
 body.light-theme .action-card h4,
+[data-theme="light"] .action-card h4 {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+body.light-theme .action-card p,
+[data-theme="light"] .action-card p {
+    color: #334155;
+    font-weight: 500;
+}
+
+body.light-theme .ac-icon,
+[data-theme="light"] .ac-icon {
+    background: #eee7de;
+    border: 1px solid rgba(195, 180, 165, 0.3);
+    color: #4338ca;
+    border-radius: 18px;
+    box-shadow: 
+        inset 3px 3px 6px rgba(185, 170, 150, 0.3),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.9);
+}
+
+body.light-theme .action-card:hover .ac-icon,
+[data-theme="light"] .action-card:hover .ac-icon {
+    background: #e2dbfc;
+    color: #3730a3;
+    box-shadow: 
+        4px 4px 10px rgba(175, 165, 215, 0.4),
+        -3px -3px 8px #ffffff,
+        inset 2px 2px 3px #ffffff;
+}
+
+/* 6. CLAYMORPHIC RECENT PAPERS TABLE */
+body.light-theme .table-container,
+[data-theme="light"] .table-container {
+    background: #f7f3ee;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    border-radius: 26px;
+    box-shadow: 
+        12px 14px 28px rgba(192, 177, 160, 0.35),
+        -10px -10px 24px rgba(255, 255, 255, 0.95),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.9);
+}
+
+body.light-theme .dash-table th,
+[data-theme="light"] .dash-table th {
+    background: #ede6dd;
+    color: #0f172a;
+    font-weight: 800;
+    font-size: 0.78rem;
+    border-bottom: 2px solid rgba(195, 180, 165, 0.35);
+}
+
+body.light-theme .dash-table td,
+[data-theme="light"] .dash-table td {
+    color: #1e293b;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(195, 180, 165, 0.22);
+}
+
+body.light-theme .dash-table tbody tr:hover,
+[data-theme="light"] .dash-table tbody tr:hover {
+    background: #f0eae1;
+}
+
 body.light-theme .title-text,
+[data-theme="light"] .title-text {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+body.light-theme .sub-text,
+[data-theme="light"] .sub-text {
+    color: #475569;
+    font-weight: 500;
+}
+
+body.light-theme .empty-table-row h4,
+[data-theme="light"] .empty-table-row h4 {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+}
+
+body.light-theme .empty-table-row p,
+[data-theme="light"] .empty-table-row p {
+    color: #334155 !important;
+    font-weight: 500 !important;
+}
+
+body.light-theme .view-all-link,
+[data-theme="light"] .view-all-link {
+    color: #4338ca;
+    font-weight: 700;
+}
+
+body.light-theme .pagination-wrapper,
+[data-theme="light"] .pagination-wrapper {
+    border-top: 1px solid rgba(195, 180, 165, 0.25);
+}
+
+body.light-theme .pagination-info,
+[data-theme="light"] .pagination-info {
+    color: #334155;
+    font-weight: 600;
+}
+
+body.light-theme .page-btn,
+[data-theme="light"] .page-btn {
+    background: #eee8e0;
+    border: 1px solid rgba(195, 180, 165, 0.35);
+    color: #334155;
+    box-shadow: 2px 2px 6px rgba(190, 175, 160, 0.25), -2px -2px 5px #fff;
+}
+
+body.light-theme .page-btn.active,
+[data-theme="light"] .page-btn.active {
+    background: #6366f1;
+    color: #fff;
+    box-shadow: 3px 3px 8px rgba(99, 102, 241, 0.4), inset 1px 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+/* 7. TACTILE PASTEL CLAY BADGES (Image 2 Reference) */
+body.light-theme .badge-completed,
+[data-theme="light"] .badge-completed {
+    background: #d4f3e7;
+    color: #065f46;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 3px 3px 8px rgba(160, 205, 185, 0.4), -2px -2px 6px #ffffff, inset 1px 1px 2px #ffffff;
+    font-weight: 700;
+}
+
+body.light-theme .badge-processing,
+[data-theme="light"] .badge-processing {
+    background: #dbeafe;
+    color: #1e40af;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 3px 3px 8px rgba(160, 190, 230, 0.4), -2px -2px 6px #ffffff, inset 1px 1px 2px #ffffff;
+    font-weight: 700;
+}
+
+body.light-theme .badge-pending,
+[data-theme="light"] .badge-pending {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 3px 3px 8px rgba(220, 200, 150, 0.4), -2px -2px 6px #ffffff, inset 1px 1px 2px #ffffff;
+    font-weight: 700;
+}
+
+body.light-theme .badge-failed,
+[data-theme="light"] .badge-failed {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 3px 3px 8px rgba(230, 170, 170, 0.4), -2px -2px 6px #ffffff, inset 1px 1px 2px #ffffff;
+    font-weight: 700;
+}
+
+/* 8. CLAY STORAGE WIDGET & ACTIVITY TIMELINE */
+body.light-theme .storage-widget,
+[data-theme="light"] .storage-widget,
+body.light-theme .activity-widget,
+[data-theme="light"] .activity-widget {
+    background: #f7f3ee;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    border-radius: 26px;
+    box-shadow: 
+        12px 14px 28px rgba(192, 177, 160, 0.35),
+        -10px -10px 24px rgba(255, 255, 255, 0.95),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.9);
+}
+
 body.light-theme .storage-center-text h4,
-body.light-theme .timeline-content p strong { color: #0f172a; }
-body.light-theme .glass-card { background: rgba(255, 255, 255, 0.75); border-color: rgba(0, 0, 0, 0.08); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); }
-body.light-theme .search-bar, body.light-theme .icon-btn, body.light-theme .user-profile-menu, body.light-theme .action-card { background: rgba(0, 0, 0, 0.03); border-color: rgba(0, 0, 0, 0.08); }
-body.light-theme .search-bar input, body.light-theme .user-info h4 { color: #0f172a; }
+[data-theme="light"] .storage-center-text h4 {
+    color: #0f172a;
+    font-weight: 800;
+}
+
+body.light-theme .storage-center-text span,
+[data-theme="light"] .storage-center-text span {
+    color: #475569;
+    font-weight: 700;
+}
+
+body.light-theme .storage-text-info p,
+[data-theme="light"] .storage-text-info p {
+    color: #0f172a;
+    font-weight: 600;
+}
+
+body.light-theme .storage-text-info span,
+[data-theme="light"] .storage-text-info span {
+    color: #475569;
+    font-weight: 500;
+}
+
+body.light-theme .plan-badge,
+[data-theme="light"] .plan-badge {
+    background: #e2dbfc;
+    color: #3730a3;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 3px 3px 8px rgba(180, 170, 215, 0.4), -2px -2px 6px #ffffff;
+    font-weight: 700;
+}
+
+body.light-theme .upgrade-btn,
+[data-theme="light"] .upgrade-btn {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    box-shadow: 
+        6px 8px 18px rgba(99, 102, 241, 0.35),
+        -4px -4px 12px rgba(255, 255, 255, 0.95),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+body.light-theme .progress-ring-bg,
+[data-theme="light"] .progress-ring-bg {
+    stroke: rgba(185, 170, 150, 0.28);
+}
+
+body.light-theme .activity-timeline::before,
+[data-theme="light"] .activity-timeline::before {
+    background: rgba(185, 170, 150, 0.35);
+}
+
+body.light-theme .timeline-content p,
+[data-theme="light"] .timeline-content p {
+    color: #1e293b;
+    font-weight: 500;
+}
+
+body.light-theme .timeline-content p strong,
+[data-theme="light"] .timeline-content p strong {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+body.light-theme .timeline-content .time,
+[data-theme="light"] .timeline-content .time {
+    color: #475569;
+    font-weight: 500;
+}
+
+body.light-theme .empty-timeline-item p,
+[data-theme="light"] .empty-timeline-item p {
+    color: #334155 !important;
+    font-weight: 500 !important;
+}
+
+body.light-theme .empty-timeline-item div i,
+[data-theme="light"] .empty-timeline-item div i {
+    color: #64748b !important;
+}
+
+/* 9. CLAY DROPDOWNS & MODALS */
+body.light-theme .dropdown-panel,
+[data-theme="light"] .dropdown-panel {
+    background: #f7f3ee;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 
+        14px 16px 36px rgba(185, 170, 150, 0.4),
+        -8px -8px 20px #ffffff;
+}
+
+body.light-theme .dropdown-panel-header,
+[data-theme="light"] .dropdown-panel-header {
+    border-bottom: 1px solid rgba(195, 180, 165, 0.25);
+}
+
+body.light-theme .dropdown-panel-header h3,
+[data-theme="light"] .dropdown-panel-header h3,
+body.light-theme .profile-dropdown-header h4,
+[data-theme="light"] .profile-dropdown-header h4 {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+body.light-theme .profile-dropdown-header p,
+[data-theme="light"] .profile-dropdown-header p {
+    color: #475569;
+    font-weight: 500;
+}
+
+body.light-theme .dropdown-divider,
+[data-theme="light"] .dropdown-divider {
+    background: rgba(195, 180, 165, 0.25);
+}
+
+body.light-theme .profile-menu-list a,
+[data-theme="light"] .profile-menu-list a {
+    color: #334155;
+    font-weight: 600;
+}
+
+body.light-theme .profile-menu-list a:hover,
+[data-theme="light"] .profile-menu-list a:hover {
+    background: #ede6dd;
+    color: #4338ca;
+}
+
+body.light-theme .search-modal-container,
+[data-theme="light"] .search-modal-container {
+    background: #f7f3ee;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 25px 60px rgba(185, 170, 150, 0.5);
+}
+
+body.light-theme .search-modal-header,
+[data-theme="light"] .search-modal-header {
+    border-bottom: 1px solid rgba(195, 180, 165, 0.25);
+}
+
+body.light-theme .search-modal-header input,
+[data-theme="light"] .search-modal-header input {
+    color: #0f172a;
+    font-weight: 600;
+}
+
+body.light-theme .modal-results-list li,
+[data-theme="light"] .modal-results-list li {
+    color: #1e293b;
+    font-weight: 500;
+}
+
+body.light-theme .modal-results-list li:hover,
+[data-theme="light"] .modal-results-list li:hover {
+    background: #ede6dd;
+    color: #4338ca;
+}
+
+body.light-theme .ai-assistant-panel,
+[data-theme="light"] .ai-assistant-panel {
+    background: #f7f3ee;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 0 20px 50px rgba(185, 170, 150, 0.45);
+}
+
+body.light-theme .ai-panel-header,
+[data-theme="light"] .ai-panel-header {
+    border-bottom: 1px solid rgba(195, 180, 165, 0.25);
+}
+
+body.light-theme .ai-brand,
+[data-theme="light"] .ai-brand {
+    color: #0f172a;
+}
+
+body.light-theme .copilot-welcome p,
+[data-theme="light"] .copilot-welcome p {
+    color: #334155;
+}
+
+body.light-theme .copilot-chip,
+[data-theme="light"] .copilot-chip {
+    background: #eee8e0;
+    color: #334155;
+    border: 1px solid rgba(195, 180, 165, 0.35);
+    box-shadow: 2px 2px 6px rgba(190, 175, 160, 0.25), -2px -2px 5px #fff;
+    font-weight: 600;
+}
+
+body.light-theme .copilot-input-box,
+[data-theme="light"] .copilot-input-box {
+    background: #ebe4dc;
+    border: 1px solid rgba(195, 180, 165, 0.35);
+    box-shadow: inset 2px 2px 5px rgba(185, 170, 150, 0.3), inset -2px -2px 4px #fff;
+}
+
+body.light-theme .copilot-input-box input,
+[data-theme="light"] .copilot-input-box input {
+    color: #0f172a;
+}
+
+/* =========================================================================
+   PROFILE IMAGE UPLOAD FEATURE & AVATAR STYLES (Light Clay & Dark Glass)
+   ========================================================================= */
+.dropdown-avatar-container {
+    position: relative;
+    display: inline-block;
+}
+
+.avatar-camera-btn {
+    position: absolute;
+    bottom: -3px;
+    right: -3px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.62rem;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.5);
+    border: 2px solid #08090f;
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 2;
+}
+
+body.light-theme .avatar-camera-btn,
+[data-theme="light"] .avatar-camera-btn {
+    border-color: #f7f3ee;
+    box-shadow: 3px 3px 8px rgba(99, 102, 241, 0.4), -2px -2px 5px #ffffff;
+}
+
+.avatar-camera-btn:hover {
+    transform: scale(1.2);
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    box-shadow: 0 5px 15px rgba(236, 72, 153, 0.6);
+}
+
+.avatar-camera-btn:active {
+    transform: scale(0.95);
+}
+
+.btn-change-photo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    background: rgba(99, 102, 241, 0.12);
+    color: #c084fc;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+body.light-theme .btn-change-photo-badge,
+[data-theme="light"] .btn-change-photo-badge {
+    background: #e2dbfc;
+    color: #3730a3;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 3px 3px 8px rgba(180, 170, 215, 0.4), -2px -2px 6px #ffffff, inset 1px 1px 2px #ffffff;
+}
+
+.btn-change-photo-badge:hover {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #ffffff;
+    border-color: transparent;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.profile-hero-avatar-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.hero-camera-btn {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 0.95rem !important;
+    bottom: 4px !important;
+    right: 4px !important;
+}
+
+.user-avatar-target {
+    object-fit: cover;
+}
 
 /* --- ANIMATIONS --- */
 .animate-fade-in { animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }

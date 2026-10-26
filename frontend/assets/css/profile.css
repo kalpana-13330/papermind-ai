@@ -254,3 +254,75 @@
         align-items: flex-start;
     }
 }
+
+/* --- CLAYMORPHISM LIGHT THEME FOR PROFILE PAGE --- */
+body.light-theme .profile-hero-card,
+[data-theme="light"] .profile-hero-card,
+body.light-theme .profile-card,
+[data-theme="light"] .profile-card {
+    background: #f7f3ee;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    border-radius: 26px;
+    box-shadow: 
+        12px 14px 28px rgba(192, 177, 160, 0.35),
+        -10px -10px 24px rgba(255, 255, 255, 0.95),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.9);
+}
+
+body.light-theme .profile-hero-details h2,
+[data-theme="light"] .profile-hero-details h2,
+body.light-theme .profile-card-header h3,
+[data-theme="light"] .profile-card-header h3,
+body.light-theme .stat-mini-item h4,
+[data-theme="light"] .stat-mini-item h4 {
+    color: #0f172a;
+    font-weight: 800;
+}
+
+body.light-theme .profile-hero-details p,
+[data-theme="light"] .profile-hero-details p,
+body.light-theme .profile-card-header p,
+[data-theme="light"] .profile-card-header p,
+body.light-theme .stat-mini-item span,
+[data-theme="light"] .stat-mini-item span {
+    color: #475569;
+    font-weight: 600;
+}
+
+body.light-theme .profile-form-group label,
+[data-theme="light"] .profile-form-group label {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+body.light-theme .profile-input,
+[data-theme="light"] .profile-input {
+    background: #ebe4dc;
+    border: 1px solid rgba(195, 180, 165, 0.35);
+    color: #0f172a;
+    box-shadow: inset 3px 3px 6px rgba(185, 170, 150, 0.3), inset -2px -2px 4px #ffffff;
+    font-weight: 500;
+}
+
+body.light-theme .profile-input:focus,
+[data-theme="light"] .profile-input:focus {
+    border-color: #6366f1;
+    background: #e7dfd5;
+}
+
+body.light-theme .profile-badge-pro,
+[data-theme="light"] .profile-badge-pro {
+    background: #e2dbfc;
+    color: #3730a3;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 2px 2px 6px rgba(180, 170, 215, 0.35), -2px -2px 4px #ffffff;
+}
+
+body.light-theme .profile-badge-active,
+[data-theme="light"] .profile-badge-active {
+    background: #d4f3e7;
+    color: #065f46;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 2px 2px 6px rgba(160, 205, 185, 0.35), -2px -2px 4px #ffffff;
+}
+
