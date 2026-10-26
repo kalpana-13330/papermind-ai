@@ -1,0 +1,9 @@
+{
+  "name": "ai-research-paper-summarizer-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for AI Research Paper Summarizer",
+  "scripts": {
+    "start": "python -m http.server 5173",
+    "dev": "python -m http.server 5173"
+  }
+}

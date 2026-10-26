@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authenticating - PaperMind AI</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.85);
+            --border-color: rgba(99, 102, 241, 0.25);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --primary: #6366f1;
+            --accent: #8b5cf6;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 40%);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        .callback-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2.75rem 2.25rem;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(99, 102, 241, 0.12);
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .icon-wrapper {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: #a5b4fc;
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.3);
+            position: relative;
+        }
+        .spinner {
+            position: absolute;
+            inset: -4px;
+            border: 3px solid transparent;
+            border-top-color: var(--primary);
+            border-right-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        h2 { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.5rem; }
+        p { color: var(--text-sub); font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.5rem; }
+        .error-message {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            color: #fca5a5;
+            padding: 0.85rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+            display: none;
+            text-align: left;
+        }
+        .btn-retry {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.25s ease;
+        }
+        .btn-retry:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+        }
+    </style>
+</head>
+<body>
+    <div class="callback-card">
+        <div class="icon-wrapper" id="iconWrapper">
+            <div class="spinner" id="spinner"></div>
+            <i class="fa-brands fa-github" id="icon"></i>
+        </div>
+        <h2 id="statusTitle">Authenticating with GitHub...</h2>
+        <p id="statusDesc">Please wait while we verify your credentials and set up your research workspace.</p>
+        <div class="error-message" id="errorMessage"></div>
+        <a href="login.html" class="btn-retry" id="btnRetry" style="display: none;">Return to Sign In</a>
+    </div>
+
+    <script src="assets/js/api.js"></script>
+    <script>
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+            const rawUser = params.get('user');
+            const error = params.get('error');
+
+            const statusTitle = document.getElementById('statusTitle');
+            const statusDesc = document.getElementById('statusDesc');
+            const errorMessage = document.getElementById('errorMessage');
+            const btnRetry = document.getElementById('btnRetry');
+            const spinner = document.getElementById('spinner');
+            const icon = document.getElementById('icon');
+
+            if (error) {
+                if (spinner) spinner.style.display = 'none';
+                if (icon) icon.className = 'fa-solid fa-circle-exclamation';
+                statusTitle.textContent = 'Sign-In Failed';
+                statusDesc.textContent = 'GitHub authorization could not be completed.';
+                errorMessage.textContent = decodeURIComponent(error);
+                errorMessage.style.display = 'block';
+                btnRetry.style.display = 'inline-block';
+                return;
+            }
+
+            if (token) {
+                try {
+                    // Store JWT token using application's standard keys
+                    localStorage.setItem('papermind_token', token);
+                    sessionStorage.setItem('papermind_token', token);
+
+                    if (rawUser) {
+                        try {
+                            const parsedUser = typeof rawUser === 'string' && rawUser.startsWith('{')
+                                ? JSON.parse(rawUser)
+                                : { name: params.get('name') || 'GitHub User', email: params.get('email') };
+                            localStorage.setItem('papermind_user', JSON.stringify(parsedUser));
+                            sessionStorage.setItem('papermind_user', JSON.stringify(parsedUser));
+                        } catch (e) {
+                            console.warn('Could not parse user JSON:', e);
+                        }
+                    }
+
+                    statusTitle.textContent = 'Sign-In Successful!';
+                    statusDesc.textContent = 'Redirecting to your research dashboard...';
+                    if (spinner) spinner.style.borderTopColor = '#10b981';
+
+                    setTimeout(function() {
+                        window.location.href = 'dashboard.html';
+                    }, 800);
+                } catch (e) {
+                    console.error('Storage error:', e);
+                    window.location.href = 'dashboard.html';
+                }
+            } else {
+                if (spinner) spinner.style.display = 'none';
+                statusTitle.textContent = 'Missing Authentication Token';
+                statusDesc.textContent = 'No authentication token was received from the server.';
+                btnRetry.style.display = 'inline-block';
+            }
+        })();
+    </script>
+</body>
+</html>

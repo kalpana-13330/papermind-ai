@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - PaperMind AI</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Global & Dashboard Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css?v=6.0">
+    <link rel="stylesheet" href="assets/css/dashboard.css?v=6.0">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=6.0">
+    <style>
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            width: 100%;
+        }
+        .settings-card {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+        .settings-card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .settings-card-header i {
+            font-size: 1.25rem;
+            color: #818cf8;
+        }
+        .settings-card-header h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 0;
+        }
+        .settings-card-header p {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin: 0.15rem 0 0 0;
+        }
+        .setting-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.85rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .setting-item-label h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 0 0 0.2rem 0;
+        }
+        .setting-item-label p {
+            font-size: 0.78rem;
+            color: #94a3b8;
+            margin: 0;
+        }
+        .settings-select {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #fff;
+            padding: 0.5rem 0.85rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            outline: none;
+            cursor: pointer;
+        }
+        .settings-select option {
+            background: #111827;
+            color: #fff;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background-color: rgba(255, 255, 255, 0.12);
+            transition: .3s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #6366f1;
+        }
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+        .theme-choice-box {
+            display: flex;
+            gap: 1rem;
+        }
+        .theme-choice-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+            cursor: pointer;
+        }
+        .danger-card {
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+        .danger-card .settings-card-header i {
+            color: #f87171;
+        }
+        .btn-danger-outline {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn-danger-outline:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fff;
+        }
+        @media (max-width: 900px) {
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="dashboard-body">
+
+    <!-- Page Loading Overlay -->
+    <div class="page-loader-overlay" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-brain-glow"><i class="fa-solid fa-brain"></i></div>
+            <div class="loader-text">Loading Settings...</div>
+        </div>
+    </div>
+
+    <!-- Background Glows -->
+    <div class="dash-bg-glow glow-1"></div>
+    <div class="dash-bg-glow glow-2"></div>
+    <div class="dash-bg-grid"></div>
+
+    <div class="dashboard-layout">
+        
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="dash-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon"><i class="fa-solid fa-brain"></i></div>
+                    <span class="logo-text">PaperMind<span>.AI</span></span>
+                </div>
+                <button class="mobile-close-btn" id="closeSidebar" aria-label="Close Sidebar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="sidebar-live-status">
+                <span class="live-pulse-dot"></span>
+                <span class="live-status-text">AI Engine Online</span>
+                <span class="live-time" id="liveClock">12:57 PM</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <p class="nav-section-title">MAIN MENU</p>
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="upload.html" class="nav-item">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Upload Paper</span>
+                </a>
+                <a href="papers.html" class="nav-item">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>My Papers</span>
+                </a>
+                <a href="summary.html" class="nav-item">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>AI Summaries</span>
+                </a>
+                
+                <p class="nav-section-title mt-4">LIBRARY</p>
+                <a href="papers.html?filter=favorites" class="nav-item">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>Favorites</span>
+                </a>
+                <a href="history.html" class="nav-item">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>History</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="settings.html" class="nav-item active" aria-current="page">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                    <div class="active-indicator"></div>
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="login.html" class="nav-item text-danger mt-2">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT WRAPPER -->
+        <div class="dash-main-wrapper">
+            
+            <!-- TOP HEADER -->
+            <header class="dash-header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="openSidebar" aria-label="Open Navigation Menu"><i class="fa-solid fa-bars"></i></button>
+                    <div class="welcome-text">
+                        <h2>Application <span>Settings</span></h2>
+                        <p>Customize your AI summarizer preferences and interface experience.</p>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="icon-btn theme-btn" id="themeToggleBtn" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+                        
+                        <div class="nav-dropdown-wrapper">
+                            <button class="icon-btn notif-btn" id="notifBtn" aria-label="Notifications">
+                                <i class="fa-regular fa-bell"></i>
+                                <span class="notif-badge" id="notifBadge">1</span>
+                            </button>
+                            
+                            <div class="dropdown-panel notif-dropdown glass-card" id="notifDropdown">
+                                <div class="dropdown-panel-header">
+                                    <h3>Notifications</h3>
+                                    <button class="mark-read-btn" id="markAllRead">Mark all as read</button>
+                                </div>
+                                <div class="notif-list">
+                                    <div class="notif-item unread">
+                                        <div class="notif-icon purple"><i class="fa-solid fa-gear"></i></div>
+                                        <div class="notif-body">
+                                            <p>All preferences are automatically synchronized.</p>
+                                            <span class="notif-time">Just now</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="nav-dropdown-wrapper">
+                            <div class="user-profile-menu" id="userProfileBtn" tabindex="0" role="button">
+                                <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar">
+                                <div class="user-info">
+                                    <h4>User</h4>
+                                    <p>Pro Plan</p>
+                                </div>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+
+                            <div class="dropdown-panel profile-dropdown glass-card" id="profileDropdown">
+                                <div class="profile-dropdown-header">
+                                    <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar-lg">
+                                    <div>
+                                        <h4>User</h4>
+                                        <p>user@example.com</p>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <ul class="profile-menu-list">
+                                    <li><a href="profile.html"><i class="fa-regular fa-user"></i> Profile</a></li>
+                                    <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="login.html" class="text-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </header>
+
+            <!-- SETTINGS CONTENT -->
+            <div class="dash-content-stacked animate-fade-in">
+                
+                <div class="settings-grid">
+                    
+                    <!-- 1. Appearance Card -->
+                    <div class="settings-card glass-card">
+                        <div class="settings-card-header">
+                            <i class="fa-solid fa-palette"></i>
+                            <div>
+                                <h3>Appearance & Interface</h3>
+                                <p>Manage how PaperMind looks on your device</p>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-item-label">
+                                <h4>Color Theme</h4>
+                                <p>Switch between dark futuristic mode and bright daylight mode</p>
+                            </div>
+                            <div class="theme-choice-box">
+                                <label class="theme-choice-label">
+                                    <input type="radio" name="appTheme" value="dark"> Dark
+                                </label>
+                                <label class="theme-choice-label">
+                                    <input type="radio" name="appTheme" value="light"> Light
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. AI Summarization Card -->
+                    <div class="settings-card glass-card">
+                        <div class="settings-card-header">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <div>
+                                <h3>AI Summarizer Options</h3>
+                                <p>Tune default extraction and synthesis parameters</p>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-item-label">
+                                <h4>Default Format</h4>
+                                <p>Structure of generated summaries</p>
+                            </div>
+                            <select id="summaryFormatSelect" class="settings-select">
+                                <option value="detailed">Structured Breakdown</option>
+                                <option value="executive">Executive Summary</option>
+                                <option value="bullet">Bullet Highlights</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-item-label">
+                                <h4>Detail Level</h4>
+                                <p>Target length of the final synopsis</p>
+                            </div>
+                            <select id="targetLengthSelect" class="settings-select">
+                                <option value="concise">Concise (~250 words)</option>
+                                <option value="standard">Standard (~500 words)</option>
+                                <option value="indepth">In-Depth (~1000 words)</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-item-label">
+                                <h4>Auto-Generate Questions</h4>
+                                <p>Generate interactive AI questions for each paper</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="autoQuestionsToggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 3. Notifications Card -->
+                    <div class="settings-card glass-card">
+                        <div class="settings-card-header">
+                            <i class="fa-regular fa-bell"></i>
+                            <div>
+                                <h3>Notifications & Alerts</h3>
+                                <p>Manage your delivery channels and reminders</p>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-item-label">
+                                <h4>Email Alerts</h4>
+                                <p>Receive notification when a paper finishes summarization</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="emailNotifsToggle" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 4. Data & Danger Zone -->
+                    <div class="settings-card glass-card danger-card">
+                        <div class="settings-card-header">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <div>
+                                <h3>Data Management</h3>
+                                <p>Local cache and session storage actions</p>
+                            </div>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-item-label">
+                                <h4>Reset Local Cache</h4>
+                                <p>Clear browser storage and local active paper state</p>
+                            </div>
+                            <button id="clearSessionBtn" class="btn-danger-outline">
+                                <i class="fa-solid fa-broom"></i> Clear Cache
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/settings.js"></script>
+</body>
+</html>

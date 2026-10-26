@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask AI - PaperMind AI</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Global & Page-Specific Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css?v=6.0">
+    <link rel="stylesheet" href="assets/css/dashboard.css?v=6.0">
+    <link rel="stylesheet" href="assets/css/chat.css?v=1.0">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=6.0">
+</head>
+<body class="dashboard-body">
+
+    <!-- Page Loading Overlay -->
+    <div class="page-loader-overlay" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-brain-glow"><i class="fa-solid fa-brain"></i></div>
+            <div class="loader-text">Loading PaperMind AI Copilot...</div>
+        </div>
+    </div>
+
+    <!-- Background Glows -->
+    <div class="dash-bg-glow glow-1"></div>
+    <div class="dash-bg-glow glow-2"></div>
+    <div class="dash-bg-grid"></div>
+
+    <div class="dashboard-layout">
+        
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="dash-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon"><i class="fa-solid fa-brain"></i></div>
+                    <span class="logo-text">PaperMind<span>.AI</span></span>
+                </div>
+                <button class="mobile-close-btn" id="closeSidebar" aria-label="Close Sidebar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Live Online Status -->
+            <div class="sidebar-live-status">
+                <span class="live-pulse-dot"></span>
+                <span class="live-status-text">AI Engine Online</span>
+                <span class="live-time" id="liveClock">12:57 PM</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <p class="nav-section-title">MAIN MENU</p>
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="upload.html" class="nav-item">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Upload Paper</span>
+                </a>
+                <a href="papers.html" class="nav-item">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>My Papers</span>
+                </a>
+                <a href="summary.html" class="nav-item active" aria-current="page">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>AI Summaries</span>
+                    <div class="active-indicator"></div>
+                </a>
+                
+                <p class="nav-section-title mt-4">LIBRARY</p>
+                <a href="papers.html?filter=favorites" class="nav-item">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>Favorites</span>
+                </a>
+                <a href="history.html" class="nav-item">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>History</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="settings.html" class="nav-item">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="login.html" class="nav-item text-danger mt-2">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT WRAPPER -->
+        <div class="dash-main-wrapper chat-wrapper">
+            
+            <!-- TOP HEADER -->
+            <header class="dash-header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="openSidebar" aria-label="Open Navigation Menu"><i class="fa-solid fa-bars"></i></button>
+                    <!-- BREADCRUMB & PAGE HEADER -->
+                    <div class="welcome-text">
+                        <div class="breadcrumb">
+                            <a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+                            <i class="fa-solid fa-chevron-right breadcrumb-arrow"></i>
+                            <a href="upload.html">Upload</a>
+                            <i class="fa-solid fa-chevron-right breadcrumb-arrow"></i>
+                            <a href="summary.html">Summary</a>
+                            <i class="fa-solid fa-chevron-right breadcrumb-arrow"></i>
+                            <span class="active-crumb">Ask AI</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="search-bar-wrapper">
+                        <div class="search-bar" id="headerSearchBar">
+                            <i class="fa-solid fa-search"></i>
+                            <input type="text" id="dashSearchInput" placeholder="Search papers, summaries..." aria-label="Search papers">
+                            <div class="search-shortcut">⌘K</div>
+                        </div>
+                    </div>
+                    
+                    <div class="header-actions">
+                        <button class="icon-btn theme-btn" id="themeToggleBtn" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+                        
+                        <!-- Notifications -->
+                        <div class="nav-dropdown-wrapper">
+                            <button class="icon-btn notif-btn" id="notifBtn" aria-label="Notifications">
+                                <i class="fa-regular fa-bell"></i>
+                                <span class="notif-badge" id="notifBadge">1</span>
+                            </button>
+                        </div>
+
+                        <!-- Profile -->
+                        <div class="nav-dropdown-wrapper">
+                            <div class="user-profile-menu" id="userProfileBtn" tabindex="0" role="button">
+                                <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+
+                            <div class="dropdown-panel profile-dropdown glass-card" id="profileDropdown">
+                                <div class="profile-dropdown-header">
+                                    <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar-lg">
+                                    <div>
+                                        <h4>User</h4>
+                                        <p>user@example.com</p>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <ul class="profile-menu-list">
+                                    <li><a href="profile.html"><i class="fa-regular fa-user"></i> Profile</a></li>
+                                    <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="login.html" class="text-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- CHAT INTERFACE CONTENT -->
+            <div class="chat-container-card glass-card animate-fade-in">
+                
+                <!-- CHAT HEADER -->
+                <div class="chat-header-bar">
+                    <div class="chat-title-info">
+                        <i class="fa-solid fa-wand-magic-sparkles text-gradient-primary"></i>
+                        <div>
+                            <h2>PaperMind Copilot</h2>
+                            <p id="chatPaperContext">Context: Attention_Is_All_You_Need.pdf</p>
+                        </div>
+                    </div>
+                    <a href="summary.html" class="btn btn-glass btn-sm"><i class="fa-solid fa-arrow-left"></i> Back to Summary</a>
+                </div>
+
+                <!-- CHAT MESSAGES AREA -->
+                <div class="chat-messages-area" id="chatMessagesArea">
+                    <!-- Empty State / Welcome -->
+                    <div class="chat-welcome-state" id="chatWelcomeState">
+                        <div class="ai-avatar-lg">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3>Ask me anything about this paper</h3>
+                        <p>I have analyzed the document and can answer questions, explain concepts, or summarize specific sections.</p>
+                        
+                        <div class="suggested-questions mt-4">
+                            <button class="suggested-btn ripple-effect">What is this paper about?</button>
+                            <button class="suggested-btn ripple-effect">What are the main findings?</button>
+                            <button class="suggested-btn ripple-effect">Explain the methodology.</button>
+                            <button class="suggested-btn ripple-effect">What are the limitations?</button>
+                        </div>
+                    </div>
+
+                    <!-- Messages will be injected here dynamically -->
+                </div>
+
+                <!-- CHAT INPUT AREA -->
+                <div class="chat-input-area">
+                    <div class="chat-input-box glass-card">
+                        <textarea id="chatInput" placeholder="Ask AI a question about this research paper..." rows="1" aria-label="Type your message here"></textarea>
+                        <button class="btn btn-primary send-btn" id="btnSendChat" aria-label="Send Message">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="chat-footer-tip">
+                        AI-generated responses can be inaccurate. Please verify critical information.
+                    </div>
+                </div>
+
+            </div> <!-- End chat-container-card -->
+
+        </div> <!-- End dash-main-wrapper -->
+    </div> <!-- End dashboard-layout -->
+
+    <!-- Scripts -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/dashboard.js?v=7.0"></script>
+    <script src="assets/js/chat.js?v=1.0"></script>
+</body>
+</html>

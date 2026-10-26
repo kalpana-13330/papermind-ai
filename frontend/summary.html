@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Summary - PaperMind AI</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Global & Page-Specific Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css?v=6.0">
+    <link rel="stylesheet" href="assets/css/dashboard.css?v=6.0">
+    <link rel="stylesheet" href="assets/css/summary.css?v=1.0">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=6.0">
+</head>
+<body class="dashboard-body">
+
+    <!-- Page Loading Overlay -->
+    <div class="page-loader-overlay" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-brain-glow"><i class="fa-solid fa-brain"></i></div>
+            <div class="loader-text">Loading Summary Results...</div>
+        </div>
+    </div>
+
+    <!-- Background Glows -->
+    <div class="dash-bg-glow glow-1"></div>
+    <div class="dash-bg-glow glow-2"></div>
+    <div class="dash-bg-grid"></div>
+
+    <div class="dashboard-layout">
+        
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="dash-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon"><i class="fa-solid fa-brain"></i></div>
+                    <span class="logo-text">PaperMind<span>.AI</span></span>
+                </div>
+                <button class="mobile-close-btn" id="closeSidebar" aria-label="Close Sidebar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Live Online Status -->
+            <div class="sidebar-live-status">
+                <span class="live-pulse-dot"></span>
+                <span class="live-status-text">AI Engine Online</span>
+                <span class="live-time" id="liveClock">12:57 PM</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <p class="nav-section-title">MAIN MENU</p>
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="upload.html" class="nav-item">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Upload Paper</span>
+                </a>
+                <a href="papers.html" class="nav-item">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>My Papers</span>
+                </a>
+                <a href="summary.html" class="nav-item active" aria-current="page">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>AI Summaries</span>
+                    <div class="active-indicator"></div>
+                </a>
+                
+                <p class="nav-section-title mt-4">LIBRARY</p>
+                <a href="papers.html?filter=favorites" class="nav-item">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>Favorites</span>
+                </a>
+                <a href="history.html" class="nav-item">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>History</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="settings.html" class="nav-item">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="login.html" class="nav-item text-danger mt-2">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT WRAPPER -->
+        <div class="dash-main-wrapper">
+            
+            <!-- TOP HEADER -->
+            <header class="dash-header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="openSidebar" aria-label="Open Navigation Menu"><i class="fa-solid fa-bars"></i></button>
+                    <!-- BREADCRUMB & PAGE HEADER -->
+                    <div class="welcome-text">
+                        <div class="breadcrumb">
+                            <a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+                            <i class="fa-solid fa-chevron-right breadcrumb-arrow"></i>
+                            <a href="upload.html">Upload</a>
+                            <i class="fa-solid fa-chevron-right breadcrumb-arrow"></i>
+                            <span class="active-crumb">Summary Results</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="search-bar-wrapper">
+                        <div class="search-bar" id="headerSearchBar">
+                            <i class="fa-solid fa-search"></i>
+                            <input type="text" id="dashSearchInput" placeholder="Search papers, summaries..." aria-label="Search papers">
+                            <div class="search-shortcut">⌘K</div>
+                        </div>
+                    </div>
+                    
+                    <div class="header-actions">
+                        <button class="icon-btn theme-btn" id="themeToggleBtn" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+                        
+                        <!-- Notifications -->
+                        <div class="nav-dropdown-wrapper">
+                            <button class="icon-btn notif-btn" id="notifBtn" aria-label="Notifications">
+                                <i class="fa-regular fa-bell"></i>
+                                <span class="notif-badge" id="notifBadge">1</span>
+                            </button>
+                            
+                            <div class="dropdown-panel notif-dropdown glass-card" id="notifDropdown">
+                                <div class="dropdown-panel-header">
+                                    <h3>Notifications</h3>
+                                    <button class="mark-read-btn" id="markAllRead">Mark all as read</button>
+                                </div>
+                                <div class="notif-list">
+                                    <div class="notif-item unread">
+                                        <div class="notif-icon purple"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                                        <div class="notif-body">
+                                            <p>New summary completed successfully!</p>
+                                            <span class="notif-time">Just now</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Profile -->
+                        <div class="nav-dropdown-wrapper">
+                            <div class="user-profile-menu" id="userProfileBtn" tabindex="0" role="button">
+                                <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar">
+                                <div class="user-info">
+                                    <h4>User</h4>
+                                    <p>Pro Plan</p>
+                                </div>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+
+                            <div class="dropdown-panel profile-dropdown glass-card" id="profileDropdown">
+                                <div class="profile-dropdown-header">
+                                    <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar-lg">
+                                    <div>
+                                        <h4>User</h4>
+                                        <p>user@example.com</p>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <ul class="profile-menu-list">
+                                    <li><a href="profile.html"><i class="fa-regular fa-user"></i> Profile</a></li>
+                                    <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                                    <li><a href="login.html" class="text-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- SUMMARY RESULTS CONTENT -->
+            <div class="summary-content-wrapper animate-fade-in">
+                
+                <!-- PAPER HEADER & ACTIONS -->
+                <div class="summary-header-card glass-card">
+                    <div class="paper-header-info">
+                        <div class="paper-icon-lg">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div class="paper-title-group">
+                            <div class="title-row">
+                                <h2 id="paperTitle">Attention Is All You Need</h2>
+                                <span class="status-badge badge-completed"><i class="fa-solid fa-check-circle"></i> AI Summary Ready</span>
+                            </div>
+                            <p class="paper-meta-sub" id="paperSubtitle">Attention_Is_All_You_Need.pdf • Uploaded Just Now</p>
+                        </div>
+                    </div>
+                    <div class="paper-actions-group">
+                        <button class="btn btn-glass" id="btnViewPdf"><i class="fa-regular fa-eye"></i> View PDF</button>
+                        <button class="btn btn-glass" id="btnDownload"><i class="fa-solid fa-download"></i> Download</button>
+                        <button class="btn btn-glass" id="btnCopy"><i class="fa-regular fa-copy"></i> Copy Summary</button>
+                        <a href="chat.html" class="btn btn-primary ripple-effect" id="btnAskAI"><i class="fa-solid fa-wand-magic-sparkles"></i> Ask AI</a>
+                    </div>
+                </div>
+
+                <!-- MAIN SUMMARY GRID -->
+                <div class="summary-grid mt-4">
+                    
+                    <!-- LEFT COLUMN: SIX-SECTION SUMMARY & INSIGHTS -->
+                    <div class="summary-main-col">
+
+                        <!-- LOADING STATE -->
+                        <div class="summary-loading-state glass-card" id="summaryLoadingState" style="display:none;">
+                            <div style="text-align:center; padding: 3rem 2rem;">
+                                <i class="fa-solid fa-brain fa-2x text-gradient-primary" style="animation: pulse 1.5s infinite;"></i>
+                                <p style="margin-top:1rem; color: var(--text-muted);">Loading AI summary...</p>
+                            </div>
+                        </div>
+
+                        <!-- EXECUTIVE SHORT SUMMARY CARD -->
+                        <div class="executive-summary-card glass-card" id="executiveSummaryCard" style="display: none;">
+                            <div class="executive-header-row">
+                                <div class="executive-title-group">
+                                    <span class="executive-badge"><i class="fa-solid fa-bolt-lightning"></i> Short Summary</span>
+                                    <h3 class="executive-heading">Executive Overview</h3>
+                                </div>
+                                <div class="executive-actions">
+                                    <button type="button" class="btn-read-complete" id="btnScrollToCompleteSummary" title="Scroll down to read all complete academic sections">
+                                        <i class="fa-solid fa-layer-group"></i>
+                                        <span>View Complete Academic Summary</span>
+                                        <i class="fa-solid fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="executive-summary-body typography-content" id="executiveSummaryBody">
+                                <!-- Populated dynamically by summary.js -->
+                            </div>
+                        </div>
+
+                        <!-- AI SEVEN-SECTION SUMMARY CARD -->
+                        <div class="summary-text-card glass-card" id="summaryMainCard">
+                            <div class="summary-card-header-bar">
+                                <div class="card-header-badge">
+                                    <i class="fa-solid fa-wand-magic-sparkles text-gradient-primary"></i>
+                                    <span>AI Academic Summary (7 Sections)</span>
+                                </div>
+                                <div class="summary-header-controls">
+                                    <button type="button" class="btn-toggle-all" id="btnToggleAllSections" title="Expand or collapse all sections between short summary and complete view">
+                                        <i class="fa-solid fa-up-right-and-down-left-from-center" id="toggleAllIcon"></i>
+                                        <span id="toggleAllText">Expand All</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Seven academic section blocks, populated by summary.js -->
+                            <div class="summary-sections" id="summarySections">
+
+                                <!-- 1. Executive Overview -->
+                                <div class="summary-section" id="sectionExecutiveOverview">
+                                    <div class="summary-section-header">
+                                        <span class="section-number">1</span>
+                                        <div class="section-icon-wrap indigo"><i class="fa-solid fa-compass"></i></div>
+                                        <h3 class="summary-section-title">Executive Overview</h3>
+                                    </div>
+                                    <div class="summary-section-body typography-content" id="executiveOverviewContent">
+                                        <p>Loading executive overview...</p>
+                                    </div>
+                                </div>
+
+                                <!-- 2. Objective and Purpose -->
+                                <div class="summary-section" id="sectionObjective">
+                                    <div class="summary-section-header">
+                                        <span class="section-number">2</span>
+                                        <div class="section-icon-wrap blue"><i class="fa-solid fa-bullseye"></i></div>
+                                        <h3 class="summary-section-title">Objective and Purpose</h3>
+                                    </div>
+                                    <div class="summary-section-body typography-content" id="objectiveContent">
+                                        <p>Loading objective...</p>
+                                    </div>
+                                </div>
+
+                                <!-- 3. Background and Context -->
+                                <div class="summary-section" id="sectionBackground">
+                                    <div class="summary-section-header">
+                                        <span class="section-number">3</span>
+                                        <div class="section-icon-wrap purple"><i class="fa-solid fa-book-open"></i></div>
+                                        <h3 class="summary-section-title">Background and Context</h3>
+                                    </div>
+                                    <div class="summary-section-body typography-content" id="backgroundContent">
+                                        <p>Loading background...</p>
+                                    </div>
+                                </div>
+
+                                <!-- 4. Methodology -->
+                                <div class="summary-section" id="sectionMethods">
+                                    <div class="summary-section-header">
+                                        <span class="section-number">4</span>
+                                        <div class="section-icon-wrap green"><i class="fa-solid fa-flask"></i></div>
+                                        <h3 class="summary-section-title">Methodology</h3>
+                                    </div>
+                                    <div class="summary-section-body typography-content" id="methodsContent">
+                                        <p>Loading methodology...</p>
+                                    </div>
+                                </div>
+
+                                <!-- 5. Key Findings and Results -->
+                                <div class="summary-section" id="sectionResults">
+                                    <div class="summary-section-header">
+                                        <span class="section-number">5</span>
+                                        <div class="section-icon-wrap orange"><i class="fa-solid fa-chart-bar"></i></div>
+                                        <h3 class="summary-section-title">Key Findings and Results</h3>
+                                    </div>
+                                    <div class="summary-section-body typography-content" id="resultsContent">
+                                        <p>Loading key findings and results...</p>
+                                    </div>
+                                </div>
+
+                                <!-- 6. Conclusions and Implications -->
+                                <div class="summary-section" id="sectionConclusions">
+                                    <div class="summary-section-header">
+                                        <span class="section-number">6</span>
+                                        <div class="section-icon-wrap teal"><i class="fa-solid fa-lightbulb"></i></div>
+                                        <h3 class="summary-section-title">Conclusions and Implications</h3>
+                                    </div>
+                                    <div class="summary-section-body typography-content" id="conclusionsContent">
+                                        <p>Loading conclusions and implications...</p>
+                                    </div>
+                                </div>
+
+                                <!-- 7. Limitations and Future Directions -->
+                                <div class="summary-section" id="sectionLimitations">
+                                    <div class="summary-section-header">
+                                        <span class="section-number">7</span>
+                                        <div class="section-icon-wrap red"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                        <h3 class="summary-section-title">Limitations and Future Directions</h3>
+                                    </div>
+                                    <div class="summary-section-body typography-content" id="limitationsContent">
+                                        <p>Loading limitations and future directions...</p>
+                                    </div>
+                                </div>
+
+                            </div><!-- end summary-sections -->
+                        </div><!-- end summary-text-card -->
+
+                        <!-- KEY INSIGHTS (derived from keyFindings + suggestedQuestions) -->
+                        <div class="insights-card glass-card mt-4" id="insightsCard">
+                            <div class="section-header">
+                                <h3><i class="fa-solid fa-lightbulb text-gradient-primary"></i> Key Insights</h3>
+                            </div>
+                            <div class="insights-grid mt-3" id="insightsGrid">
+                                <!-- Populated by summary.js -->
+                            </div>
+                        </div>
+
+                        <!-- SUGGESTED QUESTIONS -->
+                        <div class="questions-card glass-card mt-4" id="questionsCard" style="display:none;">
+                            <div class="section-header">
+                                <h3><i class="fa-solid fa-circle-question text-gradient-primary"></i> Suggested Questions</h3>
+                                <p style="font-size:0.85rem; color: var(--text-muted); margin: 0.5rem 0 0;">Click any question to ask the AI directly.</p>
+                            </div>
+                            <ul class="suggested-questions-list mt-3" id="suggestedQuestionsList">
+                                <!-- Populated by summary.js -->
+                            </ul>
+                        </div>
+
+                        <!-- RELATED PAPERS (Feature 6: Semantic Scholar + OpenAlex) -->
+                        <div class="related-papers-card glass-card mt-4" id="relatedPapersCard" style="display:none;">
+                            <div class="section-header">
+                                <h3><i class="fa-solid fa-diagram-project text-gradient-primary"></i> Related Research Papers</h3>
+                                <p style="font-size:0.83rem; color: var(--text-muted); margin: 0.4rem 0 0;" id="relatedPapersSubtitle">
+                                    Discovering related papers...
+                                </p>
+                            </div>
+                            <div class="related-papers-list mt-3" id="relatedPapersList">
+                                <!-- Populated by summary.js via Semantic Scholar / OpenAlex -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT COLUMN: METADATA -->
+                    <div class="summary-side-col">
+                        
+                        <div class="metadata-card glass-card">
+                            <h3><i class="fa-solid fa-circle-info text-gradient-primary"></i> Paper Details</h3>
+                            
+                            <ul class="metadata-list mt-3">
+                                <li>
+                                    <span class="meta-label">Title</span>
+                                    <span class="meta-value" id="metaTitle">—</span>
+                                </li>
+                                <li>
+                                    <span class="meta-label">File Name</span>
+                                    <span class="meta-value" id="metaFileName">—</span>
+                                </li>
+                                <li>
+                                    <span class="meta-label">Status</span>
+                                    <span class="meta-value" id="metaStatus">—</span>
+                                </li>
+                                <li>
+                                    <span class="meta-label">Pages</span>
+                                    <span class="meta-value" id="metaPages">—</span>
+                                </li>
+                                <li>
+                                    <span class="meta-label">Word Count</span>
+                                    <span class="meta-value" id="metaWords">—</span>
+                                </li>
+                                <li>
+                                    <span class="meta-label">Reading Time</span>
+                                    <span class="meta-value" id="metaReadingTime">—</span>
+                                </li>
+                                <li>
+                                    <span class="meta-label">AI Model</span>
+                                    <span class="meta-value" id="metaModel">—</span>
+                                </li>
+                                <li>
+                                    <span class="meta-label">Processing Time</span>
+                                    <span class="meta-value" id="metaProcessingTime">—</span>
+                                </li>
+                            </ul>
+
+                            <div class="card-footer-tip mt-4" id="timeSavedTip" style="display:none;">
+                                <i class="fa-solid fa-clock"></i>
+                                <span>Reading this AI summary saved you approx <strong id="timeSavedVal">—</strong> of reading time.</span>
+                            </div>
+                        </div>
+
+                        <!-- DOWNLOAD OPTIONS CARD -->
+                        <div class="metadata-card glass-card mt-4" id="downloadOptionsCard">
+                            <h3><i class="fa-solid fa-download text-gradient-primary"></i> Download Summary</h3>
+                            <div style="display:flex; flex-direction:column; gap:0.75rem; margin-top:1rem;">
+                                <button class="btn btn-glass" id="btnDownloadPdf" style="justify-content:center;">
+                                    <i class="fa-solid fa-file-pdf"></i> Download as PDF
+                                </button>
+                                <button class="btn btn-glass" id="btnDownloadTxt" style="justify-content:center;">
+                                    <i class="fa-solid fa-file-lines"></i> Download as Text
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div> <!-- End summary-content-wrapper -->
+
+        </div> <!-- End dash-main-wrapper -->
+    </div> <!-- End dashboard-layout -->
+
+    <!-- Global Search Modal (Ctrl+K) -->
+    <div class="search-modal-overlay" id="searchModal">
+        <div class="search-modal-container glass-card">
+            <div class="search-modal-header">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="modalSearchInput" placeholder="Search papers, AI summaries..." autocomplete="off">
+                <span class="esc-badge">ESC</span>
+            </div>
+            <div class="search-modal-body">
+                <div class="modal-section-title">RECENT SEARCHES</div>
+                <ul class="modal-results-list">
+                    <li><i class="fa-solid fa-clock-rotate-left"></i> Attention is All You Need <span class="tag">Paper</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/dashboard.js?v=7.0"></script>
+    <script src="assets/js/summary.js?v=1.0"></script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign in to your PaperMind.AI account to continue summarizing research papers with AI.">
+    <title>Sign In - PaperMind AI</title>
+    <!-- Favicon -->
+    <link class="fav" rel="icon" type="image/svg+xml" href="favicon.svg">
+    <!-- Google Fonts: Poppins & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Global, Auth & Responsive Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css?v=2.0">
+    <link rel="stylesheet" href="assets/css/auth.css?v=2.0">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=2.0">
+</head>
+<body>
+
+    <!-- Auth Wrapper -->
+    <div class="auth-wrapper">
+
+        <!-- LEFT SIDE: Branding Panel -->
+        <aside class="auth-sidebar">
+            <div class="auth-sidebar-glow-1"></div>
+            <div class="auth-sidebar-glow-2"></div>
+
+            <!-- Logo -->
+            <div class="auth-sidebar-header">
+                <a href="index.html" class="nav-brand">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <span class="logo-text">PaperMind<span class="logo-accent">.AI</span></span>
+                </a>
+            </div>
+
+            <!-- Middle Content -->
+            <div class="auth-sidebar-body">
+                <h1 class="auth-sidebar-title">Welcome Back</h1>
+                <p class="auth-sidebar-desc">
+                    Sign in to continue summarizing research papers with AI.
+                </p>
+
+                <!-- Abstract AI Illustration in HTML/CSS -->
+                <div class="auth-sidebar-illustration">
+                    <div class="auth-illustration-canvas">
+                        <div class="canvas-pulse-glow"></div>
+                        <div class="canvas-core-icon">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+
+                        <!-- Floating glass cards -->
+                        <div class="floating-glass-card float-card-1">
+                            <div class="float-card-icon bg-p">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <div class="float-card-text">
+                                <span class="float-card-title">10x Speed</span>
+                                <span class="float-card-desc">PDF Analyzed</span>
+                            </div>
+                        </div>
+
+                        <div class="floating-glass-card float-card-2">
+                            <div class="float-card-icon bg-s">
+                                <i class="fa-solid fa-shield"></i>
+                            </div>
+                            <div class="float-card-text">
+                                <span class="float-card-title">Secure</span>
+                                <span class="float-card-desc">AES-256 Active</span>
+                            </div>
+                        </div>
+
+                        <div class="floating-glass-card float-card-3">
+                            <div class="float-card-icon bg-a">
+                                <i class="fa-solid fa-chart-simple"></i>
+                            </div>
+                            <div class="float-card-text">
+                                <span class="float-card-title">Accuracy</span>
+                                <span class="float-card-desc">99.4% Rate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Highlights List -->
+                <div class="auth-highlights">
+                    <!-- Highlight 1 -->
+                    <div class="auth-highlight-item">
+                        <div class="highlight-icon">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <span class="highlight-text">AI-Powered Summaries</span>
+                    </div>
+
+                    <!-- Highlight 2 -->
+                    <div class="auth-highlight-item">
+                        <div class="highlight-icon">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <span class="highlight-text">Secure Workspace</span>
+                    </div>
+
+                    <!-- Highlight 3 -->
+                    <div class="auth-highlight-item">
+                        <div class="highlight-icon">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                        <span class="highlight-text">Fast & Accurate</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer info -->
+            <div class="auth-sidebar-footer">
+                <p>&copy; 2026 PaperMind.AI. Made for Academic Innovation.</p>
+            </div>
+        </aside>
+
+        <!-- RIGHT SIDE: Login Form Panel -->
+        <main class="auth-content">
+            <!-- Background glows & abstract grid pattern -->
+            <div class="auth-content-glow-1"></div>
+            <div class="auth-content-glow-2"></div>
+
+            <div class="auth-card card-glass animate-fade-in-down">
+                <div class="auth-header text-center">
+                    <!-- Circular PaperMind AI Logo -->
+                    <div class="auth-logo-circle">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <div class="auth-welcome-back">Welcome Back 👋</div>
+                    <p class="auth-welcome-sub">Continue your AI Research Journey</p>
+                    <h2 class="auth-title">Sign In</h2>
+                </div>
+
+                <!-- Login Form (novalidate to allow custom validation) -->
+                <form class="auth-form" id="loginForm" novalidate>
+                    <!-- Email Address -->
+                    <div class="form-group-floating">
+                        <div class="input-container">
+                            <span class="input-icon-left" aria-hidden="true"><i class="fa-regular fa-envelope"></i></span>
+                            <input type="email" id="email" class="auth-input" placeholder=" " required aria-describedby="emailError">
+                            <label for="email" class="floating-label">Email Address</label>
+                        </div>
+                        <div class="error-message" id="emailError" aria-live="polite"></div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group-floating">
+                        <div class="input-container">
+                            <span class="input-icon-left" aria-hidden="true"><i class="fa-solid fa-lock"></i></span>
+                            <input type="password" id="password" class="auth-input" placeholder=" " required aria-describedby="passwordError">
+                            <label for="password" class="floating-label">Password</label>
+                            <button type="button" class="password-toggle" id="passwordToggle" aria-label="Toggle Password Visibility">
+                                <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <div class="error-message" id="passwordError" aria-live="polite"></div>
+                    </div>
+
+                    <!-- Extra Form Actions -->
+                    <div class="form-actions">
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Remember Me</span>
+                        </label>
+                        <a href="forgot-password.html" class="forgot-password">Forgot Password?</a>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary auth-btn ripple-effect">
+                        <span>Sign In</span>
+                        <i class="fa-solid fa-arrow-right-to-bracket" aria-hidden="true"></i>
+                    </button>
+                </form>
+
+                <!-- Divider -->
+                <div class="auth-divider"><span>or continue with</span></div>
+
+                <!-- Social Sign In -->
+                <div class="social-buttons">
+                    <a href="http://localhost:5000/api/auth/github" class="btn-social" id="btnGitHub" aria-label="Continue with GitHub" style="width: 100%; justify-content: center; gap: 0.75rem; text-decoration: none; display: flex; align-items: center; cursor: pointer;">
+                        <i class="fa-brands fa-github" style="font-size: 1.25rem;" aria-hidden="true"></i>
+                        <span>Continue with GitHub</span>
+                    </a>
+                </div>
+
+                <!-- Trust Badges Section -->
+                <div class="auth-trust-badges">
+                    <span class="trust-badge"><i class="fa-solid fa-lock text-success" aria-hidden="true"></i> AES-256 Secure</span>
+                    <span class="trust-badge"><i class="fa-solid fa-bolt text-warning" aria-hidden="true"></i> 50k+ Researchers</span>
+                    <span class="trust-badge"><i class="fa-solid fa-brain text-primary" aria-hidden="true"></i> AI Powered</span>
+                </div>
+
+                <!-- Create Account Link -->
+                <div class="auth-footer">
+                    <p>Don't have an account? <a href="register.html" class="auth-footer-link gradient-link"><span>Create Account</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container" aria-live="assertive"></div>
+
+    <!-- Global JavaScript, API Service & Auth Script -->
+    <script src="assets/js/main.js?v=6.0"></script>
+    <script src="assets/js/api.js?v=6.0"></script>
+    <script src="assets/js/auth.js?v=6.0"></script>
+</body>
+</html>

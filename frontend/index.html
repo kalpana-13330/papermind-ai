@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Transform complex academic research papers into concise, actionable summaries in seconds with state-of-the-art AI.">
+    <title>PaperMind AI - Summarize Research Papers with AI in Seconds</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Global & Responsive Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+    <!-- Ambient Background Glows -->
+    <div class="ambient-glow ambient-glow-1"></div>
+    <div class="ambient-glow ambient-glow-2"></div>
+    <div class="ambient-glow ambient-glow-3"></div>
+
+    <!-- 1. Sticky Navigation Bar -->
+    <header class="header" id="header">
+        <nav class="navbar container">
+            <a href="index.html" class="nav-brand">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <span class="logo-text">PaperMind<span class="logo-accent">.AI</span></span>
+            </a>
+
+            <!-- Desktop Nav Menu -->
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+                <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#faq" class="nav-link">FAQ</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <!-- Nav Actions -->
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline btn-sm">Log In</a>
+                <a href="login.html" class="btn btn-primary btn-sm nav-cta">
+                    <span>Get Started</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- 2. Hero Section -->
+        <section class="hero-section">
+            <div class="container hero-container">
+                <div class="hero-header text-center">
+                    <!-- AI Badge Pill -->
+                    <div class="hero-badge">
+                        <span class="badge-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                        <span class="badge-text">Next-Gen Academic AI Summarizer</span>
+                        <span class="badge-tag">v2.4 Live</span>
+                    </div>
+
+                    <!-- Main Headline -->
+                    <h1 class="hero-title">
+                        Summarize Research Papers <br class="hero-br">
+                        <span class="text-gradient">with AI in Seconds</span>
+                    </h1>
+
+                    <!-- Short Description -->
+                    <p class="hero-description">
+                        Drastically cut your reading time. Our advanced AI analyzes dense PDFs, extracts critical methodologies, datasets, and key findings into structured, easy-to-digest summaries.
+                    </p>
+
+                    <!-- Two CTA Buttons -->
+                    <div class="hero-cta-group">
+                        <a href="login.html" class="btn btn-primary btn-lg hero-btn-main">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>Generate Summary</span>
+                        </a>
+                        <a href="#about" class="btn btn-glass btn-lg hero-btn-secondary">
+                            <i class="fa-solid fa-circle-play"></i>
+                            <span>Learn More</span>
+                        </a>
+                    </div>
+
+                    <!-- Trust Ratings & Proof -->
+                    <div class="hero-proof">
+                        <div class="proof-avatars">
+                            <div class="avatar-circle av-1"><i class="fa-solid fa-user-graduate"></i></div>
+                            <div class="avatar-circle av-2"><i class="fa-solid fa-microscope"></i></div>
+                            <div class="avatar-circle av-3"><i class="fa-solid fa-flask"></i></div>
+                            <div class="avatar-circle av-4"><i class="fa-solid fa-atom"></i></div>
+                        </div>
+                        <div class="proof-text">
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <span class="rating-num">4.9/5</span>
+                            </div>
+                            <p class="proof-sub">Trusted by <strong>50,000+</strong> researchers & Ph.D. scholars</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Hero Image Area (Pure CSS Modern AI Illustration) -->
+                <div class="hero-illustration-wrapper">
+                    <!-- Glass Card Mockup Showcase -->
+                    <div class="mockup-window card-glass">
+                        <!-- Window Top Header -->
+                        <div class="mockup-header">
+                            <div class="window-dots">
+                                <span class="dot dot-close"></span>
+                                <span class="dot dot-minimize"></span>
+                                <span class="dot dot-expand"></span>
+                            </div>
+                            <div class="window-title-bar">
+                                <i class="fa-solid fa-lock text-muted text-xs"></i>
+                                <span>papermind.ai/dashboard/summary?id=paper_8942</span>
+                            </div>
+                            <div class="window-actions">
+                                <span class="status-pill"><i class="fa-solid fa-circle-check"></i> Analysis Complete</span>
+                            </div>
+                        </div>
+
+                        <!-- Mockup Body Grid -->
+                        <div class="mockup-body">
+                            <!-- Left Sidebar Mockup (Paper Info) -->
+                            <div class="mockup-sidebar">
+                                <div class="paper-meta-card">
+                                    <div class="pdf-tag"><i class="fa-solid fa-file-pdf"></i> PDF Document</div>
+                                    <h4 class="paper-title">Attention Is All You Need.pdf</h4>
+                                    <p class="paper-authors">Vaswani et al. • NIPS 2017</p>
+                                    <div class="paper-stats-mini">
+                                        <span><i class="fa-solid fa-file-lines"></i> 15 Pages</span>
+                                        <span><i class="fa-solid fa-bolt"></i> 4,820 Words</span>
+                                    </div>
+                                </div>
+                                <div class="paper-outline">
+                                    <div class="outline-title">Extracted Structure</div>
+                                    <div class="outline-item active"><i class="fa-solid fa-check-circle"></i> Executive Summary</div>
+                                    <div class="outline-item"><i class="fa-solid fa-check-circle"></i> Core Novel Contributions</div>
+                                    <div class="outline-item"><i class="fa-solid fa-check-circle"></i> Architecture & Equations</div>
+                                    <div class="outline-item"><i class="fa-solid fa-check-circle"></i> Experimental Results</div>
+                                </div>
+                            </div>
+
+                            <!-- Right Main Content Mockup -->
+                            <div class="mockup-main">
+                                <!-- AI Summary Header Card -->
+                                <div class="ai-summary-card">
+                                    <div class="ai-summary-header">
+                                        <div class="ai-badge">
+                                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                            <span>AI Executive Summary</span>
+                                        </div>
+                                        <div class="reading-time">
+                                            <i class="fa-solid fa-clock"></i> 2 min read (Saved 45 min)
+                                        </div>
+                                    </div>
+
+                                    <div class="ai-content-box">
+                                        <h3 class="summary-headline">Core Breakthrough</h3>
+                                        <p class="summary-p">
+                                            This landmark paper proposes the <strong>Transformer</strong>, a novel neural network architecture based solely on self-attention mechanisms, completely dispensing with recurrence and convolutions.
+                                        </p>
+
+                                        <div class="key-takeaways">
+                                            <div class="takeaway-item">
+                                                <div class="takeaway-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                                                <div class="takeaway-text">
+                                                    <strong>Parallelizable Computation:</strong> Training time is significantly reduced compared to RNNs by processing all sequence tokens simultaneously.
+                                                </div>
+                                            </div>
+                                            <div class="takeaway-item">
+                                                <div class="takeaway-icon"><i class="fa-solid fa-chart-line"></i></div>
+                                                <div class="takeaway-text">
+                                                    <strong>State-of-the-Art Results:</strong> Achieved 28.4 BLEU on English-to-German translation, outperforming previous ensemble models.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Interactive Q&A Bar Snippet -->
+                                    <div class="mockup-chat-bar">
+                                        <div class="chat-input-placeholder">
+                                            <i class="fa-solid fa-sparkles text-primary"></i>
+                                            <span>Ask AI: "What is Multi-Head Attention?"</span>
+                                        </div>
+                                        <button class="chat-send-btn" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating CSS Accents & Badges -->
+                    <div class="floating-card float-badge-1 card-glass">
+                        <div class="float-icon bg-success-light">
+                            <i class="fa-solid fa-bolt text-success"></i>
+                        </div>
+                        <div class="float-content">
+                            <div class="float-title">10x Faster Analysis</div>
+                            <div class="float-desc">Summary ready in 4.2 sec</div>
+                        </div>
+                    </div>
+
+                    <div class="floating-card float-badge-2 card-glass">
+                        <div class="float-icon bg-primary-light">
+                            <i class="fa-solid fa-bullseye text-primary"></i>
+                        </div>
+                        <div class="float-content">
+                            <div class="float-title">99.2% Accuracy</div>
+                            <div class="float-desc">Zero hallucination mode</div>
+                        </div>
+                    </div>
+
+                    <div class="floating-card float-badge-3 card-glass">
+                        <div class="float-icon bg-accent-light">
+                            <i class="fa-solid fa-layer-group text-accent"></i>
+                        </div>
+                        <div class="float-content">
+                            <div class="float-title">Deep Synthesis</div>
+                            <div class="float-desc">Key takeaways & formulas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             SECTION 1: POWERFUL FEATURES
+             ========================================================================== -->
+        <section class="features-section fade-up" id="features">
+            <div class="container">
+                <!-- Section Header -->
+                <div class="section-header text-center">
+                    <span class="section-badge">
+                        <i class="fa-solid fa-bolt"></i> Capabilities
+                    </span>
+                    <h2 class="section-title">Powerful Features</h2>
+                    <p class="section-subheading">
+                        Everything you need to understand research papers faster with Artificial Intelligence.
+                    </p>
+                </div>
+
+                <!-- 6 Feature Cards Grid -->
+                <div class="features-grid grid grid-3">
+                    <!-- Feature Card 1 -->
+                    <div class="feature-card card card-glass card-hover">
+                        <div class="feature-icon-wrapper icon-gradient-1">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="feature-title">AI Research Paper Summarization</h3>
+                        <p class="feature-desc">
+                            Automatically summarize long research papers into short and meaningful content.
+                        </p>
+                        <div class="feature-footer-link">
+                            <span>Explore Feature</span>
+                            <i class="fa-solid fa-arrow-right-short"></i>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card 2 -->
+                    <div class="feature-card card card-glass card-hover">
+                        <div class="feature-icon-wrapper icon-gradient-2">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i>
+                        </div>
+                        <h3 class="feature-title">Key Findings Extraction</h3>
+                        <p class="feature-desc">
+                            Identify the most important discoveries and research outcomes automatically.
+                        </p>
+                        <div class="feature-footer-link">
+                            <span>Explore Feature</span>
+                            <i class="fa-solid fa-arrow-right-short"></i>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card 3 -->
+                    <div class="feature-card card card-glass card-hover">
+                        <div class="feature-icon-wrapper icon-gradient-3">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h3 class="feature-title">Objective Detection</h3>
+                        <p class="feature-desc">
+                            Extract the main research objective and hypotheses automatically.
+                        </p>
+                        <div class="feature-footer-link">
+                            <span>Explore Feature</span>
+                            <i class="fa-solid fa-arrow-right-short"></i>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card 4 -->
+                    <div class="feature-card card card-glass card-hover">
+                        <div class="feature-icon-wrapper icon-gradient-4">
+                            <i class="fa-solid fa-square-poll-vertical"></i>
+                        </div>
+                        <h3 class="feature-title">Conclusion Extraction</h3>
+                        <p class="feature-desc">
+                            Display the final conclusion separately for quick understanding.
+                        </p>
+                        <div class="feature-footer-link">
+                            <span>Explore Feature</span>
+                            <i class="fa-solid fa-arrow-right-short"></i>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card 5 -->
+                    <div class="feature-card card card-glass card-hover">
+                        <div class="feature-icon-wrapper icon-gradient-5">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <h3 class="feature-title">PDF Upload</h3>
+                        <p class="feature-desc">
+                            Upload research papers securely in PDF format with instant OCR parsing.
+                        </p>
+                        <div class="feature-footer-link">
+                            <span>Explore Feature</span>
+                            <i class="fa-solid fa-arrow-right-short"></i>
+                        </div>
+                    </div>
+
+                    <!-- Feature Card 6 -->
+                    <div class="feature-card card card-glass card-hover">
+                        <div class="feature-icon-wrapper icon-gradient-6">
+                            <i class="fa-solid fa-bolt-lightning"></i>
+                        </div>
+                        <h3 class="feature-title">Lightning Fast Processing</h3>
+                        <p class="feature-desc">
+                            Generate summaries within seconds using multi-threaded AI engines.
+                        </p>
+                        <div class="feature-footer-link">
+                            <span>Explore Feature</span>
+                            <i class="fa-solid fa-arrow-right-short"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             SECTION 2: WHY CHOOSE US
+             ========================================================================== -->
+        <section class="why-us-section fade-up" id="about">
+            <div class="container">
+                <div class="why-us-grid">
+                    <!-- Left Side: Pure HTML/CSS AI Illustration -->
+                    <div class="why-us-illustration">
+                        <div class="why-us-canvas card-glass">
+                            <!-- Background Glow & Connection Lines -->
+                            <div class="canvas-glow"></div>
+                            <div class="connection-line line-1"></div>
+                            <div class="connection-line line-2"></div>
+                            <div class="connection-line line-3"></div>
+
+                            <!-- Central AI Brain Core -->
+                            <div class="ai-core-badge">
+                                <div class="core-pulse"></div>
+                                <div class="core-icon">
+                                    <i class="fa-solid fa-brain-circuit"></i>
+                                </div>
+                                <span class="core-label">PaperMind Core</span>
+                            </div>
+
+                            <!-- Floating Element 1: PDF Card -->
+                            <div class="why-float-card float-pdf card-glass">
+                                <div class="pdf-icon-mini"><i class="fa-solid fa-file-pdf"></i></div>
+                                <div class="pdf-info-mini">
+                                    <span class="pdf-title-mini">Quantum_AI_Paper.pdf</span>
+                                    <span class="pdf-status-mini"><i class="fa-solid fa-spinner fa-spin text-primary"></i> Parsing 45 Pages...</span>
+                                </div>
+                            </div>
+
+                            <!-- Floating Element 2: AI Summary Output Card -->
+                            <div class="why-float-card float-summary card-glass">
+                                <div class="summary-badge-mini"><i class="fa-solid fa-wand-magic-sparkles"></i> Executive Summary</div>
+                                <p class="summary-text-mini">Key Finding: 99.4% accuracy achieved with 85% reduced reading time.</p>
+                                <div class="summary-tags-mini">
+                                    <span class="mini-tag">NLP</span>
+                                    <span class="mini-tag">Deep Learning</span>
+                                </div>
+                            </div>
+
+                            <!-- Floating Element 3: Speed Metrics Chip -->
+                            <div class="why-float-card float-metric card-glass">
+                                <div class="metric-icon-mini"><i class="fa-solid fa-stopwatch text-success"></i></div>
+                                <div class="metric-text-mini">
+                                    <strong>4.2 Seconds</strong>
+                                    <span>Avg Processing Time</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Content & 5 Feature Rows -->
+                    <div class="why-us-content">
+                        <span class="section-badge">
+                            <i class="fa-solid fa-shield-halved"></i> Competitive Advantage
+                        </span>
+                        <h2 class="section-title">Why Choose AI Research Paper Summarizer?</h2>
+                        <p class="why-us-description">
+                            Traditional academic research requires reading dozens of long PDF papers. Our AI-driven summarizer reduces hours of tedious reading into instant, highly accurate insights designed for students, professors, and industry researchers.
+                        </p>
+
+                        <div class="why-items-list">
+                            <!-- Item 1 -->
+                            <div class="why-item">
+                                <div class="why-item-icon">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </div>
+                                <div class="why-item-text">
+                                    <h4>Save Hours of Reading</h4>
+                                    <p>Distill 40+ page papers into bulleted key takeaways in under 5 seconds.</p>
+                                </div>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="why-item">
+                                <div class="why-item-icon">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </div>
+                                <div class="why-item-text">
+                                    <h4>Accurate AI Summaries</h4>
+                                    <p>Zero hallucination architecture guarantees true-to-text accuracy.</p>
+                                </div>
+                            </div>
+
+                            <!-- Item 3 -->
+                            <div class="why-item">
+                                <div class="why-item-icon">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </div>
+                                <div class="why-item-text">
+                                    <h4>Easy to Understand</h4>
+                                    <p>Complex mathematical equations & jargon converted into plain language.</p>
+                                </div>
+                            </div>
+
+                            <!-- Item 4 -->
+                            <div class="why-item">
+                                <div class="why-item-icon">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </div>
+                                <div class="why-item-text">
+                                    <h4>Secure PDF Processing</h4>
+                                    <p>Enterprise-grade encryption keeps your unpublished research 100% private.</p>
+                                </div>
+                            </div>
+
+                            <!-- Item 5 -->
+                            <div class="why-item">
+                                <div class="why-item-icon">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </div>
+                                <div class="why-item-text">
+                                    <h4>Modern AI Technology</h4>
+                                    <p>Powered by the latest Large Language Models fine-tuned on academic datasets.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             SECTION 3: STATISTICS
+             ========================================================================== -->
+        <section class="stats-section fade-up" id="statistics">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-badge">
+                        <i class="fa-solid fa-chart-line"></i> Proven Impact
+                    </span>
+                    <h2 class="section-title">Trusted by Researchers Worldwide</h2>
+                    <p class="section-subheading">
+                        Delivering measurable productivity gains to academic institutions and enterprise R&D teams.
+                    </p>
+                </div>
+
+                <div class="stats-grid grid grid-4">
+                    <!-- Stat Card 1 -->
+                    <div class="stat-card card card-glass card-hover">
+                        <div class="stat-icon"><i class="fa-solid fa-file-invoice"></i></div>
+                        <div class="stat-number-wrapper">
+                            <span class="stat-number text-gradient" data-target="50" data-suffix="K+">0</span>
+                        </div>
+                        <p class="stat-label">Research Papers</p>
+                        <div class="stat-bar"><div class="stat-bar-fill fill-1"></div></div>
+                    </div>
+
+                    <!-- Stat Card 2 -->
+                    <div class="stat-card card card-glass card-hover">
+                        <div class="stat-icon"><i class="fa-solid fa-bullseye"></i></div>
+                        <div class="stat-number-wrapper">
+                            <span class="stat-number text-gradient" data-target="98" data-suffix="%">0</span>
+                        </div>
+                        <p class="stat-label">Summarization Accuracy</p>
+                        <div class="stat-bar"><div class="stat-bar-fill fill-2"></div></div>
+                    </div>
+
+                    <!-- Stat Card 3 -->
+                    <div class="stat-card card card-glass card-hover">
+                        <div class="stat-icon"><i class="fa-solid fa-gauge-high"></i></div>
+                        <div class="stat-number-wrapper">
+                            <span class="stat-number text-gradient" data-target="5" data-suffix="x">0</span>
+                        </div>
+                        <p class="stat-label">Faster Reading</p>
+                        <div class="stat-bar"><div class="stat-bar-fill fill-3"></div></div>
+                    </div>
+
+                    <!-- Stat Card 4 -->
+                    <div class="stat-card card card-glass card-hover">
+                        <div class="stat-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                        <div class="stat-number-wrapper">
+                            <span class="stat-number text-gradient" data-target="24" data-suffix="/7">0</span>
+                        </div>
+                        <p class="stat-label">AI Availability</p>
+                        <div class="stat-bar"><div class="stat-bar-fill fill-4"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             SECTION 4: HOW IT WORKS
+             ========================================================================== -->
+        <section class="how-it-works-section fade-up" id="how-it-works">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-badge">
+                        <i class="fa-solid fa-list-check"></i> Workflow
+                    </span>
+                    <h2 class="section-title">How It Works</h2>
+                    <p class="section-subheading">
+                        Three simple steps to transform complex academic research papers into concise summaries.
+                    </p>
+                </div>
+
+                <div class="steps-grid grid grid-3">
+                    <!-- Step 1 -->
+                    <div class="step-card card card-glass card-hover">
+                        <div class="step-icon-num text-gradient">01</div>
+                        <h3 class="step-title">Upload Research Paper</h3>
+                        <p class="step-desc">
+                            Simply drag & drop or select your PDF file. Our systems parse document metadata, figures, tables, and raw text securely.
+                        </p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-card card card-glass card-hover">
+                        <div class="step-icon-num text-gradient">02</div>
+                        <h3 class="step-title">AI Processing</h3>
+                        <p class="step-desc">
+                            Our academic-trained LLMs segment the paper, identifying objectives, methodology, experiments, equations, and main findings.
+                        </p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-card card card-glass card-hover">
+                        <div class="step-icon-num text-gradient">03</div>
+                        <h3 class="step-title">Get Summary & Ask</h3>
+                        <p class="step-desc">
+                            View structured takeaways, copy equations, download summaries, or use natural language to chat with your document directly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             SECTION 5: TESTIMONIALS
+             ========================================================================== -->
+        <section class="testimonials-section fade-up" id="testimonials">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-badge">
+                        <i class="fa-solid fa-quote-right"></i> Testimonials
+                    </span>
+                    <h2 class="section-title">Loved by Researchers Worldwide</h2>
+                    <p class="section-subheading">
+                        Join thousands of students, Ph.D. scholars, professors, and industry professionals.
+                    </p>
+                </div>
+
+                <div class="testimonials-grid grid grid-3">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card card card-glass card-hover">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "PaperMind.AI has completely changed how I tackle literature reviews. I can digest 15 papers in the time it used to take to read just one."
+                        </p>
+                        <div class="testimonial-user">
+                            <div class="user-avatar-placeholder av-accent"><i class="fa-solid fa-user-graduate"></i></div>
+                            <div class="user-info">
+                                <h4 class="user-name">Sarah Jenkins</h4>
+                                <span class="user-role">Ph.D. Candidate, Stanford</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card card card-glass card-hover">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "The methodology and math formula extraction is incredibly accurate. It saves me the trouble of digging through complex appendices."
+                        </p>
+                        <div class="testimonial-user">
+                            <div class="user-avatar-placeholder av-primary"><i class="fa-solid fa-microscope"></i></div>
+                            <div class="user-info">
+                                <h4 class="user-name">Dr. Aris Thorne</h4>
+                                <span class="user-role">CS Associate Professor, MIT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card card card-glass card-hover">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">
+                            "We use PaperMind to summarize and tag internal technical documents. It cuts down onboarding times for new research engineers drastically."
+                        </p>
+                        <div class="testimonial-user">
+                            <div class="user-avatar-placeholder av-success"><i class="fa-solid fa-flask"></i></div>
+                            <div class="user-info">
+                                <h4 class="user-name">Elena Rostova</h4>
+                                <span class="user-role">AI Lead, DeepScience Labs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             SECTION 6: FAQ
+             ========================================================================== -->
+        <section class="faq-section fade-up" id="faq">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-badge">
+                        <i class="fa-solid fa-circle-question"></i> Questions
+                    </span>
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                    <p class="section-subheading">
+                        Everything you need to know about PaperMind.AI and how it works.
+                    </p>
+                </div>
+
+                <div class="faq-accordion">
+                    <!-- FAQ 1 -->
+                    <div class="faq-item card card-glass">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span class="faq-question">How accurate are the AI-generated summaries?</span>
+                            <span class="faq-icon-wrapper"><i class="fa-solid fa-plus"></i></span>
+                        </button>
+                        <div class="faq-content">
+                            <p>
+                                Our summaries are highly accurate, relying on specialized LLM fine-tuning on academic datasets combined with proprietary semantic search (RAG) to ensure statements are tied directly to coordinates within the uploaded document, preventing hallucinations.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="faq-item card card-glass">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span class="faq-question">Are my uploaded research papers secure?</span>
+                            <span class="faq-icon-wrapper"><i class="fa-solid fa-plus"></i></span>
+                        </button>
+                        <div class="faq-content">
+                            <p>
+                                Absolutely. Security is our top priority. All documents are encrypted in transit and at rest using AES-256 encryption. Files are never shared, sold, or used to train open LLM weights.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="faq-item card card-glass">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span class="faq-question">Can it extract mathematical formulas and complex tables?</span>
+                            <span class="faq-icon-wrapper"><i class="fa-solid fa-plus"></i></span>
+                        </button>
+                        <div class="faq-content">
+                            <p>
+                                Yes! PaperMind features state-of-the-art LaTeX and table OCR parsing, allowing it to accurately extract equations, matrices, graphs, and structured tables, translating them into crisp markdown.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="faq-item card card-glass">
+                        <button class="faq-trigger" aria-expanded="false">
+                            <span class="faq-question">What file types and size limits are supported?</span>
+                            <span class="faq-icon-wrapper"><i class="fa-solid fa-plus"></i></span>
+                        </button>
+                        <div class="faq-content">
+                            <p>
+                                We support PDF documents up to 100MB or 250 pages under free accounts, with extended limits for premium subscription tiers. Text-heavy files process in under 5 seconds.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             SECTION 7: CTA SECTION
+             ========================================================================== -->
+        <section class="cta-section fade-up" id="cta">
+            <div class="container">
+                <div class="cta-card card-glass">
+                    <div class="cta-glow-1"></div>
+                    <div class="cta-glow-2"></div>
+                    <div class="cta-content text-center">
+                        <h2 class="cta-title text-gradient-light">Accelerate Your Academic Research Today</h2>
+                        <p class="cta-desc">
+                            Join thousands of researchers who are cutting reading times down by 85% with our academic AI assistant.
+                        </p>
+                        <div class="cta-actions">
+                            <a href="login.html" class="btn btn-primary btn-lg ripple-effect">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                <span>Get Started for Free</span>
+                            </a>
+                            <a href="#contact" class="btn btn-glass btn-lg ripple-effect">
+                                <i class="fa-solid fa-envelope"></i>
+                                <span>Talk to Sales</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+             SECTION 8: NEWSLETTER
+             ========================================================================== -->
+        <section class="newsletter-section fade-up" id="newsletter">
+            <div class="container">
+                <div class="newsletter-container card-glass">
+                    <div class="newsletter-glow-1"></div>
+                    <div class="newsletter-glow-2"></div>
+                    <div class="newsletter-content text-center">
+                        <div class="newsletter-icon-badge">
+                            <i class="fa-regular fa-paper-plane"></i>
+                        </div>
+                        <h2 class="newsletter-title text-gradient-light">Stay Updated with AI Research</h2>
+                        <p class="newsletter-desc">
+                            Subscribe to receive AI research updates, new features, and productivity tips directly in your inbox.
+                        </p>
+                        <form class="newsletter-form" id="newsletterForm" onsubmit="event.preventDefault(); alert('Thank you for subscribing!'); this.reset();">
+                            <div class="newsletter-input-group">
+                                <span class="input-icon"><i class="fa-regular fa-envelope"></i></span>
+                                <input type="email" class="newsletter-input" placeholder="Enter your email address" required aria-label="Email address">
+                            </div>
+                            <button type="submit" class="btn btn-primary newsletter-btn ripple-effect">
+                                <span>Subscribe</span>
+                                <i class="fa-solid fa-bell"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================================================
+         SECTION 9: FOOTER
+         ========================================================================== -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Left Side: Brand info -->
+                <div class="footer-brand-col">
+                    <a href="index.html" class="nav-brand footer-logo">
+                        <div class="logo-icon">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <span class="logo-text">PaperMind<span class="logo-accent">.AI</span></span>
+                    </a>
+                    <p class="footer-brand-desc">
+                        AI-powered research paper summarization platform for students, researchers, and educators.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <!-- Middle Column: Quick Links -->
+                <div class="footer-links-col">
+                    <h4 class="footer-col-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html" class="footer-link-item">Home</a></li>
+                        <li><a href="#features" class="footer-link-item">Features</a></li>
+                        <li><a href="#about" class="footer-link-item">About</a></li>
+                        <li><a href="#faq" class="footer-link-item">FAQ</a></li>
+                        <li><a href="#contact" class="footer-link-item">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Right Column: Resources -->
+                <div class="footer-links-col">
+                    <h4 class="footer-col-title">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link-item">Privacy Policy</a></li>
+                        <li><a href="#" class="footer-link-item">Terms of Service</a></li>
+                        <li><a href="#" class="footer-link-item">Documentation</a></li>
+                        <li><a href="#" class="footer-link-item">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Footer bar -->
+            <div class="footer-bottom">
+                <p class="footer-copy">&copy; 2026 PaperMind.AI. All rights reserved.</p>
+                <p class="footer-innovation">Made for Academic Innovation</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SECTION 10: SCROLL TO TOP -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- SECTION 11: ELEGANT PAGE LOADER -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-spinner">
+                <i class="fa-solid fa-brain-circuit loader-brain"></i>
+                <div class="loader-ring"></div>
+            </div>
+            <h3 class="loader-title text-gradient">PaperMind.AI</h3>
+            <p class="loader-sub">Preparing academic workspace...</p>
+        </div>
+    </div>
+
+    <!-- Global JavaScript & API Service -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.authAPI && window.authAPI.isAuthenticated()) {
+                // Logged-in: swap "Log In" button to "Dashboard"
+                document.querySelectorAll('a[href="login.html"]').forEach(btn => {
+                    if (btn.classList.contains('btn') && !btn.classList.contains('nav-cta') && !btn.classList.contains('hero-btn-main') && !btn.classList.contains('ripple-effect')) {
+                        btn.textContent = 'Dashboard';
+                        btn.href = 'dashboard.html';
+                    }
+                });
+                // Logged-in: "Get Started" CTAs go straight to upload (skip login)
+                document.querySelectorAll(
+                    'a.nav-cta, a.hero-btn-main, a.ripple-effect'
+                ).forEach(btn => {
+                    if (btn.getAttribute('href') === 'login.html') {
+                        btn.href = 'upload.html';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

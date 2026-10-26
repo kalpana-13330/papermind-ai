@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity History - PaperMind AI</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Global & Dashboard Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css?v=6.0">
+    <link rel="stylesheet" href="assets/css/dashboard.css?v=6.0">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=6.0">
+    <style>
+        .history-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .history-pills {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.35rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .history-filter-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            padding: 0.45rem 1rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .history-filter-btn:hover {
+            color: #fff;
+        }
+        .history-filter-btn.active {
+            background: #6366f1;
+            color: #fff;
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+        }
+        .history-timeline-card {
+            padding: 2.25rem;
+            max-width: 900px;
+            width: 100%;
+        }
+        .history-empty-box {
+            padding: 4rem 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body class="dashboard-body">
+
+    <!-- Page Loading Overlay -->
+    <div class="page-loader-overlay" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-brain-glow"><i class="fa-solid fa-brain"></i></div>
+            <div class="loader-text">Loading History...</div>
+        </div>
+    </div>
+
+    <!-- Background Glows -->
+    <div class="dash-bg-glow glow-1"></div>
+    <div class="dash-bg-glow glow-2"></div>
+    <div class="dash-bg-grid"></div>
+
+    <div class="dashboard-layout">
+        
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="dash-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon"><i class="fa-solid fa-brain"></i></div>
+                    <span class="logo-text">PaperMind<span>.AI</span></span>
+                </div>
+                <button class="mobile-close-btn" id="closeSidebar" aria-label="Close Sidebar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="sidebar-live-status">
+                <span class="live-pulse-dot"></span>
+                <span class="live-status-text">AI Engine Online</span>
+                <span class="live-time" id="liveClock">12:57 PM</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <p class="nav-section-title">MAIN MENU</p>
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="upload.html" class="nav-item">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Upload Paper</span>
+                </a>
+                <a href="papers.html" class="nav-item">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>My Papers</span>
+                </a>
+                <a href="summary.html" class="nav-item">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>AI Summaries</span>
+                </a>
+                
+                <p class="nav-section-title mt-4">LIBRARY</p>
+                <a href="papers.html?filter=favorites" class="nav-item">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>Favorites</span>
+                </a>
+                <a href="history.html" class="nav-item active" aria-current="page">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>History</span>
+                    <div class="active-indicator"></div>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="settings.html" class="nav-item">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="login.html" class="nav-item text-danger mt-2">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT WRAPPER -->
+        <div class="dash-main-wrapper">
+            
+            <!-- TOP HEADER -->
+            <header class="dash-header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="openSidebar" aria-label="Open Navigation Menu"><i class="fa-solid fa-bars"></i></button>
+                    <div class="welcome-text">
+                        <h2>Activity <span>History</span></h2>
+                        <p>Complete record of research papers uploaded and AI summaries created.</p>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="icon-btn theme-btn" id="themeToggleBtn" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+                        
+                        <div class="nav-dropdown-wrapper">
+                            <button class="icon-btn notif-btn" id="notifBtn" aria-label="Notifications">
+                                <i class="fa-regular fa-bell"></i>
+                                <span class="notif-badge" id="notifBadge">1</span>
+                            </button>
+                            
+                            <div class="dropdown-panel notif-dropdown glass-card" id="notifDropdown">
+                                <div class="dropdown-panel-header">
+                                    <h3>Notifications</h3>
+                                    <button class="mark-read-btn" id="markAllRead">Mark all as read</button>
+                                </div>
+                                <div class="notif-list">
+                                    <div class="notif-item unread">
+                                        <div class="notif-icon purple"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                                        <div class="notif-body">
+                                            <p>Activity timeline updated in real-time.</p>
+                                            <span class="notif-time">Just now</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="nav-dropdown-wrapper">
+                            <div class="user-profile-menu" id="userProfileBtn" tabindex="0" role="button">
+                                <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar">
+                                <div class="user-info">
+                                    <h4>User</h4>
+                                    <p>Pro Plan</p>
+                                </div>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+
+                            <div class="dropdown-panel profile-dropdown glass-card" id="profileDropdown">
+                                <div class="profile-dropdown-header">
+                                    <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar-lg">
+                                    <div>
+                                        <h4>User</h4>
+                                        <p>user@example.com</p>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <ul class="profile-menu-list">
+                                    <li><a href="profile.html"><i class="fa-regular fa-user"></i> Profile</a></li>
+                                    <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="login.html" class="text-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </header>
+
+            <!-- HISTORY CONTENT -->
+            <div class="dash-content-stacked animate-fade-in">
+                
+                <div class="history-controls">
+                    <div class="history-pills">
+                        <button class="history-filter-btn active" data-filter="all"><i class="fa-solid fa-list"></i> All Events</button>
+                        <button class="history-filter-btn" data-filter="upload"><i class="fa-solid fa-cloud-arrow-up"></i> Paper Uploads</button>
+                        <button class="history-filter-btn" data-filter="summary"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Summaries</button>
+                    </div>
+                </div>
+
+                <div class="history-timeline-card glass-card">
+                    <ul class="activity-timeline" id="historyTimeline">
+                        <!-- Populated dynamically by history.js -->
+                    </ul>
+
+                    <div id="historyEmptyState" class="history-empty-box" style="display: none;">
+                        <i class="fa-regular fa-clock" style="font-size: 2.5rem; color: #64748b;"></i>
+                        <h4 style="color: #fff; margin: 0;">No Activity Recorded Yet</h4>
+                        <p style="color: #94a3b8; font-size: 0.88rem; margin: 0;">Upload and summarize your first paper to see your activity timeline here.</p>
+                        <a href="upload.html" class="action-card" style="padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #6366f1, #a855f7); color: #fff; border-radius: 12px; font-weight: 600; text-decoration: none; margin-top: 0.5rem;">
+                            Upload Paper Now
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/history.js"></script>
+</body>
+</html>

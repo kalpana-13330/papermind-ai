@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Papers Library - PaperMind AI</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Global & Dashboard Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css?v=6.0">
+    <link rel="stylesheet" href="assets/css/dashboard.css?v=6.0">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=6.0">
+    <style>
+        .papers-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .filter-pills {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.35rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .filter-pill-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            padding: 0.45rem 1rem;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .filter-pill-btn:hover {
+            color: #fff;
+        }
+        .filter-pill-btn.active {
+            background: #6366f1;
+            color: #fff;
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+        }
+        .papers-search-box {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 0.5rem 1rem;
+            min-width: 280px;
+        }
+        .papers-search-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 0.88rem;
+            width: 100%;
+        }
+        .papers-search-box i {
+            color: #64748b;
+        }
+        .btn-upload-new {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1.25rem;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+        .btn-upload-new:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+        }
+        .empty-state-box {
+            padding: 4rem 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .empty-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #818cf8;
+            font-size: 1.8rem;
+        }
+        .empty-state-box h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            margin: 0;
+        }
+        .empty-state-box p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            max-width: 400px;
+            margin: 0;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="dashboard-body">
+
+    <!-- Page Loading Overlay -->
+    <div class="page-loader-overlay" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-brain-glow"><i class="fa-solid fa-brain"></i></div>
+            <div class="loader-text">Loading My Papers...</div>
+        </div>
+    </div>
+
+    <!-- Background Glows -->
+    <div class="dash-bg-glow glow-1"></div>
+    <div class="dash-bg-glow glow-2"></div>
+    <div class="dash-bg-grid"></div>
+
+    <div class="dashboard-layout">
+        
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="dash-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon"><i class="fa-solid fa-brain"></i></div>
+                    <span class="logo-text">PaperMind<span>.AI</span></span>
+                </div>
+                <button class="mobile-close-btn" id="closeSidebar" aria-label="Close Sidebar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="sidebar-live-status">
+                <span class="live-pulse-dot"></span>
+                <span class="live-status-text">AI Engine Online</span>
+                <span class="live-time" id="liveClock">12:57 PM</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <p class="nav-section-title">MAIN MENU</p>
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="upload.html" class="nav-item">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Upload Paper</span>
+                </a>
+                <a href="papers.html" class="nav-item active" aria-current="page">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>My Papers</span>
+                    <div class="active-indicator"></div>
+                </a>
+                <a href="summary.html" class="nav-item">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>AI Summaries</span>
+                </a>
+                
+                <p class="nav-section-title mt-4">LIBRARY</p>
+                <a href="papers.html?filter=favorites" class="nav-item">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>Favorites</span>
+                </a>
+                <a href="history.html" class="nav-item">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>History</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="settings.html" class="nav-item">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="login.html" class="nav-item text-danger mt-2">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT WRAPPER -->
+        <div class="dash-main-wrapper">
+            
+            <!-- TOP HEADER -->
+            <header class="dash-header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="openSidebar" aria-label="Open Navigation Menu"><i class="fa-solid fa-bars"></i></button>
+                    <div class="welcome-text">
+                        <h2>My <span>Papers</span></h2>
+                        <p>Browse, manage and review all your uploaded research papers.</p>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="icon-btn theme-btn" id="themeToggleBtn" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+                        
+                        <div class="nav-dropdown-wrapper">
+                            <button class="icon-btn notif-btn" id="notifBtn" aria-label="Notifications">
+                                <i class="fa-regular fa-bell"></i>
+                                <span class="notif-badge" id="notifBadge">1</span>
+                            </button>
+                            
+                            <div class="dropdown-panel notif-dropdown glass-card" id="notifDropdown">
+                                <div class="dropdown-panel-header">
+                                    <h3>Notifications</h3>
+                                    <button class="mark-read-btn" id="markAllRead">Mark all as read</button>
+                                </div>
+                                <div class="notif-list">
+                                    <div class="notif-item unread">
+                                        <div class="notif-icon purple"><i class="fa-solid fa-circle-check"></i></div>
+                                        <div class="notif-body">
+                                            <p>Papers library synced with cloud.</p>
+                                            <span class="notif-time">Just now</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="nav-dropdown-wrapper">
+                            <div class="user-profile-menu" id="userProfileBtn" tabindex="0" role="button">
+                                <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar">
+                                <div class="user-info">
+                                    <h4>User</h4>
+                                    <p>Pro Plan</p>
+                                </div>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+
+                            <div class="dropdown-panel profile-dropdown glass-card" id="profileDropdown">
+                                <div class="profile-dropdown-header">
+                                    <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar-lg">
+                                    <div>
+                                        <h4>User</h4>
+                                        <p>user@example.com</p>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <ul class="profile-menu-list">
+                                    <li><a href="profile.html"><i class="fa-regular fa-user"></i> Profile</a></li>
+                                    <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="login.html" class="text-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </header>
+
+            <!-- PAPERS CONTENT -->
+            <div class="dash-content-stacked animate-fade-in">
+                
+                <!-- Action Bar -->
+                <div class="papers-header-bar">
+                    <div class="filter-pills">
+                        <button class="filter-pill-btn active" data-filter="all"><i class="fa-solid fa-list"></i> All Papers</button>
+                        <button class="filter-pill-btn" data-filter="completed"><i class="fa-solid fa-circle-check"></i> Summarized</button>
+                        <button class="filter-pill-btn" data-filter="processing"><i class="fa-solid fa-spinner"></i> Processing</button>
+                        <button class="filter-pill-btn" data-filter="favorites"><i class="fa-solid fa-star"></i> Favorites</button>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <div class="papers-search-box">
+                            <i class="fa-solid fa-search"></i>
+                            <input type="text" id="papersSearchInput" placeholder="Filter papers by title...">
+                        </div>
+                        <a href="upload.html" class="btn-upload-new">
+                            <i class="fa-solid fa-cloud-arrow-up"></i> Upload Paper
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Papers Table Card -->
+                <div class="table-container glass-card" id="tableContainer">
+                    <table class="dash-table">
+                        <thead>
+                            <tr>
+                                <th>Research Paper Title</th>
+                                <th>Date Added</th>
+                                <th>Status</th>
+                                <th>AI Summary</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="papersTableBody">
+                            <!-- Populated dynamically by papers.js -->
+                        </tbody>
+                    </table>
+
+                    <div class="pagination-wrapper">
+                        <span class="pagination-info" id="paginationInfo">Loading papers...</span>
+                        <div class="pagination-controls" id="paginationControls"></div>
+                    </div>
+                </div>
+
+                <!-- Empty State Card -->
+                <div class="glass-card empty-state-box" id="emptyState" style="display: none;">
+                    <div class="empty-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                    <h3>No Papers Found</h3>
+                    <p>No research papers match your current search or filter criteria. Upload your first paper to get started with instant AI summarization.</p>
+                    <a href="upload.html" class="btn-upload-new" style="margin-top: 0.5rem;">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Upload New Paper
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/papers.js"></script>
+</body>
+</html>

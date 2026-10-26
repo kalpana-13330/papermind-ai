@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Paper - PaperMind AI</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="assets/css/style.css?v=7.0">
+    <link rel="stylesheet" href="assets/css/dashboard.css?v=7.0">
+    <link rel="stylesheet" href="assets/css/upload.css?v=1.0">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=7.0">
+</head>
+<body class="dashboard-body">
+
+    <!-- Page Loading Overlay -->
+    <div class="page-loader-overlay" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-brain-glow"><i class="fa-solid fa-brain"></i></div>
+            <div class="loader-text">Loading Upload Center...</div>
+        </div>
+    </div>
+
+    <!-- Background Glows -->
+    <div class="dash-bg-glow glow-1"></div>
+    <div class="dash-bg-glow glow-2"></div>
+    <div class="dash-bg-grid"></div>
+
+    <div class="dashboard-layout">
+        
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="dash-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon"><i class="fa-solid fa-brain"></i></div>
+                    <span class="logo-text">PaperMind<span>.AI</span></span>
+                </div>
+                <button class="mobile-close-btn" id="closeSidebar" aria-label="Close Sidebar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Live Online Status -->
+            <div class="sidebar-live-status">
+                <span class="live-pulse-dot"></span>
+                <span class="live-status-text">AI Engine Online</span>
+                <span class="live-time" id="liveClock">02:15 PM</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <p class="nav-section-title">MAIN MENU</p>
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="upload.html" class="nav-item active" aria-current="page">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Upload Paper</span>
+                    <div class="active-indicator"></div>
+                </a>
+                <a href="papers.html" class="nav-item">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>My Papers</span>
+                </a>
+                <a href="summary.html" class="nav-item">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>AI Summaries</span>
+                </a>
+                
+                <p class="nav-section-title mt-4">LIBRARY</p>
+                <a href="papers.html?filter=favorites" class="nav-item">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>Favorites</span>
+                </a>
+                <a href="history.html" class="nav-item">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>History</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="settings.html" class="nav-item">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="login.html" class="nav-item text-danger mt-2">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT WRAPPER -->
+        <div class="dash-main-wrapper">
+            
+            <!-- TOP HEADER -->
+            <header class="dash-header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="openSidebar" aria-label="Open Navigation Menu"><i class="fa-solid fa-bars"></i></button>
+                    <!-- BREADCRUMB & PAGE HEADER -->
+                    <div class="welcome-text">
+                        <div class="breadcrumb">
+                            <a href="dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+                            <i class="fa-solid fa-chevron-right breadcrumb-arrow"></i>
+                            <span class="active-crumb">Upload Paper</span>
+                        </div>
+                        <h2>Upload <span>Research Paper</span></h2>
+                        <p>Upload your research paper and let AI generate an intelligent summary in seconds.</p>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="search-bar-wrapper">
+                        <div class="search-bar" id="headerSearchBar">
+                            <i class="fa-solid fa-search"></i>
+                            <input type="text" id="dashSearchInput" placeholder="Search papers, summaries..." aria-label="Search papers">
+                            <div class="search-shortcut">⌘K</div>
+                        </div>
+                    </div>
+                    
+                    <div class="header-actions">
+                        <button class="icon-btn theme-btn" id="themeToggleBtn" aria-label="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
+                        
+                        <!-- Notifications -->
+                        <div class="nav-dropdown-wrapper">
+                            <button class="icon-btn notif-btn" id="notifBtn" aria-label="Notifications">
+                                <i class="fa-regular fa-bell"></i>
+                                <span class="notif-badge" id="notifBadge">3</span>
+                            </button>
+                            
+                            <div class="dropdown-panel notif-dropdown glass-card" id="notifDropdown">
+                                <div class="dropdown-panel-header">
+                                    <h3>Notifications</h3>
+                                    <button class="mark-read-btn" id="markAllRead">Mark all as read</button>
+                                </div>
+                                <div class="notif-list">
+                                    <div class="notif-item unread">
+                                        <div class="notif-icon purple"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                                        <div class="notif-body">
+                                            <p>New summary completed for <strong>Attention is All You Need</strong></p>
+                                            <span class="notif-time">5 mins ago</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Profile -->
+                        <div class="nav-dropdown-wrapper">
+                            <div class="user-profile-menu" id="userProfileBtn" tabindex="0" role="button">
+                                <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar">
+                                <div class="user-info">
+                                    <h4>User</h4>
+                                    <p>Pro Plan</p>
+                                </div>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+
+                            <div class="dropdown-panel profile-dropdown glass-card" id="profileDropdown">
+                                <div class="profile-dropdown-header">
+                                    <img src="https://ui-avatars.com/api/?name=User&background=6366f1&color=fff&rounded=true" alt="User Avatar" class="avatar-lg">
+                                    <div>
+                                        <h4>User</h4>
+                                        <p>user@example.com</p>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider"></div>
+                                <ul class="profile-menu-list">
+                                    <li><a href="profile.html"><i class="fa-regular fa-user"></i> Profile</a></li>
+                                    <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                                    <li><a href="login.html" class="text-danger"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- UPLOAD MAIN GRID CONTENT -->
+            <div class="upload-content-grid animate-fade-in">
+                
+                <!-- LEFT/MAIN COLUMN: UPLOAD ZONE & PREVIEW -->
+                <div class="upload-main-col">
+                    
+                    <!-- SOURCE TYPE TABS: Upload PDF or Import from URL -->
+                    <div class="source-type-tabs glass-card" id="sourceTypeTabs">
+                        <button class="source-tab active" id="tabPdf" data-tab="pdf" aria-pressed="true">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <span>Upload PDF</span>
+                        </button>
+                        <button class="source-tab" id="tabUrl" data-tab="url" aria-pressed="false">
+                            <i class="fa-solid fa-link"></i>
+                            <span>Import from URL</span>
+                        </button>
+                    </div>
+
+                    <!-- URL IMPORT PANEL (Hidden by default) -->
+                    <div class="url-import-card glass-card" id="urlImportCard" style="display:none;">
+                        <div class="url-import-header">
+                            <div class="url-import-icon"><i class="fa-solid fa-globe"></i></div>
+                            <div>
+                                <h3>Import from URL</h3>
+                                <p>Paste a link to a research paper PDF or an accessible HTML article page.</p>
+                            </div>
+                        </div>
+                        <div class="url-input-group mt-3">
+                            <i class="fa-solid fa-link url-input-icon"></i>
+                            <input type="url" id="urlInput" class="url-input-field"
+                                placeholder="https://arxiv.org/pdf/... or https://example.com/paper"
+                                autocomplete="off" spellcheck="false" aria-label="Research paper URL" />
+                            <button class="btn btn-glass" id="clearUrlBtn" style="display:none;" title="Clear URL" aria-label="Clear URL">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        <ul class="url-tips mt-3">
+                            <li><i class="fa-solid fa-check text-success"></i> Direct PDF links (e.g., ArXiv, ResearchGate PDFs)</li>
+                            <li><i class="fa-solid fa-check text-success"></i> Open-access HTML research articles</li>
+                            <li><i class="fa-solid fa-xmark text-danger"></i> Paywalled papers (login required)</li>
+                            <li><i class="fa-solid fa-xmark text-danger"></i> JavaScript-rendered or SPA pages</li>
+                        </ul>
+                        <div class="mt-3" id="urlErrorMsg" style="display:none;">
+                            <span class="url-error-text"><i class="fa-solid fa-triangle-exclamation"></i> <span id="urlErrorText"></span></span>
+                        </div>
+                        <button class="btn btn-primary ripple-effect mt-4" id="generateUrlBtn" style="width:100%;justify-content:center;" disabled>
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>Import &amp; Summarize</span>
+                        </button>
+                    </div>
+
+                    <!-- UPLOAD AREA CARD -->
+                    <div class="upload-zone-card glass-card" id="dropZone">
+                        <input type="file" id="fileInput" accept=".pdf" class="file-input-hidden" aria-label="Choose PDF File">
+                        
+                        <!-- Empty State View -->
+                        <div class="upload-empty-state" id="uploadEmptyState">
+                            <!-- HTML/CSS Pure AI Illustration -->
+                            <div class="upload-ai-illustration" id="emptyIllustration">
+                                <div class="neural-glow"></div>
+                                <div class="cloud-ring cr-1"></div>
+                                <div class="cloud-ring cr-2"></div>
+                                <div class="floating-pdf-icon">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </div>
+                                <div class="cloud-center-icon">
+                                    <i class="fa-solid fa-cloud-arrow-up" id="uploadIcon"></i>
+                                </div>
+                            </div>
+                            
+                            <h3 class="upload-zone-title" id="uploadZoneTitle">Drag & Drop your Research Paper</h3>
+                            <p class="upload-zone-subtitle" id="uploadZoneSubtitle">or <span class="browse-link" id="browseTrigger">click to browse files</span></p>
+
+                            <div class="upload-specs">
+                                <span class="spec-badge"><i class="fa-solid fa-file-pdf"></i> PDF only</span>
+                                <span class="spec-badge"><i class="fa-solid fa-database"></i> Maximum size: 20 MB</span>
+                            </div>
+                        </div>
+
+                        <!-- Selected File State View (Hidden by default) -->
+                        <div class="upload-selected-state" id="uploadSelectedState" style="display: none;">
+                            <!-- Premium Preview Card -->
+                            <div class="selected-file-card">
+                                <div class="file-icon-box">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </div>
+                                <div class="file-meta">
+                                    <h4 class="file-name" id="selectedFileName">research-paper.pdf</h4>
+                                    <div class="file-detailed-info">
+                                        <span class="info-item" id="selectedFileSize">3.4 MB</span>
+                                        <span class="info-item">PDF Document</span>
+                                        <span class="info-item" id="selectedUploadTime">Uploaded just now</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- File Actions Buttons -->
+                            <div class="file-actions-row">
+                                <button type="button" class="btn btn-glass" id="previewFileBtn"><i class="fa-regular fa-eye"></i> Preview PDF</button>
+                                <button type="button" class="btn btn-glass" id="replaceFileBtn"><i class="fa-solid fa-arrows-rotate"></i> Replace File</button>
+                                <button type="button" class="btn btn-glass text-danger" id="removeFileBtn"><i class="fa-regular fa-trash-can"></i> Remove File</button>
+                            </div>
+
+                            <!-- AI Customization Form Options -->
+                            <div class="ai-customization-options mt-4">
+                                <h4 class="options-title"><i class="fa-solid fa-sliders"></i> AI Summary Preferences</h4>
+                                
+                                <!-- 6. AI OPTIONS -->
+                                <div class="options-checkboxes-grid">
+                                    <label class="custom-checkbox-container font-xs">
+                                        <input type="checkbox" checked id="optSummary">
+                                        <span class="custom-checkmark"><i class="fa-solid fa-check"></i></span>
+                                        <span>Generate Summary</span>
+                                    </label>
+                                    <label class="custom-checkbox-container font-xs">
+                                        <input type="checkbox" checked id="optKeywords">
+                                        <span class="custom-checkmark"><i class="fa-solid fa-check"></i></span>
+                                        <span>Extract Keywords</span>
+                                    </label>
+                                    <label class="custom-checkbox-container font-xs">
+                                        <input type="checkbox" checked id="optFindings">
+                                        <span class="custom-checkmark"><i class="fa-solid fa-check"></i></span>
+                                        <span>Key Findings</span>
+                                    </label>
+                                    <label class="custom-checkbox-container font-xs">
+                                        <input type="checkbox" checked id="optObjectives">
+                                        <span class="custom-checkmark"><i class="fa-solid fa-check"></i></span>
+                                        <span>Objectives</span>
+                                    </label>
+                                    <label class="custom-checkbox-container font-xs">
+                                        <input type="checkbox" checked id="optConclusions">
+                                        <span class="custom-checkmark"><i class="fa-solid fa-check"></i></span>
+                                        <span>Conclusions</span>
+                                    </label>
+                                </div>
+
+                                <div class="options-selectors-row mt-3">
+                                    <!-- 7. SUMMARY LENGTH -->
+                                    <div class="selector-group">
+                                        <label class="group-label">Summary Length</label>
+                                        <div class="segmented-control">
+                                            <button type="button" class="segment-btn" data-val="short">Short</button>
+                                            <button type="button" class="segment-btn active" data-val="medium">Medium</button>
+                                            <button type="button" class="segment-btn" data-val="detailed">Detailed</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- 8. LANGUAGE -->
+                                    <div class="selector-group">
+                                        <label class="group-label">Summary Language</label>
+                                        <div class="custom-select-wrapper">
+                                            <select id="summaryLanguage" class="custom-select-el" aria-label="Select Summary Language">
+                                                <option value="en" selected>English</option>
+                                                <option value="hi">Hindi</option>
+                                                <option value="se">Simple English</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 1. PROGRESS / PROCESSING OVERLAY (Hidden by default) -->
+                        <div class="upload-progress-overlay" id="progressOverlay" style="display: none;">
+                            <!-- 3. AI ANIMATION -->
+                            <div class="progress-ai-animation">
+                                <div class="pulse-core"><i class="fa-solid fa-brain"></i></div>
+                                <div class="ring r-1"></div>
+                                <div class="ring r-2"></div>
+                                <div class="ring r-3"></div>
+                                <div class="particles">
+                                    <span class="p-dot"></span><span class="p-dot"></span><span class="p-dot"></span>
+                                </div>
+                            </div>
+
+                            <!-- Status text -->
+                            <h3 class="progress-status-title" id="progressStatusTitle">Uploading PDF...</h3>
+                            
+                            <!-- Progress Bar -->
+                            <div class="progress-bar-container">
+                                <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+                            </div>
+                            <div class="progress-percentage" id="progressPercentage">0%</div>
+
+                            <!-- 2. PROCESSING STEPS LIST -->
+                            <ul class="processing-steps-list" id="processingStepsList" style="display: none;">
+                                <li id="step1" class="active"><i class="fa-solid fa-circle-notch fa-spin"></i> Reading PDF...</li>
+                                <li id="step2"><i class="fa-regular fa-circle"></i> Extracting Text...</li>
+                                <li id="step3"><i class="fa-regular fa-circle"></i> Finding Key Points...</li>
+                                <li id="step4"><i class="fa-regular fa-circle"></i> Generating AI Summary...</li>
+                                <li id="step5"><i class="fa-regular fa-circle"></i> Almost Ready...</li>
+                            </ul>
+
+                            <!-- 4. SUCCESS CHECKMARK STATE (Hidden by default) -->
+                            <div class="success-checkmark-state" id="successState" style="display: none;">
+                                <div class="success-ring-grow"></div>
+                                <i class="fa-solid fa-circle-check success-check-icon"></i>
+                                <h3 class="success-status-text">Summary Generated Successfully</h3>
+                                <p class="success-sub-text">Redirecting to summary page...</p>
+                            </div>
+
+                            <!-- 7. CANCEL OPTION -->
+                            <button type="button" class="btn-cancel-upload" id="cancelUploadBtn">Cancel Upload</button>
+                        </div>
+                    </div>
+
+                    <!-- BOTTOM GENERATE BUTTON AREA -->
+                    <div class="upload-action-bar mt-4">
+                        <button type="button" class="btn btn-primary generate-btn ripple-effect" id="generateBtn" disabled>
+                            <span class="btn-shine"></span>
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span class="btn-text">Generate AI Summary</span>
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT PANEL: AI PROCESSING INCLUDES -->
+                <div class="upload-side-col">
+                    <div class="ai-features-card glass-card">
+                        <div class="card-header-badge">
+                            <i class="fa-solid fa-sparkles text-gradient-primary"></i>
+                            <span>AI Copilot Active</span>
+                        </div>
+
+                        <h3>AI Processing Includes</h3>
+                        <p class="features-desc">Our neural models automatically extract critical intelligence from your PDF:</p>
+
+                        <ul class="ai-checklist">
+                            <li class="checklist-item">
+                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                                <div class="check-text">
+                                    <h4>Generate Summary</h4>
+                                    <p>Comprehensive executive summary & key takeaways</p>
+                                </div>
+                            </li>
+                            <li class="checklist-item">
+                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                                <div class="check-text">
+                                    <h4>Extract Keywords</h4>
+                                    <p>Core academic terms & technical concepts</p>
+                                </div>
+                            </li>
+                            <li class="checklist-item">
+                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                                <div class="check-text">
+                                    <h4>Identify Objectives</h4>
+                                    <p>Primary research questions & hypothesis</p>
+                                </div>
+                            </li>
+                            <li class="checklist-item">
+                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                                <div class="check-text">
+                                    <h4>Detect Key Findings</h4>
+                                    <p>Empirical results, data insights & figures</p>
+                                </div>
+                            </li>
+                            <li class="checklist-item">
+                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                                <div class="check-text">
+                                    <h4>Extract Conclusions</h4>
+                                    <p>Final outcomes, limitations & future work</p>
+                                </div>
+                            </li>
+                            <li class="checklist-item">
+                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                                <div class="check-text">
+                                    <h4>Estimate Reading Time</h4>
+                                    <p>Calculated time saved per section</p>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <div class="card-footer-tip">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Your paper remains private & encrypted end-to-end.</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- End upload-content-grid -->
+
+        </div> <!-- End dash-main-wrapper -->
+    </div> <!-- End dashboard-layout -->
+
+    <!-- Global Search Modal (Ctrl+K) -->
+    <div class="search-modal-overlay" id="searchModal">
+        <div class="search-modal-container glass-card">
+            <div class="search-modal-header">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="modalSearchInput" placeholder="Search papers, AI summaries..." autocomplete="off">
+                <span class="esc-badge">ESC</span>
+            </div>
+            <div class="search-modal-body">
+                <div class="modal-section-title">RECENT SEARCHES</div>
+                <ul class="modal-results-list">
+                    <li><i class="fa-solid fa-clock-rotate-left"></i> Attention is All You Need <span class="tag">Paper</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Preview Modal -->
+    <div class="search-modal-overlay" id="pdfPreviewModal" style="display: none; z-index: 10000;">
+        <div class="search-modal-container glass-card" style="width: 80%; max-width: 1000px; height: 80vh; display: flex; flex-direction: column;">
+            <div class="search-modal-header" style="justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-file-pdf text-primary"></i>
+                    <h3 style="margin: 0;" id="previewModalTitle">Document Preview</h3>
+                </div>
+                <button id="closePreviewModal" class="icon-btn" style="background: transparent; border: none; color: white; cursor: pointer;">
+                    <i class="fa-solid fa-xmark fa-lg"></i>
+                </button>
+            </div>
+            <div class="search-modal-body" style="flex: 1; padding: 0; background: #fff; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; overflow: hidden;">
+                <iframe id="pdfPreviewFrame" style="width: 100%; height: 100%; border: none;" src=""></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/dashboard.js?v=7.0"></script>
+    <script src="assets/js/upload.js?v=1.0"></script>
+</body>
+</html>
