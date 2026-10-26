@@ -48,10 +48,12 @@
   function logout() {
     removeToken();
     localStorage.removeItem(USER_KEY);
+    localStorage.removeItem('papermind_favorites');
     sessionStorage.removeItem(USER_KEY);
     sessionStorage.removeItem(ACTIVE_PAPER_KEY);
     sessionStorage.removeItem('papermind_upload_data');
     sessionStorage.removeItem('papermind_summary_data');
+    sessionStorage.clear();
     window.location.href = 'login.html';
   }
 

@@ -315,6 +315,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const email = emailInput.value.trim();
                     const password = passwordInput.value;
 
+                    localStorage.removeItem('papermind_favorites');
+                    sessionStorage.clear();
                     await window.authAPI.register(name, email, password);
 
                     // Success state

@@ -8,24 +8,31 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!window.requireAuth || !window.requireAuth()) return;
 
     // --- 1. NUMBER COUNTER ANIMATION ---
-    const counters = document.querySelectorAll('.counter');
-    const speed = 200;
+    function animateCounters() {
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
 
-    counters.forEach(counter => {
-        const animate = () => {
-            const value = +counter.getAttribute('data-target');
-            const data = +counter.innerText;
-            const time = value / speed;
-
-            if (data < value) {
-                counter.innerText = Math.ceil(data + time);
-                setTimeout(animate, 15);
-            } else {
-                counter.innerText = value;
+        counters.forEach(counter => {
+            const value = +counter.getAttribute('data-target') || 0;
+            if (value === 0) {
+                counter.innerText = '0';
+                return;
             }
-        };
-        animate();
-    });
+            const time = Math.max(1, value / speed);
+
+            const animate = () => {
+                const current = +counter.innerText || 0;
+                if (current < value) {
+                    counter.innerText = Math.ceil(current + time);
+                    setTimeout(animate, 15);
+                } else {
+                    counter.innerText = value;
+                }
+            };
+            animate();
+        });
+    }
+    animateCounters();
 
     // --- 2. MOBILE SIDEBAR TOGGLE ---
     const openSidebarBtn = document.getElementById('openSidebar');
@@ -193,12 +200,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Command Palette Quick Commands Wiring
-    const quickCmdItems = document.querySelectorAll('.modal-results-list li');
-    if (quickCmdItems.length >= 5) {
-        quickCmdItems[2].addEventListener('click', () => { window.location.href = 'upload.html'; });
-        quickCmdItems[3].addEventListener('click', () => { window.location.href = 'upload.html'; });
-        quickCmdItems[4].addEventListener('click', () => { window.location.href = 'settings.html'; });
-    }
+    const cmdUpload = document.getElementById('cmdUpload');
+    const cmdSummary = document.getElementById('cmdSummary');
+    const cmdSettings = document.getElementById('cmdSettings');
+    if (cmdUpload) cmdUpload.addEventListener('click', () => { window.location.href = 'upload.html'; });
+    if (cmdSummary) cmdSummary.addEventListener('click', () => { window.location.href = 'upload.html'; });
+    if (cmdSettings) cmdSettings.addEventListener('click', () => { window.location.href = 'settings.html'; });
 
     // Modal Search Enter key handler
     if (modalSearchInput) {
@@ -255,19 +262,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 10. STORAGE PROGRESS RING ANIMATION ---
     const circle = document.querySelector('.progress-ring-circle');
+    let setProgress = () => {};
     if (circle) {
         const radius = circle.r.baseVal.value;
         const circumference = 2 * Math.PI * radius;
         circle.style.strokeDasharray = `${circumference} ${circumference}`;
         
-        const setProgress = (percent) => {
-            const offset = circumference - (percent / 100 * circumference);
+        setProgress = (percent) => {
+            const clamped = Math.max(0, Math.min(100, percent));
+            const offset = circumference - (clamped / 100 * circumference);
             circle.style.strokeDashoffset = offset;
         };
 
-        setTimeout(() => {
-            setProgress(78);
-        }, 300);
+        // Initialize strictly at 0% for new user
+        setProgress(0);
     }
 
     // --- 11. REAL BACKEND INTEGRATION (Papers, Stats, User Profile) ---
@@ -288,24 +296,33 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // 2. Fetch user's papers from backend
-            if (!window.paperAPI) return;
-            const res = await window.paperAPI.getPapers(1, 20);
-            if (!res || !res.data || !Array.isArray(res.data.papers)) return;
+            let papers = [];
+            let totalPapers = 0;
+            if (window.paperAPI) {
+                try {
+                    const res = await window.paperAPI.getPapers(1, 20);
+                    if (res && res.data && Array.isArray(res.data.papers)) {
+                        papers = res.data.papers;
+                        totalPapers = (res.data.pagination && res.data.pagination.total !== undefined)
+                            ? res.data.pagination.total
+                            : papers.length;
+                    }
+                } catch (err) {
+                    console.warn('Could not fetch papers:', err);
+                }
+            }
 
-            const papers = res.data.papers;
-            const pagination = res.data.pagination || {};
-
-            // 3. Update Statistics Counters
+            // 3. Update Statistics Counters (All start at 0 for new user)
             const statCards = document.querySelectorAll('.stat-card');
-            if (statCards.length >= 3) {
-                // Papers Uploaded Counter
+            if (statCards.length >= 4) {
+                // Card 0: Papers Uploaded
                 const papersCounter = statCards[0].querySelector('.counter');
                 if (papersCounter) {
-                    papersCounter.setAttribute('data-target', pagination.total || papers.length);
-                    papersCounter.innerText = pagination.total || papers.length;
+                    papersCounter.setAttribute('data-target', totalPapers);
+                    papersCounter.innerText = totalPapers;
                 }
 
-                // AI Summaries Counter (completed count)
+                // Card 1: AI Summaries (completed count)
                 const completedCount = papers.filter(p => p.status === 'completed').length;
                 const summariesCounter = statCards[1].querySelector('.counter');
                 if (summariesCounter) {
@@ -313,150 +330,199 @@ document.addEventListener('DOMContentLoaded', () => {
                     summariesCounter.innerText = completedCount;
                 }
 
-                // Reading Time Saved
+                // Card 2: Reading Time Saved (0 if no papers or words)
                 const totalWords = papers.reduce((acc, p) => acc + (p.wordCount || 0), 0);
-                const hoursSaved = Math.max(1, Math.round((totalWords / 200) / 60));
+                const hoursSaved = (papers.length > 0 && totalWords > 0) ? Math.round((totalWords / 200) / 60) : 0;
                 const hoursCounter = statCards[2].querySelector('.counter');
                 if (hoursCounter) {
                     hoursCounter.setAttribute('data-target', hoursSaved);
                     hoursCounter.innerText = hoursSaved;
                 }
+
+                // Card 3: Favorite Papers (only count current user's favorited papers)
+                const userPaperIds = new Set(papers.map(p => String(p.paperId || p.id)));
+                let favs = [];
+                try {
+                    favs = JSON.parse(localStorage.getItem('papermind_favorites') || '[]');
+                } catch (e) {
+                    favs = [];
+                }
+                const validFavsCount = favs.filter(id => userPaperIds.has(String(id))).length;
+                const favsCounter = statCards[3].querySelector('.counter');
+                if (favsCounter) {
+                    favsCounter.setAttribute('data-target', validFavsCount);
+                    favsCounter.innerText = validFavsCount;
+                }
             }
+
+            // Animate counters
+            animateCounters();
 
             // 4. Update Recent Papers Table
             const tbody = document.querySelector('.dash-table tbody');
             const paginationInfo = document.querySelector('.pagination-info');
+            const paginationControls = document.querySelector('.pagination-controls');
 
             if (paginationInfo) {
-                paginationInfo.textContent = `Showing ${papers.length > 0 ? 1 : 0} to ${papers.length} of ${pagination.total || papers.length} papers`;
+                if (papers.length === 0) {
+                    paginationInfo.textContent = 'Showing 0 of 0 papers';
+                } else {
+                    paginationInfo.textContent = `Showing 1 to ${papers.length} of ${totalPapers} papers`;
+                }
             }
 
-            if (tbody && papers.length > 0) {
-                tbody.innerHTML = '';
-
-                papers.forEach(paper => {
-                    const tr = document.createElement('tr');
-                    const uploadDate = new Date(paper.uploadedAt || paper.createdAt || Date.now());
-                    const dateFormatted = uploadDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-                    const sizeFormatted = formatBytes(paper.fileSize || 0);
-
-                    let statusBadge = '<span class="status-badge badge-pending"><i class="fa-regular fa-clock"></i> Uploaded</span>';
-                    if (paper.status === 'completed') {
-                        statusBadge = '<span class="status-badge badge-completed"><i class="fa-solid fa-circle-check"></i> Completed</span>';
-                    } else if (paper.status === 'processing') {
-                        statusBadge = '<span class="status-badge badge-processing"><i class="fa-solid fa-spinner fa-spin"></i> Processing</span>';
-                    } else if (paper.status === 'failed') {
-                        statusBadge = '<span class="status-badge badge-failed"><i class="fa-solid fa-circle-exclamation"></i> Failed</span>';
-                    }
-
-                    tr.innerHTML = `
-                        <td class="paper-title-cell" style="cursor: pointer;" title="Click to view AI Summary">
-                            <i class="fa-solid fa-file-pdf pdf-icon"></i>
-                            <div>
-                                <span class="title-text" style="color: var(--primary); text-decoration: underline; text-underline-offset: 3px;">${escapeHtml(paper.title || paper.fileName)}</span>
-                                <span class="sub-text">${sizeFormatted} • PDF</span>
-                            </div>
-                        </td>
-                        <td>Author / Self</td>
-                        <td>${dateFormatted}</td>
-                        <td>${statusBadge}</td>
-                        <td><span class="summary-preview">${paper.status === 'completed' ? 'AI Summary generated' : 'Pending extraction...'}</span></td>
-                        <td>
-                            <div class="action-btns">
-                                <button class="action-btn btn-view-pdf" title="View Research Paper PDF" data-id="${paper.paperId || paper.id}"><i class="fa-regular fa-eye"></i></button>
-                                <button class="action-btn text-primary btn-view-summary" title="View AI Summary" data-id="${paper.paperId || paper.id}"><i class="fa-solid fa-file-lines"></i></button>
-                                <button class="action-btn btn-ask-ai" title="Ask AI About This Paper" data-id="${paper.paperId || paper.id}"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
-                                <button class="action-btn btn-download-paper" title="Download PDF" data-id="${paper.paperId || paper.id}"><i class="fa-solid fa-download"></i></button>
-                                <button class="action-btn text-danger btn-delete-paper" title="Delete" data-id="${paper.paperId || paper.id}"><i class="fa-regular fa-trash-can"></i></button>
-                            </div>
-                        </td>
+            if (tbody) {
+                if (papers.length === 0) {
+                    tbody.innerHTML = `
+                        <tr class="empty-table-row">
+                            <td colspan="6" style="text-align: center; padding: 3rem 1.5rem;">
+                                <div class="dash-empty-state" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem;">
+                                    <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(99, 102, 241, 0.12); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.25);">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    </div>
+                                    <h4 style="margin: 0; font-size: 1.1rem; color: #fff; font-weight: 600;">No papers uploaded yet</h4>
+                                    <p style="margin: 0; font-size: 0.88rem; color: #94a3b8; max-width: 380px; line-height: 1.5;">Your uploaded research papers and AI summaries will appear here once you upload your first PDF.</p>
+                                    <a href="upload.html" class="primary-btn ripple-effect" style="margin-top: 0.5rem; padding: 0.5rem 1.25rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; border-radius: 10px; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;">
+                                        <i class="fa-solid fa-plus"></i> Upload New Paper
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
                     `;
+                    if (paginationControls) {
+                        paginationControls.innerHTML = `
+                            <button class="page-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="page-btn active" disabled>1</button>
+                            <button class="page-btn" disabled><i class="fa-solid fa-chevron-right"></i></button>
+                        `;
+                    }
+                } else {
+                    tbody.innerHTML = '';
 
-                    // Helper to open summary
-                    const openSummary = () => {
-                        window.setActivePaperId(paper.paperId || paper.id, {
-                            fileName: paper.fileName,
-                            fileSize: sizeFormatted,
-                            uploadTime: paper.uploadedAt,
-                            title: paper.title
+                    papers.forEach(paper => {
+                        const tr = document.createElement('tr');
+                        const uploadDate = new Date(paper.uploadedAt || paper.createdAt || Date.now());
+                        const dateFormatted = uploadDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                        const sizeFormatted = formatBytes(paper.fileSize || 0);
+
+                        let statusBadge = '<span class="status-badge badge-pending"><i class="fa-regular fa-clock"></i> Uploaded</span>';
+                        if (paper.status === 'completed') {
+                            statusBadge = '<span class="status-badge badge-completed"><i class="fa-solid fa-circle-check"></i> Completed</span>';
+                        } else if (paper.status === 'processing') {
+                            statusBadge = '<span class="status-badge badge-processing"><i class="fa-solid fa-spinner fa-spin"></i> Processing</span>';
+                        } else if (paper.status === 'failed') {
+                            statusBadge = '<span class="status-badge badge-failed"><i class="fa-solid fa-circle-exclamation"></i> Failed</span>';
+                        }
+
+                        tr.innerHTML = `
+                            <td class="paper-title-cell" style="cursor: pointer;" title="Click to view AI Summary">
+                                <i class="fa-solid fa-file-pdf pdf-icon"></i>
+                                <div>
+                                    <span class="title-text" style="color: var(--primary); text-decoration: underline; text-underline-offset: 3px;">${escapeHtml(paper.title || paper.fileName)}</span>
+                                    <span class="sub-text">${sizeFormatted} • PDF</span>
+                                </div>
+                            </td>
+                            <td>Author / Self</td>
+                            <td>${dateFormatted}</td>
+                            <td>${statusBadge}</td>
+                            <td><span class="summary-preview">${paper.status === 'completed' ? 'AI Summary generated' : 'Pending extraction...'}</span></td>
+                            <td>
+                                <div class="action-btns">
+                                    <button class="action-btn btn-view-pdf" title="View Research Paper PDF" data-id="${paper.paperId || paper.id}"><i class="fa-regular fa-eye"></i></button>
+                                    <button class="action-btn text-primary btn-view-summary" title="View AI Summary" data-id="${paper.paperId || paper.id}"><i class="fa-solid fa-file-lines"></i></button>
+                                    <button class="action-btn btn-ask-ai" title="Ask AI About This Paper" data-id="${paper.paperId || paper.id}"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+                                    <button class="action-btn btn-download-paper" title="Download PDF" data-id="${paper.paperId || paper.id}"><i class="fa-solid fa-download"></i></button>
+                                    <button class="action-btn text-danger btn-delete-paper" title="Delete" data-id="${paper.paperId || paper.id}"><i class="fa-regular fa-trash-can"></i></button>
+                                </div>
+                            </td>
+                        `;
+
+                        // Helper to open summary
+                        const openSummary = () => {
+                            window.setActivePaperId(paper.paperId || paper.id, {
+                                fileName: paper.fileName,
+                                fileSize: sizeFormatted,
+                                uploadTime: paper.uploadedAt,
+                                title: paper.title
+                            });
+                            window.location.href = 'summary.html';
+                        };
+
+                        // Wire row action buttons
+                        const titleCell = tr.querySelector('.paper-title-cell');
+                        titleCell.addEventListener('click', openSummary);
+
+                        const viewSummaryBtn = tr.querySelector('.btn-view-summary');
+                        viewSummaryBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            openSummary();
                         });
-                        window.location.href = 'summary.html';
-                    };
 
-                    // Wire row action buttons
-                    const titleCell = tr.querySelector('.paper-title-cell');
-                    titleCell.addEventListener('click', openSummary);
-
-                    const viewSummaryBtn = tr.querySelector('.btn-view-summary');
-                    viewSummaryBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        openSummary();
-                    });
-
-                    // Eye button: View Research Paper PDF directly in new tab
-                    const viewPdfBtn = tr.querySelector('.btn-view-pdf');
-                    viewPdfBtn.addEventListener('click', async (e) => {
-                        e.stopPropagation();
-                        const origHtml = viewPdfBtn.innerHTML;
-                        viewPdfBtn.disabled = true;
-                        viewPdfBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
-                        try {
-                            const blob = await window.paperAPI.getPdfBlob(paper.paperId || paper.id);
-                            const url = window.URL.createObjectURL(blob);
-                            window.open(url, '_blank');
-                        } catch (err) {
-                            alert('Failed to load PDF for viewing: ' + err.message);
-                        } finally {
-                            viewPdfBtn.disabled = false;
-                            viewPdfBtn.innerHTML = origHtml;
-                        }
-                    });
-
-                    // Ask AI button: Select paper and go to chat
-                    const askAiBtn = tr.querySelector('.btn-ask-ai');
-                    askAiBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        window.setActivePaperId(paper.paperId || paper.id, {
-                            fileName: paper.fileName,
-                            fileSize: sizeFormatted,
-                            uploadTime: paper.uploadedAt,
-                            title: paper.title
+                        // Eye button: View Research Paper PDF directly in new tab
+                        const viewPdfBtn = tr.querySelector('.btn-view-pdf');
+                        viewPdfBtn.addEventListener('click', async (e) => {
+                            e.stopPropagation();
+                            const origHtml = viewPdfBtn.innerHTML;
+                            viewPdfBtn.disabled = true;
+                            viewPdfBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+                            try {
+                                const blob = await window.paperAPI.getPdfBlob(paper.paperId || paper.id);
+                                const url = window.URL.createObjectURL(blob);
+                                window.open(url, '_blank');
+                            } catch (err) {
+                                alert('Failed to load PDF for viewing: ' + err.message);
+                            } finally {
+                                viewPdfBtn.disabled = false;
+                                viewPdfBtn.innerHTML = origHtml;
+                            }
                         });
-                        window.location.href = 'chat.html';
-                    });
 
-                    const downloadBtn = tr.querySelector('.btn-download-paper');
-                    downloadBtn.addEventListener('click', async () => {
-                        try {
-                            const blob = await window.paperAPI.getPdfBlob(paper.paperId || paper.id);
-                            const url = window.URL.createObjectURL(blob);
-                            const a = document.createElement('a');
-                            a.href = url;
-                            a.download = paper.fileName || 'paper.pdf';
-                            document.body.appendChild(a);
-                            a.click();
-                            document.body.removeChild(a);
-                            window.URL.revokeObjectURL(url);
-                        } catch (err) {
-                            alert('Failed to download PDF: ' + err.message);
-                        }
-                    });
+                        // Ask AI button: Select paper and go to chat
+                        const askAiBtn = tr.querySelector('.btn-ask-ai');
+                        askAiBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            window.setActivePaperId(paper.paperId || paper.id, {
+                                fileName: paper.fileName,
+                                fileSize: sizeFormatted,
+                                uploadTime: paper.uploadedAt,
+                                title: paper.title
+                            });
+                            window.location.href = 'chat.html';
+                        });
 
-                    const deleteBtn = tr.querySelector('.btn-delete-paper');
-                    deleteBtn.addEventListener('click', async () => {
-                        if (!confirm(`Are you sure you want to delete "${paper.title || paper.fileName}"?`)) return;
-                        try {
-                            await window.paperAPI.deletePaper(paper.paperId || paper.id);
-                            tr.remove();
-                            // Refresh stats
-                            initDashboardData();
-                        } catch (err) {
-                            alert('Failed to delete paper: ' + err.message);
-                        }
-                    });
+                        const downloadBtn = tr.querySelector('.btn-download-paper');
+                        downloadBtn.addEventListener('click', async () => {
+                            try {
+                                const blob = await window.paperAPI.getPdfBlob(paper.paperId || paper.id);
+                                const url = window.URL.createObjectURL(blob);
+                                const a = document.createElement('a');
+                                a.href = url;
+                                a.download = paper.fileName || 'paper.pdf';
+                                document.body.appendChild(a);
+                                a.click();
+                                document.body.removeChild(a);
+                                window.URL.revokeObjectURL(url);
+                            } catch (err) {
+                                alert('Failed to download PDF: ' + err.message);
+                            }
+                        });
 
-                    tbody.appendChild(tr);
-                });
+                        const deleteBtn = tr.querySelector('.btn-delete-paper');
+                        deleteBtn.addEventListener('click', async () => {
+                            if (!confirm(`Are you sure you want to delete "${paper.title || paper.fileName}"?`)) return;
+                            try {
+                                await window.paperAPI.deletePaper(paper.paperId || paper.id);
+                                tr.remove();
+                                // Refresh stats
+                                initDashboardData();
+                            } catch (err) {
+                                alert('Failed to delete paper: ' + err.message);
+                            }
+                        });
+
+                        tbody.appendChild(tr);
+                    });
+                }
             }
 
             // 5. Wire Quick Action Links & View All
@@ -474,11 +540,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const viewAllLink = document.querySelector('.view-all-link');
             if (viewAllLink) viewAllLink.href = 'papers.html';
 
-            // 6. Update Cloud Storage Widget
+            // 6. Update Cloud Storage Widget (0% and 0 Bytes for new user)
             const totalBytes = papers.reduce((acc, p) => acc + (p.fileSize || 0), 0);
             const totalFormatted = formatBytes(totalBytes);
             const maxStorageBytes = 50 * 1024 * 1024; // 50MB quota
-            const percentUsed = Math.min(100, Math.max(1, Math.round((totalBytes / maxStorageBytes) * 100)));
+            const percentUsed = (totalBytes > 0 && maxStorageBytes > 0)
+                ? Math.min(100, Math.round((totalBytes / maxStorageBytes) * 100))
+                : 0;
 
             const storagePercentEl = document.querySelector('.storage-center-text h4');
             if (storagePercentEl) storagePercentEl.textContent = `${percentUsed}%`;
@@ -492,6 +560,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 storageRemaining.textContent = `${formatBytes(remBytes)} remaining`;
             }
 
+            // Animate progress ring to real percentage (0% for new user)
+            setProgress(percentUsed);
+
             const upgradeBtn = document.querySelector('.upgrade-btn');
             if (upgradeBtn) {
                 upgradeBtn.addEventListener('click', () => {
@@ -501,26 +572,81 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 7. Update Recent Activity Widget with Real Events
             const activityTimeline = document.querySelector('.activity-timeline');
-            if (activityTimeline && papers.length > 0) {
-                activityTimeline.innerHTML = '';
-                const recentSlice = papers.slice(0, 4);
-                const colors = ['blue', 'purple', 'green', 'orange'];
+            if (activityTimeline) {
+                if (papers.length === 0) {
+                    activityTimeline.innerHTML = `
+                        <li class="empty-timeline-item" style="padding: 2rem 1rem; text-align: center; list-style: none;">
+                            <div style="font-size: 1.8rem; color: #64748b; opacity: 0.5; margin-bottom: 0.5rem;">
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+                            <p style="margin: 0; font-size: 0.88rem; color: #94a3b8;">No recent activity yet. Upload a research paper to see your activity timeline.</p>
+                        </li>
+                    `;
+                } else {
+                    activityTimeline.innerHTML = '';
+                    const recentSlice = papers.slice(0, 4);
+                    const colors = ['blue', 'purple', 'green', 'orange'];
 
-                recentSlice.forEach((p, idx) => {
-                    const li = document.createElement('li');
-                    const color = colors[idx % colors.length];
-                    const uploadDate = new Date(p.uploadedAt || p.createdAt || Date.now());
-                    const timeAgo = formatTimeAgo(uploadDate);
+                    recentSlice.forEach((p, idx) => {
+                        const li = document.createElement('li');
+                        const color = colors[idx % colors.length];
+                        const uploadDate = new Date(p.uploadedAt || p.createdAt || Date.now());
+                        const timeAgo = formatTimeAgo(uploadDate);
 
-                    li.innerHTML = `
-                        <div class="timeline-dot ${color}"></div>
-                        <div class="timeline-content">
-                            <p>${p.status === 'completed' ? 'AI completed analysis for' : 'Uploaded'} <strong>${escapeHtml(p.title || p.fileName)}</strong></p>
-                            <span class="time"><i class="fa-regular fa-clock"></i> ${timeAgo}</span>
+                        li.innerHTML = `
+                            <div class="timeline-dot ${color}"></div>
+                            <div class="timeline-content">
+                                <p>${p.status === 'completed' ? 'AI completed analysis for' : 'Uploaded'} <strong>${escapeHtml(p.title || p.fileName)}</strong></p>
+                                <span class="time"><i class="fa-regular fa-clock"></i> ${timeAgo}</span>
+                            </div>
+                        `;
+                        activityTimeline.appendChild(li);
+                    });
+                }
+            }
+
+            // 8. Notifications Widget (0 / hidden for new user)
+            const notifBadge = document.getElementById('notifBadge');
+            const notifList = document.querySelector('.notif-list');
+            if (notifBadge && notifList) {
+                const completedPapers = papers.filter(p => p.status === 'completed');
+                if (completedPapers.length === 0) {
+                    notifBadge.style.display = 'none';
+                    notifBadge.textContent = '0';
+                    notifList.innerHTML = `
+                        <div class="empty-notif-state" style="padding: 1.5rem; text-align: center; color: var(--text-muted, #94a3b8);">
+                            <i class="fa-regular fa-bell-slash" style="font-size: 1.8rem; margin-bottom: 0.5rem; display: block; opacity: 0.5;"></i>
+                            <p style="font-size: 0.88rem; margin: 0;">No new notifications</p>
                         </div>
                     `;
-                    activityTimeline.appendChild(li);
-                });
+                } else {
+                    const recentDone = completedPapers.slice(0, 3);
+                    notifBadge.textContent = recentDone.length;
+                    notifBadge.style.display = 'flex';
+                    notifList.innerHTML = '';
+                    recentDone.forEach(p => {
+                        const div = document.createElement('div');
+                        div.className = 'notif-item unread';
+                        const timeAgo = formatTimeAgo(new Date(p.updatedAt || p.uploadedAt || Date.now()));
+                        div.innerHTML = `
+                            <div class="notif-icon purple"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                            <div class="notif-body">
+                                <p>Summary ready for <strong>${escapeHtml(p.title || p.fileName)}</strong></p>
+                                <span class="notif-time">${timeAgo}</span>
+                            </div>
+                            <div class="unread-dot"></div>
+                        `;
+                        div.addEventListener('click', () => {
+                            window.setActivePaperId(p.paperId || p.id, {
+                                fileName: p.fileName,
+                                uploadTime: p.uploadedAt,
+                                title: p.title
+                            });
+                            window.location.href = 'summary.html';
+                        });
+                        notifList.appendChild(div);
+                    });
+                }
             }
 
         } catch (err) {

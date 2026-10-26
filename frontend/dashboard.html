@@ -106,8 +106,8 @@
                 <div class="header-left">
                     <button class="mobile-menu-btn" id="openSidebar" aria-label="Open Navigation Menu"><i class="fa-solid fa-bars"></i></button>
                     <div class="welcome-text">
-                        <h2>Welcome back, <span>Alex</span> 👋</h2>
-                        <p>Here is your research summary overview. <span class="sync-tag"><i class="fa-solid fa-rotate"></i> Synced 2m ago</span></p>
+                        <h2>Welcome back, <span>User</span> 👋</h2>
+                        <p>Here is your research summary overview. <span class="sync-tag"><i class="fa-solid fa-circle-check"></i> Up to date</span></p>
                     </div>
                 </div>
                 
@@ -128,7 +128,7 @@
                         <div class="nav-dropdown-wrapper">
                             <button class="icon-btn notif-btn" id="notifBtn" aria-label="Notifications">
                                 <i class="fa-regular fa-bell"></i>
-                                <span class="notif-badge" id="notifBadge">3</span>
+                                <span class="notif-badge" id="notifBadge" style="display: none;">0</span>
                             </button>
                             
                             <div class="dropdown-panel notif-dropdown glass-card" id="notifDropdown">
@@ -137,29 +137,9 @@
                                     <button class="mark-read-btn" id="markAllRead">Mark all as read</button>
                                 </div>
                                 <div class="notif-list">
-                                    <div class="notif-item unread">
-                                        <div class="notif-icon purple"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                                        <div class="notif-body">
-                                            <p>New summary completed for <strong>Attention is All You Need</strong></p>
-                                            <span class="notif-time">5 mins ago</span>
-                                        </div>
-                                        <div class="unread-dot"></div>
-                                    </div>
-                                    <div class="notif-item unread">
-                                        <div class="notif-icon blue"><i class="fa-solid fa-file-arrow-up"></i></div>
-                                        <div class="notif-body">
-                                            <p>Paper processing finished: <strong>GPT-4 Technical Report</strong></p>
-                                            <span class="notif-time">1 hour ago</span>
-                                        </div>
-                                        <div class="unread-dot"></div>
-                                    </div>
-                                    <div class="notif-item unread">
-                                        <div class="notif-icon orange"><i class="fa-solid fa-database"></i></div>
-                                        <div class="notif-body">
-                                            <p>Storage warning: You have used 78% of your cloud quota.</p>
-                                            <span class="notif-time">3 hours ago</span>
-                                        </div>
-                                        <div class="unread-dot"></div>
+                                    <div class="empty-notif-state" style="padding: 1.5rem; text-align: center; color: var(--text-muted, #94a3b8);">
+                                        <i class="fa-regular fa-bell-slash" style="font-size: 1.8rem; margin-bottom: 0.5rem; display: block; opacity: 0.5;"></i>
+                                        <p style="font-size: 0.88rem; margin: 0;">No new notifications</p>
                                     </div>
                                 </div>
                             </div>
@@ -209,28 +189,28 @@
                     <div class="stat-card glass-card ripple-effect">
                         <div class="stat-icon purple-gradient"><i class="fa-solid fa-file-pdf"></i></div>
                         <div class="stat-details">
-                            <h3 class="counter" data-target="124">0</h3>
+                            <h3 class="counter" data-target="0">0</h3>
                             <p>Papers Uploaded</p>
                         </div>
                     </div>
                     <div class="stat-card glass-card ripple-effect">
                         <div class="stat-icon blue-gradient"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
                         <div class="stat-details">
-                            <h3 class="counter" data-target="89">0</h3>
+                            <h3 class="counter" data-target="0">0</h3>
                             <p>AI Summaries</p>
                         </div>
                     </div>
                     <div class="stat-card glass-card ripple-effect">
                         <div class="stat-icon green-gradient"><i class="fa-solid fa-clock"></i></div>
                         <div class="stat-details">
-                            <h3><span class="counter" data-target="45">0</span>h</h3>
+                            <h3><span class="counter" data-target="0">0</span>h</h3>
                             <p>Reading Time Saved</p>
                         </div>
                     </div>
                     <div class="stat-card glass-card ripple-effect">
                         <div class="stat-icon pink-gradient"><i class="fa-solid fa-heart"></i></div>
                         <div class="stat-details">
-                            <h3 class="counter" data-target="32">0</h3>
+                            <h3 class="counter" data-target="0">0</h3>
                             <p>Favorite Papers</p>
                         </div>
                     </div>
@@ -281,82 +261,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="paper-title-cell">
-                                    <i class="fa-solid fa-file-pdf pdf-icon"></i>
-                                    <div>
-                                        <span class="title-text">Attention is All You Need</span>
-                                        <span class="sub-text">2.4 MB • PDF</span>
-                                    </div>
-                                </td>
-                                <td>Vaswani et al.</td>
-                                <td>Oct 26, 2026</td>
-                                <td><span class="status-badge badge-completed"><i class="fa-solid fa-circle-check"></i> Completed</span></td>
-                                <td><span class="summary-preview">Transformer architecture introduction...</span></td>
-                                <td>
-                                    <div class="action-btns">
-                                        <button class="action-btn" title="View"><i class="fa-regular fa-eye"></i></button>
-                                        <button class="action-btn" title="Download"><i class="fa-solid fa-download"></i></button>
-                                        <button class="action-btn text-danger" title="Delete"><i class="fa-regular fa-trash-can"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="paper-title-cell">
-                                    <i class="fa-solid fa-file-pdf pdf-icon"></i>
-                                    <div>
-                                        <span class="title-text">GPT-4 Technical Report</span>
-                                        <span class="sub-text">4.1 MB • PDF</span>
-                                    </div>
-                                </td>
-                                <td>OpenAI Team</td>
-                                <td>Oct 25, 2026</td>
-                                <td><span class="status-badge badge-processing"><i class="fa-solid fa-spinner fa-spin"></i> Processing</span></td>
-                                <td><span class="summary-preview">Multimodal AI capabilities analysis...</span></td>
-                                <td>
-                                    <div class="action-btns">
-                                        <button class="action-btn" title="View"><i class="fa-regular fa-eye"></i></button>
-                                        <button class="action-btn" title="Download"><i class="fa-solid fa-download"></i></button>
-                                        <button class="action-btn text-danger" title="Delete"><i class="fa-regular fa-trash-can"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="paper-title-cell">
-                                    <i class="fa-solid fa-file-pdf pdf-icon"></i>
-                                    <div>
-                                        <span class="title-text">Quantum Supremacy via Sycamore</span>
-                                        <span class="sub-text">1.8 MB • PDF</span>
-                                    </div>
-                                </td>
-                                <td>Arute et al.</td>
-                                <td>Oct 24, 2026</td>
-                                <td><span class="status-badge badge-pending"><i class="fa-regular fa-clock"></i> Pending</span></td>
-                                <td><span class="summary-preview">Queued for deep AI extraction...</span></td>
-                                <td>
-                                    <div class="action-btns">
-                                        <button class="action-btn" title="View"><i class="fa-regular fa-eye"></i></button>
-                                        <button class="action-btn" title="Download"><i class="fa-solid fa-download"></i></button>
-                                        <button class="action-btn text-danger" title="Delete"><i class="fa-regular fa-trash-can"></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="paper-title-cell">
-                                    <i class="fa-solid fa-file-pdf pdf-icon"></i>
-                                    <div>
-                                        <span class="title-text">BERT: Pre-training of Deep Bidirectional</span>
-                                        <span class="sub-text">3.2 MB • PDF</span>
-                                    </div>
-                                </td>
-                                <td>Devlin et al.</td>
-                                <td>Oct 22, 2026</td>
-                                <td><span class="status-badge badge-failed"><i class="fa-solid fa-circle-exclamation"></i> Failed</span></td>
-                                <td><span class="summary-preview">Corrupted PDF format error</span></td>
-                                <td>
-                                    <div class="action-btns">
-                                        <button class="action-btn" title="Retry"><i class="fa-solid fa-rotate-right"></i></button>
-                                        <button class="action-btn text-danger" title="Delete"><i class="fa-regular fa-trash-can"></i></button>
+                            <tr class="empty-table-row">
+                                <td colspan="6" style="text-align: center; padding: 3rem 1.5rem;">
+                                    <div class="dash-empty-state" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.75rem;">
+                                        <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(99, 102, 241, 0.12); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.25);">
+                                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                                        </div>
+                                        <h4 style="margin: 0; font-size: 1.1rem; color: #fff; font-weight: 600;">No papers uploaded yet</h4>
+                                        <p style="margin: 0; font-size: 0.88rem; color: #94a3b8; max-width: 380px; line-height: 1.5;">Your uploaded research papers and AI summaries will appear here once you upload your first PDF.</p>
+                                        <a href="upload.html" class="primary-btn ripple-effect" style="margin-top: 0.5rem; padding: 0.5rem 1.25rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; border-radius: 10px; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;">
+                                            <i class="fa-solid fa-plus"></i> Upload New Paper
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -364,13 +279,11 @@
                     </table>
                     <!-- Pagination UI -->
                     <div class="pagination-wrapper">
-                        <span class="pagination-info">Showing 1 to 4 of 124 papers</span>
+                        <span class="pagination-info">Showing 0 of 0 papers</span>
                         <div class="pagination-controls">
                             <button class="page-btn" disabled><i class="fa-solid fa-chevron-left"></i></button>
-                            <button class="page-btn active">1</button>
-                            <button class="page-btn">2</button>
-                            <button class="page-btn">3</button>
-                            <button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                            <button class="page-btn active" disabled>1</button>
+                            <button class="page-btn" disabled><i class="fa-solid fa-chevron-right"></i></button>
                         </div>
                     </div>
                 </div>
@@ -381,13 +294,13 @@
                     <div class="storage-widget glass-card">
                         <div class="widget-header">
                             <h3><i class="fa-solid fa-database text-gradient-primary"></i> Cloud Storage</h3>
-                            <span class="plan-badge">Pro Plan</span>
+                            <span class="plan-badge">Free Plan</span>
                         </div>
                         <div class="storage-body-row">
                             <div class="storage-circle-container">
                                 <svg class="progress-ring" width="120" height="120">
                                     <circle class="progress-ring-bg" stroke="rgba(255,255,255,0.08)" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
-                                    <circle class="progress-ring-circle" stroke="url(#storageGradient)" stroke-width="8" stroke-dasharray="314" stroke-dashoffset="69" stroke-linecap="round" fill="transparent" r="50" cx="60" cy="60"/>
+                                    <circle class="progress-ring-circle" stroke="url(#storageGradient)" stroke-width="8" stroke-dasharray="314" stroke-dashoffset="314" stroke-linecap="round" fill="transparent" r="50" cx="60" cy="60"/>
                                     <defs>
                                         <linearGradient id="storageGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                                             <stop offset="0%" stop-color="#6366f1" />
@@ -396,14 +309,14 @@
                                     </defs>
                                 </svg>
                                 <div class="storage-center-text">
-                                    <h4>78%</h4>
+                                    <h4>0%</h4>
                                     <span>Used</span>
                                 </div>
                             </div>
                             <div class="storage-details-right">
                                 <div class="storage-text-info">
-                                    <p><strong>7.8 GB</strong> of 10 GB used</p>
-                                    <span>2.2 GB remaining</span>
+                                    <p><strong>0 MB</strong> of 50 MB used</p>
+                                    <span>50 MB remaining</span>
                                 </div>
                                 <button class="upgrade-btn ripple-effect mt-3"><i class="fa-solid fa-bolt"></i> Upgrade Storage</button>
                             </div>
@@ -417,33 +330,11 @@
                         </div>
                         <div class="widget-section mt-3">
                             <ul class="activity-timeline">
-                                <li>
-                                    <div class="timeline-dot blue"></div>
-                                    <div class="timeline-content">
-                                        <p>AI completed analysis for <strong>GPT-4 Technical Report</strong></p>
-                                        <span class="time"><i class="fa-regular fa-clock"></i> 10 mins ago</span>
+                                <li class="empty-timeline-item" style="padding: 2rem 1rem; text-align: center; list-style: none;">
+                                    <div style="font-size: 1.8rem; color: #64748b; opacity: 0.5; margin-bottom: 0.5rem;">
+                                        <i class="fa-regular fa-clock"></i>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="timeline-dot purple"></div>
-                                    <div class="timeline-content">
-                                        <p>Uploaded <strong>Attention is All You Need.pdf</strong></p>
-                                        <span class="time"><i class="fa-regular fa-clock"></i> 2 hours ago</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="timeline-dot green"></div>
-                                    <div class="timeline-content">
-                                        <p>Added <strong>ResNet Architecture</strong> to Favorites</p>
-                                        <span class="time"><i class="fa-regular fa-clock"></i> Yesterday</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="timeline-dot orange"></div>
-                                    <div class="timeline-content">
-                                        <p>Downloaded summary for <strong>Quantum Supremacy</strong></p>
-                                        <span class="time"><i class="fa-regular fa-clock"></i> 3 days ago</span>
-                                    </div>
+                                    <p style="margin: 0; font-size: 0.88rem; color: #94a3b8;">No recent activity yet. Upload a research paper to see your activity timeline.</p>
                                 </li>
                             </ul>
                         </div>
@@ -465,16 +356,15 @@
             </div>
             <div class="search-modal-body">
                 <div class="modal-section-title">RECENT SEARCHES</div>
-                <ul class="modal-results-list">
-                    <li><i class="fa-solid fa-clock-rotate-left"></i> Attention is All You Need <span class="tag">Paper</span></li>
-                    <li><i class="fa-solid fa-clock-rotate-left"></i> GPT-4 Multimodal Analysis <span class="tag">Summary</span></li>
+                <ul class="modal-results-list" id="modalRecentSearches">
+                    <li style="color: var(--text-muted); font-size: 0.88rem; padding: 0.75rem 1rem;"><i class="fa-solid fa-clock-rotate-left"></i> No recent searches yet</li>
                 </ul>
 
                 <div class="modal-section-title mt-3">QUICK COMMANDS</div>
                 <ul class="modal-results-list">
-                    <li><i class="fa-solid fa-cloud-arrow-up text-primary"></i> Upload a new PDF paper <span class="shortcut">⌘U</span></li>
-                    <li><i class="fa-solid fa-wand-magic-sparkles text-purple"></i> Generate AI Summary <span class="shortcut">⌘G</span></li>
-                    <li><i class="fa-solid fa-gear text-muted"></i> Open Settings <span class="shortcut">⌘S</span></li>
+                    <li id="cmdUpload"><i class="fa-solid fa-cloud-arrow-up text-primary"></i> Upload a new PDF paper <span class="shortcut">⌘U</span></li>
+                    <li id="cmdSummary"><i class="fa-solid fa-wand-magic-sparkles text-purple"></i> Generate AI Summary <span class="shortcut">⌘G</span></li>
+                    <li id="cmdSettings"><i class="fa-solid fa-gear text-muted"></i> Open Settings <span class="shortcut">⌘S</span></li>
                 </ul>
             </div>
         </div>
