@@ -1363,7 +1363,7 @@
         }
     }
 /* ==========================================================================
-   REGISTER FORM — GLOBAL WHITE TEXT OVERRIDE
+   REGISTER FORM ï¿½ GLOBAL WHITE TEXT OVERRIDE
    Forces ALL form text to be visible on the dark background.
    ========================================================================== */
 
@@ -1455,4 +1455,1148 @@
 }
 .register-card .password-toggle:hover {
     color: #a5b4fc !important;
+}
+
+
+
+/* ==========================================================================
+   REGISTER FORM - AWWWARDS MINIMALISM & PURE WHITE CONTRAST
+   Ensures ALL small text, labels, strength indicators, and sidebar elements
+   are 100% visible, high-contrast white on dark background.
+   ========================================================================== */
+
+/* 1. Global Autofill Bug Fix (Prevents Chrome/Edge from turning inputs solid white) */
+.register-card input:-webkit-autofill,
+.register-card input:-webkit-autofill:hover, 
+.register-card input:-webkit-autofill:focus, 
+.register-card input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #131828 inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    caret-color: #ffffff !important;
+    border-color: rgba(96, 165, 250, 0.5) !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+}
+
+/* 2. Unified Standard Input Styling for All 4 Fields */
+.register-card .standard-input {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    border-radius: 14px !important;
+    height: 52px !important;
+    padding: 0 3rem 0 3rem !important;
+    font-size: 0.98rem !important;
+    color: #ffffff !important;
+    caret-color: #60a5fa !important;
+    -webkit-text-fill-color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.register-card .standard-input:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.register-card .standard-input:focus {
+    background: rgba(255, 255, 255, 0.09) !important;
+    border-color: #60a5fa !important;
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.25), 0 8px 25px rgba(96, 165, 250, 0.15) !important;
+    color: #ffffff !important;
+}
+
+/* Placeholder text */
+.register-card input::placeholder {
+    color: #94a3b8 !important;
+    -webkit-text-fill-color: #94a3b8 !important;
+    opacity: 1 !important;
+}
+
+/* 3. All Form Labels: Bright, Pure White */
+.register-card .standard-label,
+.register-card .box-label,
+.register-card label {
+    display: block !important;
+    color: #ffffff !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.45rem !important;
+    letter-spacing: 0.01em !important;
+    text-transform: none !important;
+    opacity: 1 !important;
+}
+
+/* 4. Left Icons in Inputs */
+.register-card .input-icon-left {
+    position: absolute !important;
+    left: 1rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: #94a3b8 !important;
+    font-size: 1.05rem !important;
+    pointer-events: none !important;
+    transition: color 0.2s ease !important;
+}
+
+.register-card .input-container:focus-within .input-icon-left i {
+    color: #60a5fa !important;
+    filter: drop-shadow(0 0 6px rgba(96, 165, 250, 0.6)) !important;
+}
+
+/* Password toggle icon */
+.register-card .password-toggle {
+    position: absolute !important;
+    right: 1rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    background: transparent !important;
+    border: none !important;
+    color: #94a3b8 !important;
+    cursor: pointer !important;
+    font-size: 1.1rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.register-card .password-toggle:hover {
+    color: #ffffff !important;
+    transform: translateY(-50%) scale(1.15) !important;
+}
+
+/* 5. Password Strength Meter & Requirement Checklist: Pure White */
+.register-card .strength-layout-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    margin-top: 0.85rem !important;
+    margin-bottom: 0.75rem !important;
+    color: #ffffff !important;
+}
+
+.register-card .strength-txt-prefix {
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+}
+
+.register-card .strength-status-text {
+    font-weight: 700 !important;
+    padding: 0.15rem 0.5rem !important;
+    border-radius: 6px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    margin-left: 4px !important;
+    color: #fbbf24 !important;
+}
+
+.register-card .strength-bars-row {
+    display: flex !important;
+    gap: 6px !important;
+    flex: 1 !important;
+    height: 5px !important;
+}
+
+.register-card .strength-bar {
+    flex: 1 !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 999px !important;
+    transition: all 0.3s ease !important;
+}
+
+.register-card .strength-txt-suffix {
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+}
+
+/* Checklist requirements items */
+.register-card .strength-helpers-inline {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px 16px !important;
+    margin-top: 0.6rem !important;
+    padding: 0 !important;
+    list-style: none !important;
+}
+
+.register-card .strength-helpers-inline li {
+    font-size: 0.82rem !important;
+    color: #ffffff !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-weight: 500 !important;
+    transition: all 0.25s ease !important;
+}
+
+.register-card .strength-helpers-inline li i {
+    font-size: 0.92rem !important;
+    color: #94a3b8 !important;
+}
+
+.register-card .strength-helpers-inline li.valid {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+.register-card .strength-helpers-inline li.valid i {
+    color: #10b981 !important;
+    filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.7)) !important;
+}
+
+/* 6. Terms Checkbox: Pure White */
+.register-card .terms-group {
+    margin-top: 1.25rem !important;
+}
+
+.register-card .custom-checkbox-container {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    cursor: pointer !important;
+}
+
+.register-card .custom-checkmark {
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+    border: 2px solid rgba(255, 255, 255, 0.4) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    transition: all 0.2s ease !important;
+}
+
+.register-card .custom-checkbox-container input:checked ~ .custom-checkmark {
+    background: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5) !important;
+}
+
+.register-card .custom-checkmark i {
+    color: #ffffff !important;
+    font-size: 0.75rem !important;
+    opacity: 0 !important;
+}
+
+.register-card .custom-checkbox-container input:checked ~ .custom-checkmark i {
+    opacity: 1 !important;
+}
+
+.register-card .terms-text {
+    font-size: 0.88rem !important;
+    color: #ffffff !important;
+    line-height: 1.4 !important;
+}
+
+.register-card .terms-text a {
+    color: #60a5fa !important;
+    font-weight: 600 !important;
+    text-decoration: underline !important;
+    transition: color 0.2s ease !important;
+}
+
+.register-card .terms-text a:hover {
+    color: #93c5fd !important;
+}
+
+/* 7. Auth Divider, Social Button & Footer Link: Pure White */
+.register-card .auth-divider {
+    display: flex !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin: 1.75rem 0 !important;
+    color: #e2e8f0 !important;
+}
+
+.register-card .auth-divider::before,
+.register-card .auth-divider::after {
+    content: '' !important;
+    flex: 1 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.register-card .auth-divider span {
+    padding: 0 1rem !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    color: #e2e8f0 !important;
+}
+
+.register-card .btn-social {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 14px !important;
+    padding: 0.85rem 1.5rem !important;
+    color: #ffffff !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    transition: all 0.25s ease !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+}
+
+.register-card .btn-social:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.35) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25) !important;
+}
+
+.register-card .auth-footer p {
+    color: #ffffff !important;
+    font-size: 0.92rem !important;
+}
+
+.register-card .auth-footer-link {
+    color: #60a5fa !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    margin-left: 4px !important;
+}
+
+.register-card .auth-footer-link:hover {
+    color: #93c5fd !important;
+    text-decoration: underline !important;
+}
+
+/* 8. Left Sidebar Feature Cards & Branding: Pure White High Contrast */
+.register-sidebar .feature-card-v {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-radius: 16px !important;
+    padding: 1.25rem 1.4rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.35rem !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2) !important;
+    transition: all 0.25s ease !important;
+}
+
+.register-sidebar .feature-card-v:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    transform: translateY(-3px) !important;
+}
+
+.register-sidebar .feature-card-v h4 {
+    color: #ffffff !important;
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.01em !important;
+}
+
+.register-sidebar .feature-card-v p {
+    color: #cbd5e1 !important;
+    font-size: 0.86rem !important;
+    line-height: 1.4 !important;
+}
+
+.register-sidebar .feature-card-v .fc-icon {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 10px !important;
+    background: rgba(96, 165, 250, 0.15) !important;
+    color: #60a5fa !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.1rem !important;
+    margin-bottom: 0.35rem !important;
+}
+
+.register-sidebar .register-desc {
+    color: #cbd5e1 !important;
+}
+
+.register-sidebar .register-badge-top {
+    color: #ffffff !important;
+    border-color: rgba(99, 102, 241, 0.5) !important;
+}
+
+.auth-sidebar-footer p {
+    color: #94a3b8 !important;
+}
+
+
+/* ==========================================================================
+   REGISTER PAGE: LIGHT & MONOCHROMATIC DARK THEME CHECKLIST & INPUT PERFECTION
+   ========================================================================== */
+
+/* --- LIGHT THEME REGISTER --- */
+[data-theme="light"] .register-wrapper {
+  background: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .register-sidebar {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%) !important;
+  border-right: 1px solid #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .register-badge-top {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #0f172a !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .register-title {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+
+[data-theme="light"] .register-desc {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .float-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #0f172a !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme="light"] .feature-card-v {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .feature-card-v h4 {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .feature-card-v p {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .register-content {
+  background: #f8fafc !important;
+}
+
+[data-theme="light"] .register-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="light"] .register-card::before {
+  display: none !important;
+}
+
+[data-theme="light"] .standard-label {
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="light"] .standard-input {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .standard-input:-webkit-autofill,
+[data-theme="light"] .standard-input:-webkit-autofill:hover, 
+[data-theme="light"] .standard-input:-webkit-autofill:focus, 
+[data-theme="light"] .standard-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  box-shadow: 0 0 0 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #0f172a !important;
+  color: #0f172a !important;
+  caret-color: #0f172a !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
+/* Password Strength & Requirements Visibility in LIGHT THEME */
+[data-theme="light"] .strength-txt-prefix {
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="light"] .strength-status-text {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="light"] .strength-txt-suffix {
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="light"] .strength-bar {
+  background: #e2e8f0 !important;
+}
+
+[data-theme="light"] .strength-helpers-inline li {
+  color: #334155 !important;
+  font-weight: 500 !important;
+  font-size: 0.82rem !important;
+}
+
+[data-theme="light"] .strength-helpers-inline li i {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .strength-helpers-inline li.valid {
+  color: #047857 !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="light"] .strength-helpers-inline li.valid i {
+  color: #059669 !important;
+}
+
+[data-theme="light"] .terms-text {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .terms-text a {
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="light"] .register-btn {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.2) !important;
+}
+
+[data-theme="light"] .register-btn:hover {
+  background: #1e293b !important;
+  transform: translateY(-2px) !important;
+}
+
+/* --- MONOCHROMATIC DARK THEME REGISTER --- */
+[data-theme="dark"] .register-wrapper {
+  background: #05070a !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .register-sidebar {
+  background: linear-gradient(145deg, #0a0d14 0%, #05070a 100%) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .register-badge-top {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .register-title {
+  background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+[data-theme="dark"] .register-desc {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .float-card {
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .feature-card-v {
+  background: rgba(255, 255, 255, 0.035) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .feature-card-v h4 {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .feature-card-v p {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .register-content {
+  background: #05070a !important;
+}
+
+[data-theme="dark"] .register-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0.008) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.18), 0 25px 60px -15px rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(28px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+}
+
+[data-theme="dark"] .register-card::before {
+  display: none !important;
+}
+
+[data-theme="dark"] .standard-label {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="dark"] .standard-input {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .standard-input:-webkit-autofill,
+[data-theme="dark"] .standard-input:-webkit-autofill:hover, 
+[data-theme="dark"] .standard-input:-webkit-autofill:focus, 
+[data-theme="dark"] .standard-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #111520 inset !important;
+  box-shadow: 0 0 0 1000px #111520 inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+  caret-color: #ffffff !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
+/* Password Strength & Requirements Visibility in DARK THEME */
+[data-theme="dark"] .strength-txt-prefix {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="dark"] .strength-status-text {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="dark"] .strength-txt-suffix {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="dark"] .strength-bar {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .strength-helpers-inline li {
+  color: #ffffff !important;
+  font-size: 0.82rem !important;
+}
+
+[data-theme="dark"] .strength-helpers-inline li i {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .strength-helpers-inline li.valid {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+[data-theme="dark"] .strength-helpers-inline li.valid i {
+  color: #10b981 !important;
+  filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.7)) !important;
+}
+
+[data-theme="dark"] .terms-text {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .terms-text a {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .register-btn {
+  background: #ffffff !important;
+  color: #05070a !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-theme="dark"] .register-btn:hover {
+  background: #e2e8f0 !important;
+  color: #000000 !important;
+  transform: translateY(-2px) !important;
+}
+
+
+/* ==========================================================================
+   PERFECT VISIBILITY & AESTHETICS OVERRIDES (LIGHT & DARK THEMES)
+   ========================================================================== */
+
+/* ------------------ LIGHT THEME PERFECT CONTRAST ------------------ */
+[data-theme="light"] .register-wrapper,
+[data-theme="light"] .auth-wrapper {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+}
+
+[data-theme="light"] .register-sidebar,
+[data-theme="light"] .auth-sidebar {
+    background: #f8fafc !important;
+    border-right: 1px solid #e2e8f0 !important;
+}
+
+[data-theme="light"] .register-sidebar .logo,
+[data-theme="light"] .auth-sidebar .nav-brand,
+[data-theme="light"] .auth-sidebar-header a {
+    color: #0f172a !important;
+}
+
+[data-theme="light"] .register-badge-top {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .register-badge-top i {
+    color: #0f172a !important;
+}
+
+/* FIX: Ensure Headline is 100% Bold Obsidian, never white */
+[data-theme="light"] .register-title,
+[data-theme="light"] .auth-sidebar-title,
+[data-theme="light"] .register-sidebar-body .register-title {
+    color: #0f172a !important;
+    -webkit-text-fill-color: #0f172a !important;
+    background: none !important;
+    font-weight: 800 !important;
+}
+
+/* "with AI" in light mode: deep sleek slate gradient */
+[data-theme="light"] .register-title .text-gradient-primary,
+[data-theme="light"] .auth-sidebar-title .text-gradient-primary,
+[data-theme="light"] .auth-title .text-gradient-primary {
+    background: linear-gradient(135deg, #0f172a 0%, #334155 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+}
+
+[data-theme="light"] .register-desc,
+[data-theme="light"] .auth-sidebar-desc {
+    color: #475569 !important;
+    font-weight: 500 !important;
+}
+
+/* Floating Mockup Cards in Sidebar: Clean white cards */
+[data-theme="light"] .float-card,
+[data-theme="light"] .float-card.fc-pdf,
+[data-theme="light"] .float-card.fc-ai,
+[data-theme="light"] .float-card.fc-charts,
+[data-theme="light"] .float-card.fc-research {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="light"] .float-card.fc-pdf i {
+    color: #ef4444 !important;
+}
+
+[data-theme="light"] .float-card.fc-charts i {
+    color: #10b981 !important;
+}
+
+[data-theme="light"] .float-card.fc-ai i {
+    color: #0f172a !important;
+}
+
+[data-theme="light"] .holo-core {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+[data-theme="light"] .holo-brain {
+    color: #0f172a !important;
+}
+
+/* Feature cards in sidebar */
+[data-theme="light"] .feature-card-v {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .feature-card-v h4 {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+}
+
+[data-theme="light"] .feature-card-v p {
+    color: #64748b !important;
+}
+
+[data-theme="light"] .feature-card-v .fc-icon {
+    background: #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #0f172a !important;
+}
+
+/* Right Content Area */
+[data-theme="light"] .register-content,
+[data-theme="light"] .auth-content {
+    background: #f8fafc !important;
+}
+
+[data-theme="light"] .register-card,
+[data-theme="light"] .auth-card {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .register-card::before,
+[data-theme="light"] .auth-card::before {
+    display: none !important;
+}
+
+[data-theme="light"] .auth-logo-circle {
+    background: #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #0f172a !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme="light"] .premium-logo-ring {
+    border-color: rgba(15, 23, 42, 0.06) !important;
+}
+
+[data-theme="light"] .auth-welcome-back {
+    color: #64748b !important;
+    font-weight: 600 !important;
+}
+
+[data-theme="light"] .auth-title {
+    color: #0f172a !important;
+    -webkit-text-fill-color: #0f172a !important;
+    font-weight: 800 !important;
+}
+
+/* Labels: 100% High-Contrast Obsidian */
+[data-theme="light"] .register-card .standard-label,
+[data-theme="light"] .register-card label,
+[data-theme="light"] .auth-card .standard-label,
+[data-theme="light"] .auth-card label,
+[data-theme="light"] .standard-label {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    opacity: 1 !important;
+}
+
+/* Inputs: Crisp White Surface with Dark Slate Typed Text */
+[data-theme="light"] .register-card .standard-input,
+[data-theme="light"] .register-card input[type="text"],
+[data-theme="light"] .register-card input[type="email"],
+[data-theme="light"] .register-card input[type="password"],
+[data-theme="light"] .auth-input,
+[data-theme="light"] .standard-input {
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    -webkit-text-fill-color: #0f172a !important;
+    caret-color: #0f172a !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+    font-size: 0.96rem !important;
+}
+
+[data-theme="light"] .register-card .standard-input:hover,
+[data-theme="light"] .auth-input:hover {
+    border-color: #94a3b8 !important;
+}
+
+[data-theme="light"] .register-card .standard-input:focus,
+[data-theme="light"] .auth-input:focus {
+    border-color: #0f172a !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* Input Placeholder */
+[data-theme="light"] .register-card input::placeholder,
+[data-theme="light"] .auth-input::placeholder {
+    color: #94a3b8 !important;
+    -webkit-text-fill-color: #94a3b8 !important;
+    opacity: 1 !important;
+}
+
+/* Input Left Icons */
+[data-theme="light"] .input-icon-left i,
+[data-theme="light"] .register-card .input-icon-left i {
+    color: #64748b !important;
+}
+
+/* Autofill: Force Pure White Background with Dark Slate Text in Light Mode */
+[data-theme="light"] .register-card input:-webkit-autofill,
+[data-theme="light"] .register-card input:-webkit-autofill:hover, 
+[data-theme="light"] .register-card input:-webkit-autofill:focus, 
+[data-theme="light"] .register-card input:-webkit-autofill:active,
+[data-theme="light"] .auth-input:-webkit-autofill,
+[data-theme="light"] .auth-input:-webkit-autofill:hover, 
+[data-theme="light"] .auth-input:-webkit-autofill:focus, 
+[data-theme="light"] .auth-input:-webkit-autofill:active,
+[data-theme="light"] input:-internal-autofill-selected,
+[data-theme="light"] input:autofill {
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+    box-shadow: 0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color: #0f172a !important;
+    color: #0f172a !important;
+    caret-color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+}
+
+/* Password Strength & Checklist Items: 100% Crystal-Clear Visibility */
+[data-theme="light"] .strength-txt-prefix {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+    font-size: 0.86rem !important;
+}
+
+[data-theme="light"] .strength-status-text {
+    font-weight: 800 !important;
+}
+
+[data-theme="light"] .strength-txt-suffix {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+    font-size: 0.86rem !important;
+}
+
+[data-theme="light"] .strength-bar {
+    background: #e2e8f0 !important;
+}
+
+[data-theme="light"] .strength-helpers-inline {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px 16px !important;
+    margin-top: 0.65rem !important;
+}
+
+[data-theme="light"] .strength-helpers-inline li,
+[data-theme="light"] .register-card .strength-helpers-inline li {
+    color: #1e293b !important;
+    font-weight: 600 !important;
+    font-size: 0.84rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+[data-theme="light"] .strength-helpers-inline li i,
+[data-theme="light"] .register-card .strength-helpers-inline li i {
+    color: #64748b !important;
+    font-size: 0.95rem !important;
+}
+
+[data-theme="light"] .strength-helpers-inline li.valid,
+[data-theme="light"] .register-card .strength-helpers-inline li.valid {
+    color: #047857 !important;
+    font-weight: 700 !important;
+}
+
+[data-theme="light"] .strength-helpers-inline li.valid i,
+[data-theme="light"] .register-card .strength-helpers-inline li.valid i {
+    color: #059669 !important;
+    filter: drop-shadow(0 0 4px rgba(5, 150, 105, 0.4)) !important;
+}
+
+/* Terms Checkbox */
+[data-theme="light"] .terms-text {
+    color: #475569 !important;
+    font-weight: 500 !important;
+}
+
+[data-theme="light"] .terms-text a {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+}
+
+/* Buttons */
+[data-theme="light"] .register-btn,
+[data-theme="light"] .auth-btn,
+[data-theme="light"] .btn-primary {
+    background: #0f172a !important;
+    color: #ffffff !important;
+    border: none !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25) !important;
+}
+
+[data-theme="light"] .register-btn:hover,
+[data-theme="light"] .auth-btn:hover,
+[data-theme="light"] .btn-primary:hover {
+    background: #1e293b !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.3) !important;
+}
+
+[data-theme="light"] .btn-social {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    font-weight: 600 !important;
+}
+
+[data-theme="light"] .btn-social:hover {
+    background: #f8fafc !important;
+    border-color: #94a3b8 !important;
+}
+
+[data-theme="light"] .social-svg-icon {
+    filter: invert(0) !important;
+}
+
+[data-theme="light"] .auth-footer p {
+    color: #64748b !important;
+}
+
+[data-theme="light"] .auth-footer-link {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+}
+
+
+/* ------------------ MONOCHROMATIC DARK THEME PERFECT CONTRAST ------------------ */
+[data-theme="dark"] .register-wrapper,
+[data-theme="dark"] .auth-wrapper {
+    background: #05070a !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .register-sidebar,
+[data-theme="dark"] .auth-sidebar {
+    background: linear-gradient(145deg, #0a0d14 0%, #05070a 100%) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+[data-theme="dark"] .register-title,
+[data-theme="dark"] .auth-sidebar-title {
+    background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+[data-theme="dark"] .register-desc,
+[data-theme="dark"] .auth-sidebar-desc {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .register-content,
+[data-theme="dark"] .auth-content {
+    background: #05070a !important;
+}
+
+[data-theme="dark"] .register-card,
+[data-theme="dark"] .auth-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0.008) 100%) !important;
+    backdrop-filter: blur(28px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.18), 0 25px 60px -15px rgba(0, 0, 0, 0.85) !important;
+}
+
+[data-theme="dark"] .register-card::before,
+[data-theme="dark"] .auth-card::before {
+    display: none !important;
+}
+
+[data-theme="dark"] .auth-title {
+    background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+[data-theme="dark"] .register-card .standard-label,
+[data-theme="dark"] .auth-card .standard-label,
+[data-theme="dark"] .standard-label {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+[data-theme="dark"] .register-card .standard-input,
+[data-theme="dark"] .auth-input,
+[data-theme="dark"] .standard-input {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+    caret-color: #ffffff !important;
+}
+
+[data-theme="dark"] .register-card input:-webkit-autofill,
+[data-theme="dark"] .register-card input:-webkit-autofill:hover, 
+[data-theme="dark"] .register-card input:-webkit-autofill:focus, 
+[data-theme="dark"] .register-card input:-webkit-autofill:active,
+[data-theme="dark"] .auth-input:-webkit-autofill,
+[data-theme="dark"] .auth-input:-webkit-autofill:hover, 
+[data-theme="dark"] .auth-input:-webkit-autofill:focus, 
+[data-theme="dark"] .auth-input:-webkit-autofill:active,
+[data-theme="dark"] input:-internal-autofill-selected,
+[data-theme="dark"] input:autofill {
+    -webkit-box-shadow: 0 0 0 1000px #111520 inset !important;
+    box-shadow: 0 0 0 1000px #111520 inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    color: #ffffff !important;
+    caret-color: #ffffff !important;
+    transition: background-color 5000s ease-in-out 0s !important;
+}
+
+[data-theme="dark"] .strength-txt-prefix,
+[data-theme="dark"] .strength-status-text,
+[data-theme="dark"] .strength-txt-suffix {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+[data-theme="dark"] .strength-helpers-inline li {
+    color: #ffffff !important;
+    font-size: 0.82rem !important;
+}
+
+[data-theme="dark"] .strength-helpers-inline li i {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .strength-helpers-inline li.valid {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+[data-theme="dark"] .strength-helpers-inline li.valid i {
+    color: #10b981 !important;
+    filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.7)) !important;
+}
+
+[data-theme="dark"] .register-btn,
+[data-theme="dark"] .auth-btn,
+[data-theme="dark"] .btn-primary {
+    background: #ffffff !important;
+    color: #05070a !important;
+    border: none !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15) !important;
+}
+
+[data-theme="dark"] .register-btn:hover,
+[data-theme="dark"] .auth-btn:hover,
+[data-theme="dark"] .btn-primary:hover {
+    background: #e2e8f0 !important;
+    color: #000000 !important;
+    transform: translateY(-2px) !important;
+}
+
+[data-theme="dark"] .btn-social {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .social-svg-icon {
+    filter: invert(1) !important;
 }

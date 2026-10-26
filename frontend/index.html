@@ -14,8 +14,9 @@
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <!-- Global & Responsive Stylesheets -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="GooeyNav.css?v=7.0">
+    <link rel="stylesheet" href="assets/css/style.css?v=7.0">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=7.0">
 </head>
 <body>
 
@@ -34,10 +35,15 @@
                 <span class="logo-text">PaperMind<span class="logo-accent">.AI</span></span>
             </a>
 
-            <!-- Desktop Nav Menu -->
+            <!-- GooeyNav ReactBits Navigation Centerpiece -->
+            <div id="gooeyNavContainer" class="nav-gooey-wrapper">
+                <!-- GooeyNav with WebGL2 liquid droplets mounts here -->
+            </div>
+
+            <!-- Fallback / Mobile Nav Menu (Preserved for full website navigation & mobile drawer) -->
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
-                <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
+                <li class="nav-item"><a href="#features" class="nav-link">Work</a></li>
                 <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="#faq" class="nav-link">FAQ</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
@@ -45,6 +51,30 @@
 
             <!-- Nav Actions -->
             <div class="nav-actions">
+                <!-- Language Selector from reference UI -->
+                <div class="nav-lang-pill" title="Select Language">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>English</span>
+                </div>
+
+                <!-- Theme Toggle Switch (NAV ONLY - Preserved Rolling Ball) -->
+                <div class="theme-toggle-wrapper" title="Toggle Theme (Dark / Light)">
+                    <i class="fa-solid fa-moon theme-icon-moon"></i>
+                    <label class="switch" for="themeToggleNav">
+                        <input class="switch__input" id="themeToggleNav" data-role="theme-toggle" type="checkbox" role="switch" aria-label="Toggle Theme">
+                        <span class="switch__shadow">
+                            <span class="switch__shadow-inner"></span>
+                        </span>
+                        <span class="switch__ball-shadow"></span>
+                        <span class="switch__ball-shadow-outer"></span>
+                        <span class="switch__ball">
+                            <span class="switch__ball-texture"></span>
+                        </span>
+                        <span class="switch__label">Toggle Theme</span>
+                    </label>
+                    <i class="fa-solid fa-sun theme-icon-sun"></i>
+                </div>
+
                 <a href="login.html" class="btn btn-outline btn-sm">Log In</a>
                 <a href="login.html" class="btn btn-primary btn-sm nav-cta">
                     <span>Get Started</span>
@@ -59,181 +89,207 @@
 
     <!-- Main Content Area -->
     <main class="main-content">
-        <!-- 2. Hero Section -->
-        <section class="hero-section">
-            <div class="container hero-container">
-                <div class="hero-header text-center">
-                    <!-- AI Badge Pill -->
-                    <div class="hero-badge">
-                        <span class="badge-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
-                        <span class="badge-text">Next-Gen Academic AI Summarizer</span>
-                        <span class="badge-tag">v2.4 Live</span>
+        <!-- 2. Hero Section Matching Reference Image -->
+        <section class="hero-section hero-athletic-showcase" id="home">
+            <div class="container hero-frame-container">
+                <div class="hero-showcase-card">
+                    <!-- Subtle Ambient Backdrop Shine -->
+                    <div class="hero-card-ambient-shine"></div>
+
+                    <!-- Side Chevron Navigation Arrows -->
+                    <button class="hero-nav-arrow arrow-prev" aria-label="Previous Slide">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button class="hero-nav-arrow arrow-next" aria-label="Next Slide">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <!-- Main Top Headline -->
+                    <div class="hero-headline-wrap">
+                        <h1 class="hero-main-title">
+                            <span class="title-light">Innovation Meets</span>
+                            <span class="title-bold">Academic Excellence</span>
+                        </h1>
                     </div>
 
-                    <!-- Main Headline -->
-                    <h1 class="hero-title">
-                        Summarize Research Papers <br class="hero-br">
-                        <span class="text-gradient">with AI in Seconds</span>
-                    </h1>
-
-                    <!-- Short Description -->
-                    <p class="hero-description">
-                        Drastically cut your reading time. Our advanced AI analyzes dense PDFs, extracts critical methodologies, datasets, and key findings into structured, easy-to-digest summaries.
-                    </p>
-
-                    <!-- Two CTA Buttons -->
-                    <div class="hero-cta-group">
-                        <a href="login.html" class="btn btn-primary btn-lg hero-btn-main">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                            <span>Generate Summary</span>
-                        </a>
-                        <a href="#about" class="btn btn-glass btn-lg hero-btn-secondary">
-                            <i class="fa-solid fa-circle-play"></i>
-                            <span>Learn More</span>
-                        </a>
-                    </div>
-
-                    <!-- Trust Ratings & Proof -->
-                    <div class="hero-proof">
-                        <div class="proof-avatars">
-                            <div class="avatar-circle av-1"><i class="fa-solid fa-user-graduate"></i></div>
-                            <div class="avatar-circle av-2"><i class="fa-solid fa-microscope"></i></div>
-                            <div class="avatar-circle av-3"><i class="fa-solid fa-flask"></i></div>
-                            <div class="avatar-circle av-4"><i class="fa-solid fa-atom"></i></div>
-                        </div>
-                        <div class="proof-text">
-                            <div class="stars">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <span class="rating-num">4.9/5</span>
+                    <!-- 3-Column Showcase Grid -->
+                    <div class="hero-showcase-grid">
+                        <!-- Left Column: Academic Intelligence, Joined Scholars, Description, CTA, Publisher Logos -->
+                        <div class="hero-col hero-col-left">
+                            <div class="event-meta-block">
+                                <h3 class="event-title">Academic Intelligence</h3>
+                                <span class="event-dates">Next-Gen Research &bull; v2.4 Live</span>
                             </div>
-                            <p class="proof-sub">Trusted by <strong>50,000+</strong> researchers & Ph.D. scholars</p>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- 3. Hero Image Area (Pure CSS Modern AI Illustration) -->
-                <div class="hero-illustration-wrapper">
-                    <!-- Glass Card Mockup Showcase -->
-                    <div class="mockup-window card-glass">
-                        <!-- Window Top Header -->
-                        <div class="mockup-header">
-                            <div class="window-dots">
-                                <span class="dot dot-close"></span>
-                                <span class="dot dot-minimize"></span>
-                                <span class="dot dot-expand"></span>
-                            </div>
-                            <div class="window-title-bar">
-                                <i class="fa-solid fa-lock text-muted text-xs"></i>
-                                <span>papermind.ai/dashboard/summary?id=paper_8942</span>
-                            </div>
-                            <div class="window-actions">
-                                <span class="status-pill"><i class="fa-solid fa-circle-check"></i> Analysis Complete</span>
+                            <p class="event-desc">
+                                Drastically cut your reading time. Our advanced AI analyzes dense PDFs, extracts critical methodologies, datasets, and key findings into structured, easy-to-digest summaries.
+                            </p>
+
+                            <a href="login.html" class="btn-learn-pill">
+                                <span>Generate Summary</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+
+                            <!-- Academic Publisher & Archive Brand Marks -->
+                            <div class="hero-brand-logos">
+                                <!-- arXiv -->
+                                <span class="pub-badge" title="arXiv Archive">arXiv</span>
+                                <!-- IEEE -->
+                                <span class="pub-badge" title="IEEE Xplore">IEEE</span>
+                                <!-- Nature -->
+                                <span class="pub-badge pub-badge-nature" title="Nature Publishing">nature</span>
+                                <!-- PubMed -->
+                                <span class="pub-badge" title="PubMed NLM">PubMed</span>
                             </div>
                         </div>
 
-                        <!-- Mockup Body Grid -->
-                        <div class="mockup-body">
-                            <!-- Left Sidebar Mockup (Paper Info) -->
-                            <div class="mockup-sidebar">
-                                <div class="paper-meta-card">
-                                    <div class="pdf-tag"><i class="fa-solid fa-file-pdf"></i> PDF Document</div>
-                                    <h4 class="paper-title">Attention Is All You Need.pdf</h4>
-                                    <p class="paper-authors">Vaswani et al. • NIPS 2017</p>
-                                    <div class="paper-stats-mini">
-                                        <span><i class="fa-solid fa-file-lines"></i> 15 Pages</span>
-                                        <span><i class="fa-solid fa-bolt"></i> 4,820 Words</span>
-                                    </div>
+                        <!-- Center Column: iPhone Mockup & Academic AI Researcher -->
+                        <div class="hero-col hero-col-center">
+                            <div class="iphone-mockup-frame">
+                                <div class="iphone-dynamic-island">
+                                    <span class="island-camera"></span>
+                                    <span class="island-sensor"></span>
                                 </div>
-                                <div class="paper-outline">
-                                    <div class="outline-title">Extracted Structure</div>
-                                    <div class="outline-item active"><i class="fa-solid fa-check-circle"></i> Executive Summary</div>
-                                    <div class="outline-item"><i class="fa-solid fa-check-circle"></i> Core Novel Contributions</div>
-                                    <div class="outline-item"><i class="fa-solid fa-check-circle"></i> Architecture & Equations</div>
-                                    <div class="outline-item"><i class="fa-solid fa-check-circle"></i> Experimental Results</div>
-                                </div>
-                            </div>
 
-                            <!-- Right Main Content Mockup -->
-                            <div class="mockup-main">
-                                <!-- AI Summary Header Card -->
-                                <div class="ai-summary-card">
-                                    <div class="ai-summary-header">
-                                        <div class="ai-badge">
-                                            <i class="fa-solid fa-wand-magic-sparkles"></i>
-                                            <span>AI Executive Summary</span>
+                                <div class="iphone-screen-content">
+                                    <img src="assets/images/hero-scholar.jpg" alt="Academic Researcher" class="iphone-athlete-img" />
+                                    <div class="iphone-screen-gradient-overlay"></div>
+
+                                    <!-- Overlaid Phone Widgets -->
+                                    <div class="iphone-widgets-container">
+                                        <div class="phone-ui-header">
+                                            <h3 class="phone-today-title">Analysis Results</h3>
+                                            <button class="phone-more-btn" aria-label="Options">
+                                                <i class="fa-solid fa-ellipsis"></i>
+                                            </button>
                                         </div>
-                                        <div class="reading-time">
-                                            <i class="fa-solid fa-clock"></i> 2 min read (Saved 45 min)
-                                        </div>
-                                    </div>
 
-                                    <div class="ai-content-box">
-                                        <h3 class="summary-headline">Core Breakthrough</h3>
-                                        <p class="summary-p">
-                                            This landmark paper proposes the <strong>Transformer</strong>, a novel neural network architecture based solely on self-attention mechanisms, completely dispensing with recurrence and convolutions.
-                                        </p>
-
-                                        <div class="key-takeaways">
-                                            <div class="takeaway-item">
-                                                <div class="takeaway-icon"><i class="fa-solid fa-lightbulb"></i></div>
-                                                <div class="takeaway-text">
-                                                    <strong>Parallelizable Computation:</strong> Training time is significantly reduced compared to RNNs by processing all sequence tokens simultaneously.
+                                        <div class="phone-metrics-row">
+                                            <!-- Metric 1: Papers Processed -->
+                                            <div class="phone-metric-glass walk-glass">
+                                                <div class="glass-metric-top">
+                                                    <span>Papers</span>
+                                                    <i class="fa-solid fa-file-lines"></i>
+                                                </div>
+                                                <div class="arc-gauge-wrap">
+                                                    <svg viewBox="0 0 100 60" class="gauge-svg">
+                                                        <path d="M 15 55 A 35 35 0 0 1 85 55" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="7" stroke-linecap="round"/>
+                                                        <path d="M 15 55 A 35 35 0 0 1 72 24" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+                                                    </svg>
+                                                    <div class="gauge-center-text">
+                                                        <span class="gauge-num">3,456</span>
+                                                        <span class="gauge-unit">Analyzed</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="takeaway-item">
-                                                <div class="takeaway-icon"><i class="fa-solid fa-chart-line"></i></div>
-                                                <div class="takeaway-text">
-                                                    <strong>State-of-the-Art Results:</strong> Achieved 28.4 BLEU on English-to-German translation, outperforming previous ensemble models.
+
+                                            <!-- Metric 2: Donut Score -->
+                                            <div class="phone-metric-glass score-glass">
+                                                <div class="donut-chart-box">
+                                                    <svg viewBox="0 0 100 100" class="donut-circle-svg">
+                                                        <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="8"/>
+                                                        <circle cx="50" cy="50" r="38" fill="none" stroke="#ff7354" stroke-width="8" stroke-dasharray="75 240" stroke-dashoffset="0" stroke-linecap="round"/>
+                                                        <circle cx="50" cy="50" r="38" fill="none" stroke="#12c2e9" stroke-width="8" stroke-dasharray="60 240" stroke-dashoffset="-85" stroke-linecap="round"/>
+                                                        <circle cx="50" cy="50" r="38" fill="none" stroke="#f6ad55" stroke-width="8" stroke-dasharray="45 240" stroke-dashoffset="-155" stroke-linecap="round"/>
+                                                    </svg>
+                                                    <div class="donut-number-wrap">
+                                                        <span class="donut-big-val">9.8</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <!-- Interactive Q&A Bar Snippet -->
-                                    <div class="mockup-chat-bar">
-                                        <div class="chat-input-placeholder">
-                                            <i class="fa-solid fa-sparkles text-primary"></i>
-                                            <span>Ask AI: "What is Multi-Head Attention?"</span>
+                                        <!-- Bottom Row Metrics -->
+                                        <div class="phone-bottom-row">
+                                            <div class="phone-bottom-card heart-glass">
+                                                <div class="stat-header-mini">
+                                                    <span>Latency</span>
+                                                    <i class="fa-solid fa-bolt text-accent"></i>
+                                                </div>
+                                                <div class="ecg-pulse-wrap">
+                                                    <svg viewBox="0 0 100 24" class="ecg-svg">
+                                                        <path d="M 0 12 L 20 12 L 26 4 L 32 20 L 38 2 L 44 18 L 50 12 L 100 12" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+
+                                            <div class="phone-bottom-card sleep-glass">
+                                                <div class="stat-header-mini">
+                                                    <span>Synthesis</span>
+                                                    <i class="fa-solid fa-wand-magic-sparkles text-primary"></i>
+                                                </div>
+                                                <div class="sleep-info-mini">
+                                                    <span class="sleep-hours">Deep Mode</span>
+                                                    <span class="sleep-subtag">Zero Hallucination</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <button class="chat-send-btn" aria-label="Send"><i class="fa-solid fa-paper-plane"></i></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Floating CSS Accents & Badges -->
-                    <div class="floating-card float-badge-1 card-glass">
-                        <div class="float-icon bg-success-light">
-                            <i class="fa-solid fa-bolt text-success"></i>
-                        </div>
-                        <div class="float-content">
-                            <div class="float-title">10x Faster Analysis</div>
-                            <div class="float-desc">Summary ready in 4.2 sec</div>
-                        </div>
-                    </div>
+                        <!-- Right Column: Glass Feature Card & Floating Academic Widgets -->
+                        <div class="hero-col hero-col-right">
+                            <!-- Top Glass Feature Card with 3 Technical Paper Diagrams -->
+                            <div class="glass-feature-card">
+                                <div class="glass-card-topbar">
+                                    <div class="card-dots-indicator">
+                                        <span class="indicator-dot dot-active"></span>
+                                        <span class="indicator-dot"></span>
+                                        <span class="indicator-dot"></span>
+                                    </div>
+                                    <button class="btn-more-pill">More</button>
+                                </div>
 
-                    <div class="floating-card float-badge-2 card-glass">
-                        <div class="float-icon bg-primary-light">
-                            <i class="fa-solid fa-bullseye text-primary"></i>
-                        </div>
-                        <div class="float-content">
-                            <div class="float-title">99.2% Accuracy</div>
-                            <div class="float-desc">Zero hallucination mode</div>
-                        </div>
-                    </div>
+                                <div class="thumbnails-triple-row">
+                                    <div class="thumb-card-item">
+                                        <img src="assets/images/thumb-diagram-1.jpg" alt="Multi-Head Attention Architecture" />
+                                    </div>
+                                    <div class="thumb-card-item">
+                                        <img src="assets/images/thumb-diagram-2.jpg" alt="Model Convergence & Accuracy Benchmarks" />
+                                    </div>
+                                    <div class="thumb-card-item">
+                                        <img src="assets/images/thumb-diagram-3.jpg" alt="Mathematical Formulation & Equations" />
+                                    </div>
+                                </div>
 
-                    <div class="floating-card float-badge-3 card-glass">
-                        <div class="float-icon bg-accent-light">
-                            <i class="fa-solid fa-layer-group text-accent"></i>
-                        </div>
-                        <div class="float-content">
-                            <div class="float-title">Deep Synthesis</div>
-                            <div class="float-desc">Key takeaways & formulas</div>
+                                <h4 class="glass-feature-title">Deep Paper Synthesis</h4>
+                                <p class="glass-feature-desc">
+                                    Automatically extract multi-head attention diagrams, loss curves, and mathematical formulations directly from complex PDFs.
+                                </p>
+                            </div>
+
+                            <!-- Floating Widgets Row -->
+                            <div class="hero-float-widgets-row">
+                                <!-- Update / Paper Ready Widget -->
+                                <div class="float-widget-badge update-widget">
+                                    <div class="update-preview-box">
+                                        <img src="assets/images/thumb-diagram-1.jpg" alt="Paper Preview" />
+                                        <span class="pulse-indicator-dot"></span>
+                                    </div>
+                                    <div class="update-copy">
+                                        <span class="update-title-text">Summary Ready</span>
+                                        <span class="update-status-text">Attention Is All You Need</span>
+                                    </div>
+                                </div>
+
+                                <!-- Audio Paper Narration Controller Pill -->
+                                <div class="float-widget-badge media-controller-pill">
+                                    <div class="media-pill-avatars">
+                                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&auto=format&fit=crop&q=80" alt="Scholar 1" />
+                                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&auto=format&fit=crop&q=80" alt="Scholar 2" />
+                                    </div>
+                                    <div class="media-wave-bars">
+                                        <span></span><span></span><span></span><span></span><span></span>
+                                    </div>
+                                    <div class="media-pill-controls">
+                                        <button class="pill-btn-action" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+                                        <button class="pill-btn-action pill-btn-dot" aria-label="Audio Playback"><i class="fa-solid fa-volume-high"></i></button>
+                                        <button class="pill-btn-action" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -370,7 +426,7 @@
                             <div class="ai-core-badge">
                                 <div class="core-pulse"></div>
                                 <div class="core-icon">
-                                    <i class="fa-solid fa-brain-circuit"></i>
+                                    <i class="fa-solid fa-brain"></i>
                                 </div>
                                 <span class="core-label">PaperMind Core</span>
                             </div>
@@ -582,86 +638,101 @@
         </section>
 
         <!-- ==========================================================================
-             SECTION 5: TESTIMONIALS
+             SECTION 5: COMMUNITY TESTIMONIALS & FEEDBACK
              ========================================================================== -->
         <section class="testimonials-section fade-up" id="testimonials">
-            <div class="container">
+            <div class="container testimonials-wrapper">
                 <div class="section-header text-center">
                     <span class="section-badge">
-                        <i class="fa-solid fa-quote-right"></i> Testimonials
+                        <i class="fa-solid fa-comment-dots"></i> Community Feedback
                     </span>
-                    <h2 class="section-title">Loved by Researchers Worldwide</h2>
-                    <p class="section-subheading">
-                        Join thousands of students, Ph.D. scholars, professors, and industry professionals.
+                    <h2 class="section-title testimonials-main-heading">Scholar Reviews & Experiences</h2>
+                    <p class="section-subheading testimonials-sub-heading">
+                        PaperMind AI is an open academic innovation. Tested the summarizer? Share your genuine feedback and review below.
                     </p>
+                    <div class="testimonials-action-wrap">
+                        <button class="btn btn-primary btn-add-testi" id="openTestimonialModalBtn">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add Your Testimonial</span>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="testimonials-grid grid grid-3">
-                    <!-- Testimonial 1 -->
-                    <div class="testimonial-card card card-glass card-hover">
-                        <div class="stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="testimonial-text">
-                            "PaperMind.AI has completely changed how I tackle literature reviews. I can digest 15 papers in the time it used to take to read just one."
-                        </p>
-                        <div class="testimonial-user">
-                            <div class="user-avatar-placeholder av-accent"><i class="fa-solid fa-user-graduate"></i></div>
-                            <div class="user-info">
-                                <h4 class="user-name">Sarah Jenkins</h4>
-                                <span class="user-role">Ph.D. Candidate, Stanford</span>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Dynamic Testimonials Grid -->
+                <div class="user-testimonials-container" id="userTestimonialsContainer">
+                    <!-- Dynamic review cards will be injected here via JavaScript -->
+                </div>
 
-                    <!-- Testimonial 2 -->
-                    <div class="testimonial-card card card-glass card-hover">
-                        <div class="stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="testimonial-text">
-                            "The methodology and math formula extraction is incredibly accurate. It saves me the trouble of digging through complex appendices."
-                        </p>
-                        <div class="testimonial-user">
-                            <div class="user-avatar-placeholder av-primary"><i class="fa-solid fa-microscope"></i></div>
-                            <div class="user-info">
-                                <h4 class="user-name">Dr. Aris Thorne</h4>
-                                <span class="user-role">CS Associate Professor, MIT</span>
-                            </div>
-                        </div>
+                <!-- Empty State (Shown when no testimonials exist yet) -->
+                <div class="empty-testimonials-box" id="emptyTestimonialsBox">
+                    <div class="empty-icon-wrap">
+                        <i class="fa-solid fa-feather-pointed"></i>
                     </div>
-
-                    <!-- Testimonial 3 -->
-                    <div class="testimonial-card card card-glass card-hover">
-                        <div class="stars">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p class="testimonial-text">
-                            "We use PaperMind to summarize and tag internal technical documents. It cuts down onboarding times for new research engineers drastically."
-                        </p>
-                        <div class="testimonial-user">
-                            <div class="user-avatar-placeholder av-success"><i class="fa-solid fa-flask"></i></div>
-                            <div class="user-info">
-                                <h4 class="user-name">Elena Rostova</h4>
-                                <span class="user-role">AI Lead, DeepScience Labs</span>
-                            </div>
-                        </div>
-                    </div>
+                    <h3 class="empty-title">Be the First to Share Your Review</h3>
+                    <p class="empty-desc">
+                        No user reviews have been published yet. Try summarizing your research papers with PaperMind AI, then click <strong>Add Your Testimonial</strong> to share your experience with the community.
+                    </p>
+                    <button class="btn btn-secondary btn-sm" id="emptyAddBtn">
+                        <i class="fa-solid fa-pen-nib"></i> Write First Testimonial
+                    </button>
                 </div>
             </div>
         </section>
+
+        <!-- Testimonial Submission Modal -->
+        <div class="testimonial-modal-backdrop" id="testimonialModalBackdrop" style="display: none;">
+            <div class="testimonial-modal-card">
+                <div class="modal-header-row">
+                    <div class="modal-header-copy">
+                        <span class="modal-badge"><i class="fa-solid fa-sparkles"></i> Scholar Experience</span>
+                        <h3 class="modal-title">Share Your Testimonial</h3>
+                    </div>
+                    <button class="modal-close-btn" id="closeTestimonialModalBtn" aria-label="Close Modal">&times;</button>
+                </div>
+
+                <form id="testimonialSubmitForm" class="testi-form">
+                    <!-- Star Rating Picker -->
+                    <div class="testi-form-group">
+                        <label class="testi-label">Your Rating</label>
+                        <div class="star-rating-picker" id="starRatingPicker">
+                            <i class="fa-solid fa-star star-pick active" data-rating="1"></i>
+                            <i class="fa-solid fa-star star-pick active" data-rating="2"></i>
+                            <i class="fa-solid fa-star star-pick active" data-rating="3"></i>
+                            <i class="fa-solid fa-star star-pick active" data-rating="4"></i>
+                            <i class="fa-solid fa-star star-pick active" data-rating="5"></i>
+                            <span class="rating-selected-text" id="ratingScoreText">5.0 / 5.0</span>
+                        </div>
+                        <input type="hidden" id="selectedStarScore" value="5" />
+                    </div>
+
+                    <!-- Name -->
+                    <div class="testi-form-group">
+                        <label for="testiAuthorName" class="testi-label">Your Full Name</label>
+                        <input type="text" id="testiAuthorName" class="testi-input" placeholder="e.g. Dr. Alex Morgan" required />
+                    </div>
+
+                    <!-- Role & Institution -->
+                    <div class="testi-form-group">
+                        <label for="testiAuthorRole" class="testi-label">Academic Role / Institution</label>
+                        <input type="text" id="testiAuthorRole" class="testi-input" placeholder="e.g. Ph.D. Candidate, Stanford University" required />
+                    </div>
+
+                    <!-- Review Text -->
+                    <div class="testi-form-group">
+                        <label for="testiReviewText" class="testi-label">Your Review & Thoughts</label>
+                        <textarea id="testiReviewText" class="testi-textarea" rows="4" placeholder="How was your experience summarizing papers with PaperMind AI? What worked well?" required></textarea>
+                    </div>
+
+                    <div class="modal-actions-row">
+                        <button type="button" class="btn btn-secondary" id="cancelTestiModalBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="saveTestiModalBtn">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Publish Testimonial</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <!-- ==========================================================================
              SECTION 6: FAQ
@@ -795,57 +866,137 @@
     </main>
 
     <!-- ==========================================================================
-         SECTION 9: FOOTER
+         SECTION 9: AWWWARDS-LEVEL MINIMALIST FULL DESKTOP FOOTER WITH PRISM WEBGL
          ========================================================================== -->
-    <footer class="footer" id="contact">
-        <div class="container">
-            <div class="footer-grid">
-                <!-- Left Side: Brand info -->
-                <div class="footer-brand-col">
-                    <a href="index.html" class="nav-brand footer-logo">
-                        <div class="logo-icon">
-                            <i class="fa-solid fa-brain"></i>
-                        </div>
-                        <span class="logo-text">PaperMind<span class="logo-accent">.AI</span></span>
+    <footer class="footer-awwwards" id="contact">
+        <!-- ReactBits WebGL Prism Background -->
+        <div class="footer-prism-bg" id="footerPrismBg">
+            <canvas class="prism-canvas" id="footerPrismCanvas" aria-hidden="true"></canvas>
+        </div>
+        <div class="footer-prism-overlay"></div>
+
+        <div class="container footer-minimal-container">
+            <!-- 1. Top Minimal Bar: Live Status & Clean Action Pill -->
+            <div class="footer-minimal-top">
+                <div class="minimal-status-badge">
+                    <span class="status-pulse"></span>
+                    <span class="status-text">SYSTEM OPERATIONAL &middot; GEMINI 3.1 FLASH POWERED</span>
+                </div>
+                <div class="minimal-top-action">
+                    <span class="action-caption">Next-Gen Academic Synthesis</span>
+                    <a href="upload.html" class="minimal-btn-pill">
+                        <span>Launch Workspace</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </a>
-                    <p class="footer-brand-desc">
-                        AI-powered research paper summarization platform for students, researchers, and educators.
+                </div>
+            </div>
+
+            <!-- 2. Center Editorial Minimalist Hero -->
+            <div class="footer-minimal-hero">
+                <span class="minimal-eyebrow">THE FRONTIER OF RESEARCH</span>
+                <h2 class="minimal-headline">
+                    Synthesizing human knowledge,<br><span>one paper at a time.</span>
+                </h2>
+                <p class="minimal-subline">
+                    Transforming dense, multi-column scientific literature into concise methodologies, core findings, and conversational intelligence.
+                </p>
+            </div>
+
+            <!-- 3. Minimalist Numeric Navigation Columns Strip -->
+            <div class="footer-minimal-nav">
+                <!-- Brand, Social Icons & Geolocation Column -->
+                <div class="min-nav-col min-nav-brand">
+                    <a href="index.html" class="min-logo">
+                        <span class="min-logo-symbol"><i class="fa-solid fa-brain"></i></span>
+                        <span class="min-logo-text">PaperMind<span class="logo-accent">.AI</span></span>
+                    </a>
+                    <p class="min-brand-meta">
+                        Engineered for professors, PhD candidates, and research labs pushing the boundaries of discovery.
                     </p>
+
+                    <!-- RE-ADDED 4 CIRCULAR SOCIAL ICON BUTTONS -->
                     <div class="footer-socials">
-                        <a href="#" class="social-link" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-                        <a href="#" class="social-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://twitter.com" target="_blank" rel="noopener" class="social-link" aria-label="Twitter / X">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="https://github.com/kalpana-13330/papermind-ai" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://discord.com" target="_blank" rel="noopener" class="social-link" aria-label="Discord">
+                            <i class="fa-brands fa-discord"></i>
+                        </a>
+                    </div>
+
+                    <div class="min-coords">
+                        <span>LAT: 37.7749&deg; N &middot; LON: 122.4194&deg; W</span>
+                        <span>DEPLOYMENT: GLOBAL EDGE &middot; V2026.1</span>
                     </div>
                 </div>
 
-                <!-- Middle Column: Quick Links -->
-                <div class="footer-links-col">
-                    <h4 class="footer-col-title">Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="index.html" class="footer-link-item">Home</a></li>
-                        <li><a href="#features" class="footer-link-item">Features</a></li>
-                        <li><a href="#about" class="footer-link-item">About</a></li>
-                        <li><a href="#faq" class="footer-link-item">FAQ</a></li>
-                        <li><a href="#contact" class="footer-link-item">Contact</a></li>
+                <!-- Navigation Column 01: Solutions -->
+                <div class="min-nav-col">
+                    <div class="min-col-header">
+                        <span class="min-col-num">01</span>
+                        <span class="min-col-name">SOLUTIONS</span>
+                    </div>
+                    <ul class="min-links-list">
+                        <li><a href="upload.html" class="min-link"><span>PDF Summarizer</span><i class="fa-solid fa-arrow-right"></i></a></li>
+                        <li><a href="dashboard.html" class="min-link"><span>Academic Workspace</span><i class="fa-solid fa-arrow-right"></i></a></li>
+                        <li><a href="papers.html" class="min-link"><span>Paper Library</span><i class="fa-solid fa-arrow-right"></i></a></li>
+                        <li><a href="chat.html" class="min-link"><span>Document Chat</span><i class="fa-solid fa-arrow-right"></i></a></li>
                     </ul>
                 </div>
 
-                <!-- Right Column: Resources -->
-                <div class="footer-links-col">
-                    <h4 class="footer-col-title">Resources</h4>
-                    <ul class="footer-links">
-                        <li><a href="#" class="footer-link-item">Privacy Policy</a></li>
-                        <li><a href="#" class="footer-link-item">Terms of Service</a></li>
-                        <li><a href="#" class="footer-link-item">Documentation</a></li>
-                        <li><a href="#" class="footer-link-item">Support</a></li>
+                <!-- Navigation Column 02: Architecture -->
+                <div class="min-nav-col">
+                    <div class="min-col-header">
+                        <span class="min-col-num">02</span>
+                        <span class="min-col-name">ARCHITECTURE</span>
+                    </div>
+                    <ul class="min-links-list">
+                        <li><a href="#features" class="min-link"><span>Methodology Extraction</span><i class="fa-solid fa-arrow-right"></i></a></li>
+                        <li><a href="#about" class="min-link"><span>Gemini 3.1 LLM</span><i class="fa-solid fa-arrow-right"></i></a></li>
+                        <li><a href="#faq" class="min-link"><span>Data Isolation</span><i class="fa-solid fa-arrow-right"></i></a></li>
+                        <li><a href="index.html#features" class="min-link"><span>Multi-Modal Parser</span><i class="fa-solid fa-arrow-right"></i></a></li>
+                    </ul>
+                </div>
+
+                <!-- Navigation Column 03: Community & Source -->
+                <div class="min-nav-col">
+                    <div class="min-col-header">
+                        <span class="min-col-num">03</span>
+                        <span class="min-col-name">COMMUNITY</span>
+                    </div>
+                    <ul class="min-links-list">
+                        <li><a href="https://github.com/kalpana-13330/papermind-ai" target="_blank" rel="noopener" class="min-link"><span>GitHub Source</span><i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
+                        <li><a href="https://x.com" target="_blank" rel="noopener" class="min-link"><span>Twitter / X</span><i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
+                        <li><a href="https://discord.com" target="_blank" rel="noopener" class="min-link"><span>Discord Server</span><i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
+                        <li><a href="https://linkedin.com" target="_blank" rel="noopener" class="min-link"><span>LinkedIn</span><i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Bottom Footer bar -->
-            <div class="footer-bottom">
-                <p class="footer-copy">&copy; 2026 PaperMind.AI. All rights reserved.</p>
-                <p class="footer-innovation">Made for Academic Innovation</p>
+            <!-- 4. Bottom Signature & Legal -->
+            <div class="footer-minimal-bottom">
+                <div class="min-bottom-left">
+                    <span class="min-copy">&copy; 2026 PaperMind.AI. All rights reserved.</span>
+                    <span class="min-divider">/</span>
+                    <a href="#" class="min-legal-link">Privacy</a>
+                    <a href="#" class="min-legal-link">Terms</a>
+                    <a href="#" class="min-legal-link">Security</a>
+                </div>
+                <div class="min-bottom-center">
+                    <span>DESIGNED FOR SCHOLARS &middot; POWERED BY GEMINI AI</span>
+                </div>
+                <div class="min-bottom-right">
+                    <button class="min-back-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Back to Top">
+                        <span>BACK TO TOP</span>
+                        <i class="fa-solid fa-arrow-up"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </footer>
@@ -867,11 +1018,242 @@
         </div>
     </div>
 
-    <!-- Global JavaScript & API Service -->
+    <!-- Global JavaScript, Prism WebGL, GooeyNav & API Service -->
+    <script src="assets/js/gooey-nav.js"></script>
+    <script src="assets/js/prism.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/api.js"></script>
     <script>
+        // Global Theme Management & Physics Switch Synchronization
+        (function() {
+            const THEME_KEY = 'papermind_theme';
+            const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
+
+            window.applyTheme = function(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem(THEME_KEY, theme);
+
+                // Sync all switches on the page
+                document.querySelectorAll('.switch__input[data-role="theme-toggle"]').forEach(sw => {
+                    sw.checked = (theme === 'light');
+                });
+
+                // Update Prism WebGL if active
+                if (window.prismInstance && typeof window.prismInstance.update === 'function') {
+                    window.prismInstance.update({ lightMode: theme === 'light' });
+                }
+
+                // Update GooeyNav if active
+                if (window.gooeyNavInstance && typeof window.gooeyNavInstance.setTheme === 'function') {
+                    window.gooeyNavInstance.setTheme(theme);
+                }
+            };
+
+            // Set initial theme
+            applyTheme(savedTheme);
+        })();
+
         document.addEventListener('DOMContentLoaded', () => {
+            // Bind theme toggle inputs (Nav only)
+            document.querySelectorAll('.switch__input[data-role="theme-toggle"]').forEach(sw => {
+                sw.checked = (document.documentElement.getAttribute('data-theme') === 'light');
+                sw.addEventListener('change', (e) => {
+                    const nextTheme = e.target.checked ? 'light' : 'dark';
+                    window.applyTheme(nextTheme);
+                });
+            });
+
+            // Initialize ReactBits GooeyNav with user requested configuration
+            if (window.initGooeyNav) {
+                const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+                const navItems = [
+                    { label: 'Home', href: '#' },
+                    { label: 'Work', href: '#features' },
+                    { label: 'About', href: '#about' },
+                    { label: 'Contact', href: '#contact' }
+                ];
+
+                window.gooeyNavInstance = window.initGooeyNav('#gooeyNavContainer', {
+                    items: navItems,
+                    initialActiveIndex: 0,
+                    theme: currentTheme,
+                    size: 'md',
+                    frame: true,
+                    particleCount: 15,
+                    spread: 56,
+                    animationTime: 600,
+                    timeVariance: 300,
+                    gooeyness: 0.5,
+                    wobble: 0.5,
+                    hoverEffect: true,
+                    onChange: (index, item) => {
+                        console.log(index, item.label);
+                        if (item.href && item.href.startsWith('#') && item.href.length > 1) {
+                            const target = document.querySelector(item.href);
+                            if (target) {
+                                target.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Initialize Radiant ReactBits Prism WebGL in footer background
+            if (window.initPrism) {
+                const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+                window.prismInstance = window.initPrism('#footerPrismBg', {
+                    animationType: 'rotate',
+                    timeScale: 0.5,
+                    height: 3.5,
+                    baseWidth: 5.5,
+                    scale: 3.6,
+                    hueShift: 0,
+                    colorFrequency: 1,
+                    glow: 1.25,
+                    saturation: 1.6,
+                    intro: false,
+                    resolution: 1,
+                    lightMode: currentTheme === 'light',
+                    interactive: true
+                });
+            }
+
+            // User Testimonial Modal & Submission System
+            const modalBackdrop = document.getElementById('testimonialModalBackdrop');
+            const openModalBtn = document.getElementById('openTestimonialModalBtn');
+            const emptyAddBtn = document.getElementById('emptyAddBtn');
+            const closeModalBtn = document.getElementById('closeTestimonialModalBtn');
+            const cancelModalBtn = document.getElementById('cancelTestiModalBtn');
+            const testiForm = document.getElementById('testimonialSubmitForm');
+            const testiContainer = document.getElementById('userTestimonialsContainer');
+            const emptyBox = document.getElementById('emptyTestimonialsBox');
+            const starPicker = document.getElementById('starRatingPicker');
+            const selectedStarInput = document.getElementById('selectedStarScore');
+            const ratingScoreText = document.getElementById('ratingScoreText');
+
+            const openModal = () => {
+                if (modalBackdrop) modalBackdrop.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeModal = () => {
+                if (modalBackdrop) modalBackdrop.style.display = 'none';
+                document.body.style.overflow = '';
+            };
+
+            if (openModalBtn) openModalBtn.addEventListener('click', openModal);
+            if (emptyAddBtn) emptyAddBtn.addEventListener('click', openModal);
+            if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+            if (cancelModalBtn) cancelModalBtn.addEventListener('click', closeModal);
+            if (modalBackdrop) {
+                modalBackdrop.addEventListener('click', (e) => {
+                    if (e.target === modalBackdrop) closeModal();
+                });
+            }
+
+            // Star Rating Picker Interaction
+            if (starPicker) {
+                const stars = starPicker.querySelectorAll('.star-pick');
+                stars.forEach(star => {
+                    star.addEventListener('click', () => {
+                        const score = parseInt(star.getAttribute('data-rating'), 10);
+                        selectedStarInput.value = score;
+                        if (ratingScoreText) ratingScoreText.textContent = `${score}.0 / 5.0`;
+                        stars.forEach((s, idx) => {
+                            if (idx < score) {
+                                s.classList.add('active');
+                            } else {
+                                s.classList.remove('active');
+                            }
+                        });
+                    });
+                });
+            }
+
+            // LocalStorage Key
+            const STORAGE_KEY = 'papermind_user_testimonials';
+
+            const loadTestimonials = () => {
+                try {
+                    const raw = localStorage.getItem(STORAGE_KEY);
+                    return raw ? JSON.parse(raw) : [];
+                } catch (e) {
+                    return [];
+                }
+            };
+
+            const renderTestimonials = () => {
+                const list = loadTestimonials();
+                if (!testiContainer || !emptyBox) return;
+
+                if (!list || list.length === 0) {
+                    testiContainer.innerHTML = '';
+                    testiContainer.style.display = 'none';
+                    emptyBox.style.display = 'flex';
+                    return;
+                }
+
+                emptyBox.style.display = 'none';
+                testiContainer.style.display = 'grid';
+
+                testiContainer.innerHTML = list.map((item) => {
+                    const starsHtml = Array.from({ length: 5 }, (_, i) => 
+                        `<i class="fa-solid fa-star ${i < (item.rating || 5) ? 'star-filled' : 'star-dim'}"></i>`
+                    ).join('');
+
+                    return `
+                        <div class="user-testi-card">
+                            <div class="testi-card-header">
+                                <div class="testi-stars-row">${starsHtml}</div>
+                                <span class="testi-date-badge">${item.date || 'Recent'}</span>
+                            </div>
+                            <p class="testi-user-text">"${item.text}"</p>
+                            <div class="testi-user-meta">
+                                <div class="testi-avatar-pill">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+                                <div class="testi-user-info">
+                                    <h4 class="testi-user-name">${item.name}</h4>
+                                    <span class="testi-user-role">${item.role}</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            };
+
+            // Form Submit
+            if (testiForm) {
+                testiForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('testiAuthorName').value.trim();
+                    const role = document.getElementById('testiAuthorRole').value.trim();
+                    const text = document.getElementById('testiReviewText').value.trim();
+                    const rating = parseInt(selectedStarInput.value, 10) || 5;
+
+                    if (!name || !role || !text) return;
+
+                    const newTestimonial = {
+                        id: Date.now(),
+                        name,
+                        role,
+                        text,
+                        rating,
+                        date: new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })
+                    };
+
+                    const list = loadTestimonials();
+                    list.unshift(newTestimonial);
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+
+                    testiForm.reset();
+                    closeModal();
+                    renderTestimonials();
+                });
+            }
+
+            renderTestimonials();
+
             if (window.authAPI && window.authAPI.isAuthenticated()) {
                 // Logged-in: swap "Log In" button to "Dashboard"
                 document.querySelectorAll('a[href="login.html"]').forEach(btn => {

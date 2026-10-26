@@ -14,15 +14,44 @@
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <!-- Global, Auth & Responsive Stylesheets -->
-    <link rel="stylesheet" href="assets/css/style.css?v=5.0">
-    <link rel="stylesheet" href="assets/css/auth.css?v=5.0">
-    <link rel="stylesheet" href="assets/css/register.css?v=5.0">
-    <link rel="stylesheet" href="assets/css/responsive.css?v=5.0">
+    <link rel="stylesheet" href="assets/css/style.css?v=7.0">
+    <link rel="stylesheet" href="assets/css/auth.css?v=7.0">
+    <link rel="stylesheet" href="assets/css/register.css?v=7.0">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=7.0">
+
+    <!-- Early Theme Detection & Sync -->
+    <script>
+        (function() {
+            const THEME_KEY = 'papermind_theme';
+            const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
 </head>
 <body>
 
     <!-- Auth Wrapper -->
     <div class="auth-wrapper register-wrapper">
+
+    <!-- Top-Right Theme Toggle Switch -->
+    <div class="auth-theme-header-bar" title="Toggle Theme (Dark / Light)">
+        <i class="fa-solid fa-moon theme-icon-moon"></i>
+        <label class="switch" for="authThemeToggle">
+            <input class="switch__input" id="authThemeToggle" data-role="theme-toggle" type="checkbox" role="switch" aria-label="Toggle Theme">
+            <span class="switch__shadow">
+                <span class="switch__shadow-inner"></span>
+            </span>
+            <span class="switch__ball-shadow"></span>
+            <span class="switch__ball-shadow-outer"></span>
+            <span class="switch__ball">
+                <span class="switch__ball-texture"></span>
+            </span>
+            <span class="switch__label">Toggle Theme</span>
+        </label>
+        <i class="fa-solid fa-sun theme-icon-sun"></i>
+    </div>
+
 
         <!-- LEFT SIDE: Branding Panel -->
         <aside class="auth-sidebar register-sidebar">
@@ -135,21 +164,21 @@
                     <!-- Row 1: Full Name & Email -->
                     <div class="form-row">
                         <!-- Full Name -->
-                        <div class="form-group form-group-box">
-                            <label for="fullname" class="box-label">Full Name</label>
+                        <div class="form-group">
+                            <label for="fullname" class="standard-label">Full Name</label>
                             <div class="input-container">
                                 <span class="input-icon-left" aria-hidden="true"><i class="fa-regular fa-user"></i></span>
-                                <input type="text" id="fullname" class="auth-input box-input" placeholder="Enter your full name" required aria-describedby="fullnameError">
+                                <input type="text" id="fullname" class="auth-input standard-input" placeholder="Enter your full name" required aria-describedby="fullnameError">
                             </div>
                             <div class="error-message" id="fullnameError" aria-live="polite"></div>
                         </div>
 
                         <!-- Email Address -->
-                        <div class="form-group form-group-box">
-                            <label for="email" class="box-label">Email Address</label>
+                        <div class="form-group">
+                            <label for="email" class="standard-label">Email Address</label>
                             <div class="input-container">
                                 <span class="input-icon-left" aria-hidden="true"><i class="fa-regular fa-envelope"></i></span>
-                                <input type="email" id="email" class="auth-input box-input" placeholder="Enter your email" required aria-describedby="emailError">
+                                <input type="email" id="email" class="auth-input standard-input" placeholder="Enter your email" required aria-describedby="emailError">
                             </div>
                             <div class="error-message" id="emailError" aria-live="polite"></div>
                         </div>
@@ -248,5 +277,21 @@
     <script src="assets/js/main.js?v=6.0"></script>
     <script src="assets/js/api.js?v=6.0"></script>
     <script src="assets/js/register.js?v=6.0"></script>
+
+    <!-- Sync Auth Theme Toggle Switch -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sw = document.getElementById('authThemeToggle');
+            if (sw) {
+                sw.checked = (document.documentElement.getAttribute('data-theme') === 'light');
+                sw.addEventListener('change', (e) => {
+                    const nextTheme = e.target.checked ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', nextTheme);
+                    localStorage.setItem('papermind_theme', nextTheme);
+                });
+            }
+        });
+    </script>
+
 </body>
 </html>

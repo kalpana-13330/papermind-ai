@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Frontend for AI Research Paper Summarizer",
   "scripts": {
+    "build": "echo 'Frontend static assets ready for deployment'",
     "start": "python -m http.server 5173",
     "dev": "python -m http.server 5173"
   }

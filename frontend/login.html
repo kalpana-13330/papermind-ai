@@ -14,14 +14,43 @@
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <!-- Global, Auth & Responsive Stylesheets -->
-    <link rel="stylesheet" href="assets/css/style.css?v=2.0">
-    <link rel="stylesheet" href="assets/css/auth.css?v=2.0">
-    <link rel="stylesheet" href="assets/css/responsive.css?v=2.0">
+    <link rel="stylesheet" href="assets/css/style.css?v=7.0">
+    <link rel="stylesheet" href="assets/css/auth.css?v=7.0">
+    <link rel="stylesheet" href="assets/css/responsive.css?v=7.0">
+
+    <!-- Early Theme Detection & Sync -->
+    <script>
+        (function() {
+            const THEME_KEY = 'papermind_theme';
+            const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
 </head>
 <body>
 
     <!-- Auth Wrapper -->
     <div class="auth-wrapper">
+
+    <!-- Top-Right Theme Toggle Switch -->
+    <div class="auth-theme-header-bar" title="Toggle Theme (Dark / Light)">
+        <i class="fa-solid fa-moon theme-icon-moon"></i>
+        <label class="switch" for="authThemeToggle">
+            <input class="switch__input" id="authThemeToggle" data-role="theme-toggle" type="checkbox" role="switch" aria-label="Toggle Theme">
+            <span class="switch__shadow">
+                <span class="switch__shadow-inner"></span>
+            </span>
+            <span class="switch__ball-shadow"></span>
+            <span class="switch__ball-shadow-outer"></span>
+            <span class="switch__ball">
+                <span class="switch__ball-texture"></span>
+            </span>
+            <span class="switch__label">Toggle Theme</span>
+        </label>
+        <i class="fa-solid fa-sun theme-icon-sun"></i>
+    </div>
+
 
         <!-- LEFT SIDE: Branding Panel -->
         <aside class="auth-sidebar">
@@ -212,5 +241,21 @@
     <script src="assets/js/main.js?v=6.0"></script>
     <script src="assets/js/api.js?v=6.0"></script>
     <script src="assets/js/auth.js?v=6.0"></script>
+
+    <!-- Sync Auth Theme Toggle Switch -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sw = document.getElementById('authThemeToggle');
+            if (sw) {
+                sw.checked = (document.documentElement.getAttribute('data-theme') === 'light');
+                sw.addEventListener('change', (e) => {
+                    const nextTheme = e.target.checked ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', nextTheme);
+                    localStorage.setItem('papermind_theme', nextTheme);
+                });
+            }
+        });
+    </script>
+
 </body>
 </html>

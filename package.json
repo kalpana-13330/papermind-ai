@@ -1,0 +1,8 @@
+{
+  "name": "papermind-ai",
+  "version": "1.0.0",
+  "description": "PaperMind AI - Summarize Research Papers with AI in Seconds",
+  "scripts": {
+    "build": "echo 'Vercel build succeeded for PaperMind AI'"
+  }
+}

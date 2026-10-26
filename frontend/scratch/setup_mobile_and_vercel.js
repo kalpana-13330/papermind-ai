@@ -1,0 +1,583 @@
+const fs = require('fs');
+const path = require('path');
+
+const projectRoot = path.resolve(__dirname, '..', '..');
+const frontendRoot = path.resolve(__dirname, '..');
+
+// 1. CREATE ROOT vercel.json
+const rootVercelJson = {
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/frontend/$1"
+    }
+  ]
+};
+fs.writeFileSync(path.join(projectRoot, 'vercel.json'), JSON.stringify(rootVercelJson, null, 2) + '\n', 'utf8');
+console.log('Created root vercel.json');
+
+// 2. CREATE frontend/vercel.json (For deployments where root directory is set to frontend)
+const frontendVercelJson = {
+  "cleanUrls": true,
+  "trailingSlash": false
+};
+fs.writeFileSync(path.join(frontendRoot, 'vercel.json'), JSON.stringify(frontendVercelJson, null, 2) + '\n', 'utf8');
+console.log('Created frontend/vercel.json');
+
+// 3. CREATE ROOT package.json
+const rootPackageJson = {
+  "name": "papermind-ai",
+  "version": "1.0.0",
+  "description": "PaperMind AI - Summarize Research Papers with AI in Seconds",
+  "scripts": {
+    "build": "echo 'Vercel build succeeded for PaperMind AI'"
+  }
+};
+fs.writeFileSync(path.join(projectRoot, 'package.json'), JSON.stringify(rootPackageJson, null, 2) + '\n', 'utf8');
+console.log('Created root package.json');
+
+// 4. UPDATE frontend/package.json WITH BUILD SCRIPT
+const frontendPkgPath = path.join(frontendRoot, 'package.json');
+let frontendPkg = JSON.parse(fs.readFileSync(frontendPkgPath, 'utf8'));
+frontendPkg.scripts = {
+  "build": "echo 'Frontend static assets ready for deployment'",
+  "start": "python -m http.server 5173",
+  "dev": "python -m http.server 5173"
+};
+fs.writeFileSync(frontendPkgPath, JSON.stringify(frontendPkg, null, 2) + '\n', 'utf8');
+console.log('Updated frontend/package.json with build script');
+
+// 5. CREATE ROOT index.html (Fallback redirect for platforms that serve root directly)
+const rootIndexHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=/frontend/index.html">
+    <title>PaperMind AI - Academic Research Paper Summarizer</title>
+    <script>
+        window.location.replace('/frontend/index.html');
+    </script>
+</head>
+<body>
+    <p style="font-family: sans-serif; text-align: center; margin-top: 2rem;">
+        Redirecting to <a href="/frontend/index.html">PaperMind AI</a>...
+    </p>
+</body>
+</html>
+`;
+fs.writeFileSync(path.join(projectRoot, 'index.html'), rootIndexHtml, 'utf8');
+console.log('Created root index.html redirect fallback');
+
+// 6. UPDATE responsive.css WITH EXCELLENT MOBILE RESPONSIVENESS ACROSS ALL SCREENS
+const responsiveCssPath = path.join(frontendRoot, 'assets', 'css', 'responsive.css');
+const comprehensiveResponsiveCss = `/* ==========================================================================
+   AI RESEARCH PAPER SUMMARIZER - COMPREHENSIVE RESPONSIVE DESIGN SYSTEM
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. GLOBAL RESET & BASE MOBILE ADAPTATIONS
+   -------------------------------------------------------------------------- */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   2. DESKTOP & LAPTOP (max-width: 1200px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+  .container {
+    max-width: 1024px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .hero-showcase-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .hero-col-center {
+    grid-column: span 2;
+    order: 2;
+    margin: 1.5rem auto;
+  }
+
+  .hero-col-left {
+    order: 1;
+  }
+
+  .hero-col-right {
+    order: 3;
+    grid-column: span 2;
+  }
+
+  .hero-float-widgets-row {
+    justify-content: center;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. TABLETS & MID-SIZE SCREENS (max-width: 991px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+  .container {
+    max-width: 768px;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  /* Sticky Header */
+  .header {
+    height: 64px !important;
+    padding: 0 1rem !important;
+  }
+
+  .navbar {
+    height: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* Hide Desktop GooeyNav on Tablet/Mobile */
+  .nav-gooey-wrapper {
+    display: none !important;
+  }
+
+  /* Hamburger Toggle */
+  .mobile-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  /* Mobile Slide-Down Menu Drawer */
+  .nav-menu {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    flex-direction: column;
+    padding: 1.5rem 1.25rem 2rem 1.25rem;
+    gap: 0.75rem;
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    z-index: 999;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  [data-theme="dark"] .nav-menu {
+    background: rgba(5, 7, 10, 0.98) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(24px) !important;
+  }
+
+  [data-theme="light"] .nav-menu {
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    backdrop-filter: blur(24px) !important;
+  }
+
+  .nav-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-link {
+    width: 100%;
+    text-align: center;
+    padding: 0.85rem 1rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 12px;
+  }
+
+  .mobile-drawer-auth {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  [data-theme="light"] .mobile-drawer-auth {
+    border-top-color: #e2e8f0;
+  }
+
+  /* Why Choose Us Grid */
+  .why-us-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+
+  .why-us-illustration {
+    order: 2 !important;
+  }
+
+  .why-us-content {
+    order: 1 !important;
+  }
+
+  /* Features Grid */
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.25rem !important;
+  }
+
+  /* Auth Pages */
+  .auth-wrapper {
+    flex-direction: column !important;
+    min-height: 100vh !important;
+  }
+
+  .auth-sidebar {
+    padding: 2.5rem 1.5rem !important;
+    min-height: auto !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .auth-sidebar-body {
+    max-width: 100% !important;
+    margin: 1.5rem 0 !important;
+  }
+
+  .auth-sidebar-illustration {
+    display: none !important;
+  }
+
+  .auth-content {
+    padding: 2.5rem 1.5rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .auth-card {
+    max-width: 480px !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. MOBILE PHONES (max-width: 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Headings */
+  .section-title {
+    font-size: 2rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .section-subheading {
+    font-size: 0.95rem !important;
+  }
+
+  /* Section Spacing */
+  .features-section,
+  .why-us-section,
+  .stats-section,
+  .how-it-works-section,
+  .testimonials-section,
+  .faq-section,
+  .newsletter-section {
+    padding: 4rem 0 !important;
+  }
+
+  /* Hero Showcase Frame */
+  .hero-showcase-card {
+    padding: 2rem 1.25rem !important;
+    border-radius: 24px !important;
+  }
+
+  .title-light {
+    font-size: clamp(1.8rem, 6.5vw, 2.6rem) !important;
+  }
+
+  .title-bold {
+    font-size: clamp(2rem, 7.5vw, 3rem) !important;
+  }
+
+  .hero-showcase-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .hero-col-center {
+    grid-column: span 1 !important;
+    margin: 0 auto !important;
+  }
+
+  .hero-col-right {
+    grid-column: span 1 !important;
+  }
+
+  .hero-nav-arrow {
+    display: none !important;
+  }
+
+  .iphone-mockup-frame {
+    width: 290px !important;
+    height: 560px !important;
+    border-radius: 40px !important;
+    padding: 10px !important;
+  }
+
+  .iphone-screen-content {
+    border-radius: 32px !important;
+  }
+
+  .hero-brand-logos {
+    margin-top: 2rem !important;
+    justify-content: center !important;
+  }
+
+  .btn-learn-pill {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Features Grid: Single Column */
+  .features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  /* Why Choose Us Canvas */
+  .why-us-canvas {
+    min-height: 380px !important;
+    padding: 1rem !important;
+  }
+
+  .why-float-card.float-pdf {
+    top: 15px !important;
+    left: 10px !important;
+    transform: scale(0.9) !important;
+  }
+
+  .why-float-card.float-summary {
+    bottom: 15px !important;
+    right: 10px !important;
+    max-width: 220px !important;
+    transform: scale(0.9) !important;
+  }
+
+  .why-float-card.float-metric {
+    display: none !important;
+  }
+
+  .why-item {
+    padding: 1rem 1.15rem !important;
+    gap: 1rem !important;
+  }
+
+  /* Statistics Grid */
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  .stat-card {
+    padding: 1.75rem 1.25rem !important;
+  }
+
+  .stat-number {
+    font-size: 2.3rem !important;
+  }
+
+  /* How It Works Steps Grid */
+  .steps-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Newsletter Box */
+  .newsletter-container {
+    padding: 2.5rem 1.25rem !important;
+    border-radius: 20px !important;
+  }
+
+  .newsletter-form {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 0.75rem !important;
+  }
+
+  .newsletter-input-group {
+    width: 100% !important;
+  }
+
+  .newsletter-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    height: 50px !important;
+  }
+
+  /* Footer Minimal */
+  .footer-minimal-top,
+  .footer-minimal-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1.25rem !important;
+  }
+
+  .footer-minimal-nav {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .min-nav-brand {
+    grid-column: span 1 !important;
+  }
+
+  .minimal-headline {
+    font-size: 2rem !important;
+  }
+
+  /* Auth Pages Mobile Layout */
+  .auth-sidebar {
+    padding: 2rem 1rem 1.5rem 1rem !important;
+  }
+
+  .auth-content {
+    padding: 1.5rem 1rem !important;
+  }
+
+  .auth-card,
+  .register-card {
+    padding: 2rem 1.25rem !important;
+    border-radius: 20px !important;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+
+  .auth-theme-header-bar {
+    top: 1rem !important;
+    right: 1rem !important;
+  }
+
+  .auth-sidebar-title,
+  .register-title {
+    font-size: 2.2rem !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. ULTRA-COMPACT MOBILE PHONES (max-width: 480px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  html {
+    font-size: 14.5px !important;
+  }
+
+  .navbar {
+    padding: 0 0.5rem !important;
+  }
+
+  .logo-text {
+    font-size: 1.15rem !important;
+  }
+
+  .logo-icon {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 1rem !important;
+  }
+
+  /* Hide extra buttons on ultra-narrow navigation to avoid crowding */
+  .nav-lang-pill {
+    display: none !important;
+  }
+
+  .nav-actions .btn-outline {
+    display: none !important;
+  }
+
+  .nav-actions .nav-cta {
+    padding: 0.45rem 0.85rem !important;
+    font-size: 0.82rem !important;
+  }
+
+  .hero-athletic-showcase {
+    padding: 1rem 0 2.5rem 0 !important;
+  }
+
+  .hero-frame-container {
+    padding: 0 0.5rem !important;
+  }
+
+  .iphone-mockup-frame {
+    width: 270px !important;
+    height: 520px !important;
+  }
+
+  .thumbnails-triple-row {
+    gap: 0.4rem !important;
+  }
+
+  .section-title {
+    font-size: 1.75rem !important;
+  }
+
+  .section-badge {
+    font-size: 0.72rem !important;
+    padding: 0.3rem 0.8rem !important;
+  }
+
+  .auth-card,
+  .register-card {
+    padding: 1.75rem 1rem !important;
+  }
+
+  .auth-input,
+  .standard-input {
+    height: 48px !important;
+    font-size: 0.92rem !important;
+  }
+
+  .auth-title {
+    font-size: 1.85rem !important;
+  }
+
+  .strength-helpers-inline {
+    gap: 8px 12px !important;
+  }
+
+  .strength-helpers-inline li {
+    font-size: 0.78rem !important;
+  }
+}
+`;
+
+fs.writeFileSync(responsiveCssPath, comprehensiveResponsiveCss, 'utf8');
+console.log('Successfully updated responsive.css with comprehensive mobile rules!');
