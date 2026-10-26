@@ -102,11 +102,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+        backToTopBtn.addEventListener('click', (e) => {
+            if (window.lenis) {
+                e.preventDefault();
+                window.lenis.scrollTo(0, { duration: 1.5 });
+            } else {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
         });
     }
 

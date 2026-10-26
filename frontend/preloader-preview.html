@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awwwards Preloader Visual Inspection</title>
+    <!-- Google Fonts: Playfair Display & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,600;0,800;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css?v=8.0">
+    <style>
+        body {
+            margin: 0;
+            background: #05070a;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- AWWWARDS-LEVEL LUXURY CIRCULAR PRELOADER (MATCHING USER REFERENCE IMAGE) -->
+    <div class="awwwards-preloader" id="awwwardsPreloader" style="display: flex; opacity: 1;">
+        <div class="preloader-curtain curtain-top"></div>
+        <div class="preloader-curtain curtain-bottom"></div>
+        <div class="preloader-center-wrap">
+            <div class="preloader-circle-frame">
+                <!-- SVG Perimeter Progress Trace -->
+                <svg class="preloader-svg" viewBox="0 0 320 320">
+                    <circle class="preloader-circle-bg" cx="160" cy="160" r="150" />
+                    <circle class="preloader-circle-bar" id="preloaderProgressCircle" cx="160" cy="160" r="150" style="stroke-dashoffset: 750;" />
+                </svg>
+                <!-- Elegant Luxury Serif Number Counter starting at 00 -->
+                <div class="preloader-counter-box">
+                    <span class="preloader-num" id="preloaderCounter">00</span>
+                </div>
+            </div>
+            <div class="preloader-status-text">
+                <span class="status-dot"></span>
+                <span class="status-msg">Loading...</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
